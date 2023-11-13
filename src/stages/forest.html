@@ -19,17 +19,21 @@
     <div class="container-battle" id="forest">
         <div class="battle-panel">
             <div class="encounter">
-                Andando pela floresta, você encontrou um Goblin!
+                Depois de muito andar pela floresta, você encontrou um Goblin!
             </div>
             <div class="battlers">
                 <div class="player">
                     <img src="../assets/img/guerreiro.jpg" class="img-battler" id="player">
-                    <span class="health-points" id="player"></span>
+                    <span class="status" id="player-hp">❤️ 50</span>
+                    <span class="status" id="player-atk">⚔️ 50</span>
                 </div>
-                <div class="img-versus"></div>
+                <div class="img-versus">
+                    <img src="../assets/img/versus.jpg"id="versus"/>
+                </div>
                 <div class="monster">
                     <img src="../assets/img/goblin.png" class="img-battler" id="monster">
-                    <span class="health-points" id="monster"></span>
+                    <span class="status" id="monster-hp">❤️ 20</span>
+                    <span class="status" id="monster-atk">⚔️ 50</span>
                 </div>
             </div>
             <div class="information">
@@ -42,13 +46,15 @@
 
 
         <div class="status-panel">
-
+            <div class="survival-itens"></div>
+            <button id="sort-number">ATACAR</button>
+            <button id="next-battle">PRÓXIMO</button>
         </div>
     </div>
 
     <footer></footer>
 
     <!-- Scripts Import -->
-    <script src="./src/scripts/main.js" defer></script>
+    <!-- <script src="./src/scripts/main.js" defer></script> -->
 </body>
 </html>
