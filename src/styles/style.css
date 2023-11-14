@@ -172,14 +172,13 @@ h4 {
 
 .status-panel {
     width: 25%;
-    height: 100vh;
+    height: 100%;
     background-color: #000;
-    /* padding: 0.5rem; */
+    padding: 2rem;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: space-evenly;
-    border: 2px solid red;
 }
 
 .survival-itens {
@@ -190,8 +189,8 @@ h4 {
 }
 
 .itens {
-    width: 400px;
-    height: 500px;
+    width: 100%;
+    max-height: 30%;
     background-color: #ff9a02;
     border-radius: 15px;
     box-shadow: inset 5px 6px 3px #c97901;
@@ -218,5 +217,5 @@ h4 {
     padding: 0.5rem;
     font-size: 1.6rem;
     transition: 0.2s;
-    display: none;
+    /* display: none; */
 }
