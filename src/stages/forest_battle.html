@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure Game | Forest Battle</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../styles/style.css">
+
+    <!-- FONTS -->
+</head>
+<body>
+
+    <div class="background">
+        <img src="../assets/img/forest.jpg"/>
+    </div>
+
+    <div class="container-battle" id="forest">
+        <div class="battle-panel">
+            <div class="encounter">
+                Depois de muito andar pela floresta (e de matar muitos orcs),
+                você encontrou quem comandava o acampamento na floresta!
+            </div>
+            <div class="battlers">
+                <div class="player">
+                    <img class="img-battler" id="player">
+                    <span class="status" id="player-hp">
+                        <span id="player-hp-icon">❤️</span>
+                        <span id="player-hp-points"></span>
+                    </span>
+                    <span class="status" id="player-atk">
+                        <span id="player-atk-icon">⚔️</span>
+                        <span id="player-atk-points"></span>
+                    </span>
+                </div>
+                <div class="img-versus">
+                    <img src="../assets/img/versus.png"id="versus"/>
+                </div>
+                <div class="monster">
+                    <img class="img-battler" id="monster">
+                    <span class="status" id="monster-hp">
+                        <span id="monster-hp-icon">❤️</span>
+                        <span id="monster-hp-points"></span>
+                    </span>
+                    <span class="status" id="monster-atk">
+                        <span id="monster-atk-icon">⚔️</span>
+                        <span id="monster-atk-points"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="information">
+                <span id="player-number">Pressione o botão ATACAR.</span>
+                <span id="monster-number">Compare os números.</span>
+                <span id="damage">Ataque ou seja atacado!</span>
+            </div>
+        </div>
+
+
+
+        <div class="status-panel">
+
+            <span style="color: #fff; font-size: 35px;">Mochila</span>
+            <div class="survival-itens">
+            </div>
+            <button id="sort-number">⚔️ ATACAR</button>
+            <button id="next-battle">👉🏻 PRÓXIMO</button>
+        </div>
+    </div>
+
+    <div class="game-over">
+        <span class="text-game-over">☠️GAME OVER☠️</span>
+        <a href="/index.html"><button id="restart">RECOMEÇAR</button></a>
+    </div>
+
+    <!-- Scripts Import -->
+    <script src="../scripts/forest_battle.js" defer></script>
+</body>
+</html>
