@@ -34,6 +34,7 @@ const game = {
         damage: document.getElementById('damage'),
         playerHP: document.getElementById('player-hp'),
         enemyHP: document.getElementById('monster-hp'),
+        heal: document.getElementById('player-hp'),
     },
     screen: {
         gameOver: document.querySelector('.game-over')
@@ -41,6 +42,10 @@ const game = {
 };
 
 const itemSpanNumber = [0, 1, 2, 3, 4];
+const swordStab = new Audio('../assets/audio/sword_stab.wav');
+const enemyHit = new Audio('../assets/audio/enemy_hit.wav');
+const drawSound = new Audio('../assets/audio/swords_draw.wav');
+const healing = new Audio('../assets/audio/healing.wav');
 
 async function showSprites(){
     game.player.visual.avatar.src = "../assets/img/guerreiro.png";
@@ -81,6 +86,7 @@ async function clickAttack(){
 
     game.action.attack.addEventListener('click', () => {
 
+        refreshMessageLog();
         game.action.attack.disabled = true;
         const randomPlayerNumber = Math.floor(Math.random()*11);
         const randomEnemyNumber = Math.floor(Math.random()*11);
@@ -90,6 +96,7 @@ async function clickAttack(){
 
         if (randomPlayerNumber > randomEnemyNumber){
 
+            swordStab.play();
             game.action.damage.innerHTML = `Você desferiu ${game.player.value.attack} de dano!`;
             game.action.enemyHP.classList.add('damaged');
             game.enemy.value.health -= game.player.value.attack;
@@ -110,6 +117,7 @@ async function clickAttack(){
 
         } else if (randomPlayerNumber < randomEnemyNumber){
 
+            enemyHit.play();
             game.action.damage.innerHTML = `Você recebeu ${game.enemy.value.attack} de dano!`;
             game.action.playerHP.classList.add('damaged');
             game.player.value.health -= game.enemy.value.attack;
@@ -128,6 +136,7 @@ async function clickAttack(){
             setTimeout(() => {game.action.playerHP.classList.remove('damaged');}, 300);
 
         } else {
+            drawSound.play();
             game.action.damage.innerHTML = `Suas armas se batem! Não houve dano!`;
         }
 
@@ -141,11 +150,31 @@ async function recoverHealthPoints(potions){
     for (let i = 0; i < potions; i++) {
         const slotBox = document.querySelector(`.item-slot${itemSpanNumber[i]}`);
         slotBox.addEventListener('click', () => {
-            game.player.value.health = game.player.value.maxHealth;
-            game.player.status.health.innerHTML = game.player.value.health;
-            slotBox.remove();
+            
+            if (game.player.value.health < game.player.value.maxHealth){
+                
+                healing.play();
+                game.action.heal.classList.add('healed');
+                game.player.value.health = game.player.value.maxHealth;
+                game.player.status.health.innerHTML = game.player.value.health;
+                game.action.playerNumber.innerText = "Você usou uma poção!";
+                game.action.enemyNumber.style.display = "none";
+                game.action.damage.style.display = 'none';
+                setTimeout(() => {game.action.heal.classList.remove('healed');}, 300);
+                
+                slotBox.remove();
+
+            }
         });
     }
+}
+
+function refreshMessageLog(){
+    game.action.enemyNumber.style.display = 'block';
+    game.action.damage.style.display = 'block';
+    game.action.playerNumber.innerText = "Pressione o botão ATACAR.";
+    game.action.enemyNumber.innerText = "Compare os números.";
+    game.action.damage.innerText = "Ataque ou seja atacado!";
 }
 
 function displayNextButton(){

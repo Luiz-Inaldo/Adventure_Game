@@ -156,6 +156,21 @@ h4 {
     transition: 0.3s;
 }
 
+.status.healed {
+    width: 150px;
+    height: 50px;
+    background-color: rgba(0, 255, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 25px;
+    color: #fff;
+    border: 3px solid #fff;
+    border-radius: 10px;
+    transform: scale(1.06);
+    transition: 0.3s;
+}
+
 .img-versus {
     width: 120px;
     height: 120px;
