@@ -19,8 +19,8 @@ h4 {
 
 .container-battle {
     display: flex;
-    position: relative;
-    z-index: 3;
+    position: absolute;
+    z-index: 0;
     /* background-color: #000; */
     height: 100vh;
     /* border: 1px solid red; */
@@ -70,7 +70,7 @@ h4 {
 
 .background {
     position: absolute;
-    z-index: -2;
+    z-index: -1;
     left: -106px;
     bottom: 0;
     width: 100vw;
@@ -123,7 +123,7 @@ h4 {
 .img-battler {
     width: 150px;
     height: 200px;
-    border: 3px solid #000;
+    border: 3px solid #824e01;
     border-radius: 10px;
 }
 
@@ -170,6 +170,12 @@ h4 {
     border-radius: 10px;
 }
 
+#player-number,
+#monster-number,
+#damage {
+    text-align: center;
+}
+
 .status-panel {
     width: 25%;
     height: 100%;
@@ -184,14 +190,15 @@ h4 {
 .survival-itens {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
+    justify-content: space-around;
     width: 100%;
-    max-height: 30%;
+    min-height: 58%;
     background-color: #ff9a02;
     border-radius: 15px;
     box-shadow: inset 5px 6px 3px #c97901;
     border: 3px solid #fff;
+    padding: 1rem;
 }
 
 #sort-number {
@@ -202,8 +209,14 @@ h4 {
     padding: 0.5rem;
     font-size: 1.6rem;
     transition: 0.2s;
+}
+
+#sort-number:hover {
+    transition: 0.2s;
+    transform: scale(1.1);
     background-color: #ff0000;
     color: #fff;
+    cursor: pointer;
 }
 
 #next-battle {
@@ -214,5 +227,78 @@ h4 {
     padding: 0.5rem;
     font-size: 1.6rem;
     transition: 0.2s;
-    /* display: none; */
+    display: none;
+}
+
+#next-battle:hover {
+    transition: 0.2s;
+    transform: scale(1.1);
+    background-color: #ff9500;
+    color: #fff;
+    cursor: pointer;
+}
+
+.item-slot0,
+.item-slot1,
+.item-slot2,
+.item-slot3,
+.item-slot4 {
+    border: 2px solid #000;
+    border-radius: 10px;
+    background: linear-gradient(
+        325deg, #fff 0%, #dadada 30%, #afafaf 70%, #8d8d8d 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 0.3rem;
+    transition: 0.2s;
+}
+
+.item-slot0:hover,
+.item-slot1:hover,
+.item-slot2:hover,
+.item-slot3:hover,
+.item-slot4:hover {
+    transition: 0.2s;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.item-img {
+    width: 50px;
+    height: 50px;
+}
+
+.item-description {
+    font-size: 20px;
+}
+
+.game-over {
+    z-index: 1;
+    position: relative;
+    background-color: #000;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.text-game-over {
+    color: #fff;
+    font-size: 60px;
+}
+
+#restart {
+    font-size: 60px;
+    padding: 1rem;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+#restart:hover {
+    background-color: #006400;
+    color: #fff;
+    transform: scale(1.1);
 }
