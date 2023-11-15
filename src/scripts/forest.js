@@ -42,10 +42,12 @@ const game = {
 };
 
 const itemSpanNumber = [0, 1, 2, 3, 4];
+
 const swordStab = new Audio('../assets/audio/sword_stab.wav');
 const enemyHit = new Audio('../assets/audio/enemy_hit.wav');
 const drawSound = new Audio('../assets/audio/swords_draw.wav');
 const healing = new Audio('../assets/audio/healing.wav');
+const winSound = new Audio('../assets/audio/win.wav');
 
 async function showSprites(){
     game.player.visual.avatar.src = "../assets/img/guerreiro.png";
@@ -94,6 +96,7 @@ async function clickAttack(){
         game.action.playerNumber.innerText = `Seu número foi ${randomPlayerNumber}!`;
         game.action.enemyNumber.innerText = `O número do oponente foi ${randomEnemyNumber}!`;
 
+            // if normal attack
         if (randomPlayerNumber > randomEnemyNumber){
 
             swordStab.play();
@@ -104,12 +107,12 @@ async function clickAttack(){
 
             if (game.enemy.value.health <= 0){
 
-                game.enemy.visual.avatar.src = '';
                 game.action.attack.style.display = "none";
                 game.action.playerNumber.style.display = "none";
                 game.action.enemyNumber.innerText = "Você venceu! E ficou um pouco mais forte!";
                 game.action.damage.innerText = "Hp + 50 | Atk + 5";
-                setTimeout(displayNextButton, 1000);
+                winSound.play();
+                setTimeout(displayNextButton, 6000);
 
             }
 
@@ -204,7 +207,10 @@ async function engageAllElements(){
 }
 
 function init(){
+
     engageAllElements();
+    const theme = document.getElementById('bgm');
+    theme.play();
 }
 
 init();

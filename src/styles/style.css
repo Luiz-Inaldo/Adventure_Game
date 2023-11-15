@@ -298,6 +298,8 @@ h4 {
     transition: 0.2s;
     transform: scale(1.05);
     cursor: pointer;
+    background: linear-gradient(
+        325deg, #ffbcbc 0%, #fd9191 30%, #ff5353 70%, #ff3d3d 100%);
 }
 
 .item-img {
