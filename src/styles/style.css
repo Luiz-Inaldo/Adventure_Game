@@ -98,7 +98,7 @@ h4 {
     justify-content: center;
     font-size: 30px;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
     padding: 1rem;
     border-radius: 10px;
@@ -130,7 +130,7 @@ h4 {
 .status {
     width: 150px;
     height: 50px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -138,12 +138,27 @@ h4 {
     color: #fff;
     border: 3px solid #fff;
     border-radius: 10px;
+    transition: 0.3s;
+}
+
+.status.damaged {
+    width: 150px;
+    height: 50px;
+    background-color: rgba(255, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 25px;
+    color: #fff;
+    border: 3px solid #fff;
+    border-radius: 10px;
+    transform: scale(1.06);
+    transition: 0.3s;
 }
 
 .img-versus {
     width: 120px;
     height: 120px;
-    /* border: 3px solid #000; */
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -164,7 +179,7 @@ h4 {
     align-items: center;
     justify-content: space-around;
     font-size: 30px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.9);
     color: #fff;
     padding: 1rem;
     border-radius: 10px;
@@ -190,10 +205,10 @@ h4 {
 .survival-itens {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-around;
     width: 100%;
-    min-height: 58%;
+    min-height: 62%;
     background-color: #ff9a02;
     border-radius: 15px;
     box-shadow: inset 5px 6px 3px #c97901;
@@ -217,6 +232,12 @@ h4 {
     background-color: #ff0000;
     color: #fff;
     cursor: pointer;
+}
+
+#sort-number:disabled {
+    cursor: not-allowed;
+    background-color: #2e2e2e;
+    color: #4b4b4b;
 }
 
 #next-battle {
@@ -287,7 +308,7 @@ h4 {
 
 .text-game-over {
     color: #fff;
-    font-size: 60px;
+    font-size: 120px;
 }
 
 #restart {

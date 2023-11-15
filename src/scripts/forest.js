@@ -32,6 +32,8 @@ const game = {
         playerNumber: document.getElementById('player-number'),
         enemyNumber: document.getElementById('monster-number'),
         damage: document.getElementById('damage'),
+        playerHP: document.getElementById('player-hp'),
+        enemyHP: document.getElementById('monster-hp'),
     },
     screen: {
         gameOver: document.querySelector('.game-over')
@@ -76,7 +78,10 @@ async function showSupplies(supNumber){
 }
 
 async function clickAttack(){
+
     game.action.attack.addEventListener('click', () => {
+
+        game.action.attack.disabled = true;
         const randomPlayerNumber = Math.floor(Math.random()*11);
         const randomEnemyNumber = Math.floor(Math.random()*11);
 
@@ -84,31 +89,50 @@ async function clickAttack(){
         game.action.enemyNumber.innerText = `O número do oponente foi ${randomEnemyNumber}!`;
 
         if (randomPlayerNumber > randomEnemyNumber){
+
             game.action.damage.innerHTML = `Você desferiu ${game.player.value.attack} de dano!`;
+            game.action.enemyHP.classList.add('damaged');
             game.enemy.value.health -= game.player.value.attack;
             game.enemy.status.health.textContent = game.enemy.value.health;
+
             if (game.enemy.value.health <= 0){
+
+                game.enemy.visual.avatar.src = '';
                 game.action.attack.style.display = "none";
                 game.action.playerNumber.style.display = "none";
                 game.action.enemyNumber.innerText = "Você venceu! E ficou um pouco mais forte!";
                 game.action.damage.innerText = "Hp + 50 | Atk + 5";
                 setTimeout(displayNextButton, 1000);
+
             }
-            console.log(game.enemy.value.health);
+
+            setTimeout(() => {game.action.enemyHP.classList.remove('damaged');}, 300);
+
         } else if (randomPlayerNumber < randomEnemyNumber){
+
             game.action.damage.innerHTML = `Você recebeu ${game.enemy.value.attack} de dano!`;
+            game.action.playerHP.classList.add('damaged');
             game.player.value.health -= game.enemy.value.attack;
             game.player.status.health.textContent = game.player.value.health;
+
             if (game.player.value.health <= 0){
+
                 game.action.attack.style.display = "none";
                 game.action.playerNumber.style.display = "none";
                 game.action.enemyNumber.innerText = "Oh Não! Você MORREU!";
                 game.action.damage.style.display = "none";
                 setTimeout(displayGameOver, 2000);
+
             }
+
+            setTimeout(() => {game.action.playerHP.classList.remove('damaged');}, 300);
+
         } else {
             game.action.damage.innerHTML = `Suas armas se batem! Não houve dano!`;
         }
+
+        setTimeout(() => {game.action.attack.disabled = false;}, 1000);
+
     })
 }
 
@@ -148,8 +172,6 @@ async function engageAllElements(){
     // recoverHP
     await recoverHealthPoints(5);
 
-    // results
-    await fightResult();
 }
 
 function init(){
