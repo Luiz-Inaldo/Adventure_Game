@@ -48,6 +48,7 @@ const enemyHit = new Audio('../assets/audio/enemy_hit.wav');
 const drawSound = new Audio('../assets/audio/swords_draw.wav');
 const healing = new Audio('../assets/audio/healing.wav');
 const winSound = new Audio('../assets/audio/win.wav');
+const loseSound = new Audio('../assets/audio/lose.wav');
 
 async function showSprites(){
     game.player.visual.avatar.src = "../assets/img/guerreiro.png";
@@ -132,6 +133,7 @@ async function clickAttack(){
                 game.action.playerNumber.style.display = "none";
                 game.action.enemyNumber.innerText = "Oh Não! Você MORREU!";
                 game.action.damage.style.display = "none";
+                loseSound.play();
                 setTimeout(displayGameOver, 2000);
 
             }

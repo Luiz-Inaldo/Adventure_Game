@@ -24,7 +24,7 @@
             </div>
             <div class="battlers">
                 <div class="player">
-                    <img class="img-battler" id="player">
+                    <img class="img-battler-player" id="player">
                     <span class="status" id="player-hp">
                         <span id="player-hp-icon">❤️</span>
                         <span id="player-hp-points"></span>
@@ -38,7 +38,7 @@
                     <img src="../assets/img/versus.png"id="versus"/>
                 </div>
                 <div class="monster">
-                    <img class="img-battler" id="monster">
+                    <img class="img-battler-monster-orc" id="monster">
                     <span class="status" id="monster-hp">
                         <span id="monster-hp-icon">❤️</span>
                         <span id="monster-hp-points"></span>
@@ -60,11 +60,16 @@
 
         <div class="status-panel">
 
-            <span style="color: #fff; font-size: 35px;">Mochila</span>
-            <div class="survival-itens">
+            <div class="backpack">
+                <span style="color: #fff; font-size: 35px;">Mochila</span>
+                <div class="survival-itens"></div>
             </div>
-            <button id="sort-number">⚔️ ATACAR</button>
-            <button id="next-battle">👉🏻 PRÓXIMO</button>
+            
+            <div class="action-buttons">
+                <button id="sort-number">⚔️ ATACAR</button>
+                <button id="next-battle">👉🏻 PRÓXIMO</button>
+            </div>
+            
         </div>
     </div>
 
