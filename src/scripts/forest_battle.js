@@ -211,7 +211,6 @@ async function engageAllElements(){
 function init(){
 
     engageAllElements();
-
 }
 
 init();
