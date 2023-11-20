@@ -45,6 +45,7 @@ const itemSpanNumber = [0, 1, 2, 3, 4];
 
 const swordStab = new Audio('../assets/audio/sword_stab.wav');
 const enemyHit = new Audio('../assets/audio/enemy_hit.wav');
+const criticalHit = new Audio('../assets/audio/critical_hit.mp3');
 const drawSound = new Audio('../assets/audio/swords_draw.wav');
 const healing = new Audio('../assets/audio/healing.wav');
 const winSound = new Audio('../assets/audio/win.wav');
@@ -106,6 +107,7 @@ async function clickAttack(){
             if (criticalNumberPlayer === 3){
 
                 swordStab.play();
+                criticalHit.play();
                 game.action.damage.innerHTML = `Você desferiu ${game.player.value.attack * 2} de dano crítico!`;
                 game.action.enemyHP.classList.add('damaged');
                 game.enemy.value.health -= game.player.value.attack * 2;
@@ -113,6 +115,7 @@ async function clickAttack(){
 
                 if (game.enemy.value.health <= 0){
 
+                    game.enemy.status.health.textContent = '0';
                     game.action.attack.style.display = "none";
                     game.action.playerNumber.style.display = "none";
                     game.action.enemyNumber.innerText = "Você venceu! E ficou um pouco mais forte!";
@@ -132,6 +135,7 @@ async function clickAttack(){
 
                 if (game.enemy.value.health <= 0){
 
+                    game.enemy.status.health.textContent = '0';
                     game.action.attack.style.display = "none";
                     game.action.playerNumber.style.display = "none";
                     game.action.enemyNumber.innerText = "Você venceu! E ficou um pouco mais forte!";
@@ -153,6 +157,7 @@ async function clickAttack(){
             if (criticalNumberEnemy === 3){
 
                 enemyHit.play();
+                criticalHit.play();
                 game.action.damage.innerHTML = `Você recebeu ${game.enemy.value.attack * 2} de dano crítico!`;
                 game.action.playerHP.classList.add('damaged');
                 game.player.value.health -= game.enemy.value.attack * 2;
@@ -160,6 +165,7 @@ async function clickAttack(){
 
                 if (game.player.value.health <= 0){
 
+                    game.player.status.health.textContent = '0';
                     game.action.attack.style.display = "none";
                     game.action.playerNumber.style.display = "none";
                     game.action.enemyNumber.innerText = "Oh Não! Você MORREU!";
@@ -180,6 +186,7 @@ async function clickAttack(){
 
                 if (game.player.value.health <= 0){
 
+                    game.player.status.health.textContent = '0';
                     game.action.attack.style.display = "none";
                     game.action.playerNumber.style.display = "none";
                     game.action.enemyNumber.innerText = "Oh Não! Você MORREU!";

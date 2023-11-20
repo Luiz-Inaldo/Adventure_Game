@@ -45,6 +45,7 @@ const itemSpanNumber = [0, 1, 2, 3, 4];
 
 const swordStab = new Audio('../assets/audio/sword_stab.wav');
 const enemyHit = new Audio('../assets/audio/enemy_hit.wav');
+const criticalHit = new Audio('../assets/audio/critical_hit.mp3');
 const drawSound = new Audio('../assets/audio/swords_draw.wav');
 const healing = new Audio('../assets/audio/healing.wav');
 const winSound = new Audio('../assets/audio/win.wav');
@@ -93,54 +94,113 @@ async function clickAttack(){
         game.action.attack.disabled = true;
         const randomPlayerNumber = Math.floor(Math.random()*11);
         const randomEnemyNumber = Math.floor(Math.random()*11);
+        const criticalNumberPlayer = Math.floor(Math.random()*5);
+        const criticalNumberEnemy = Math.floor(Math.random()*5);
+        console.log(criticalNumberPlayer)
 
         game.action.playerNumber.innerText = `Seu número foi ${randomPlayerNumber}!`;
         game.action.enemyNumber.innerText = `O número do oponente foi ${randomEnemyNumber}!`;
 
-            // if normal attack
+            // if player attacks
         if (randomPlayerNumber > randomEnemyNumber){
 
-            swordStab.play();
-            game.action.damage.innerHTML = `Você desferiu ${game.player.value.attack} de dano!`;
-            game.action.enemyHP.classList.add('damaged');
-            game.enemy.value.health -= game.player.value.attack;
-            game.enemy.status.health.textContent = game.enemy.value.health;
+            if (criticalNumberPlayer === 3){
 
-            if (game.enemy.value.health <= 0){
+                swordStab.play();
+                criticalHit.play();
+                game.action.damage.innerHTML = `Você desferiu ${game.player.value.attack * 2} de dano crítico!`;
+                game.action.enemyHP.classList.add('damaged');
+                game.enemy.value.health -= game.player.value.attack * 2;
+                game.enemy.status.health.textContent = game.enemy.value.health;
 
-                game.action.attack.style.display = "none";
-                game.action.playerNumber.style.display = "none";
-                game.action.enemyNumber.innerText = "Você venceu! E ficou um pouco mais forte!";
-                game.action.damage.innerText = "Hp + 50 | Atk + 5";
-                winSound.play();
-                setTimeout(displayNextButton, 6000);
+                if (game.enemy.value.health <= 0){
 
+                    game.enemy.status.health.textContent = '0';
+                    game.action.attack.style.display = "none";
+                    game.action.playerNumber.style.display = "none";
+                    game.action.enemyNumber.innerText = "Você venceu! E ficou um pouco mais forte!";
+                    game.action.damage.innerText = "Hp + 50 | Atk + 5";
+                    winSound.play();
+                    setTimeout(displayNextButton, 6000);
+
+                }
+                setTimeout(() => {game.action.enemyHP.classList.remove('damaged');}, 300);
+            } else {
+
+                swordStab.play();
+                game.action.damage.innerHTML = `Você desferiu ${game.player.value.attack} de dano!`;
+                game.action.enemyHP.classList.add('damaged');
+                game.enemy.value.health -= game.player.value.attack;
+                game.enemy.status.health.textContent = game.enemy.value.health;
+
+                if (game.enemy.value.health <= 0){
+
+                    game.enemy.status.health.textContent = '0';
+                    game.action.attack.style.display = "none";
+                    game.action.playerNumber.style.display = "none";
+                    game.action.enemyNumber.innerText = "Você venceu! E ficou um pouco mais forte!";
+                    game.action.damage.innerText = "Hp + 50 | Atk + 5";
+                    winSound.play();
+                    setTimeout(displayNextButton, 6000);
+
+                }
+                setTimeout(() => {game.action.enemyHP.classList.remove('damaged');}, 300);
             }
+            
 
-            setTimeout(() => {game.action.enemyHP.classList.remove('damaged');}, 300);
+            
 
-        } else if (randomPlayerNumber < randomEnemyNumber){
+        } 
+            // if enemy attack
+        else if (randomPlayerNumber < randomEnemyNumber){
 
-            enemyHit.play();
-            game.action.damage.innerHTML = `Você recebeu ${game.enemy.value.attack} de dano!`;
-            game.action.playerHP.classList.add('damaged');
-            game.player.value.health -= game.enemy.value.attack;
-            game.player.status.health.textContent = game.player.value.health;
+            if (criticalNumberEnemy === 3){
 
-            if (game.player.value.health <= 0){
+                enemyHit.play();
+                criticalHit.play();
+                game.action.damage.innerHTML = `Você recebeu ${game.enemy.value.attack * 2} de dano crítico!`;
+                game.action.playerHP.classList.add('damaged');
+                game.player.value.health -= game.enemy.value.attack * 2;
+                game.player.status.health.textContent = game.player.value.health;
 
-                game.action.attack.style.display = "none";
-                game.action.playerNumber.style.display = "none";
-                game.action.enemyNumber.innerText = "Oh Não! Você MORREU!";
-                game.action.damage.style.display = "none";
-                loseSound.play();
-                setTimeout(displayGameOver, 2000);
+                if (game.player.value.health <= 0){
 
+                    game.player.status.health.textContent = '0';
+                    game.action.attack.style.display = "none";
+                    game.action.playerNumber.style.display = "none";
+                    game.action.enemyNumber.innerText = "Oh Não! Você MORREU!";
+                    game.action.damage.style.display = "none";
+                    loseSound.play();
+                    setTimeout(displayGameOver, 2000);
+
+                }
+
+                setTimeout(() => {game.action.playerHP.classList.remove('damaged');}, 300);
+            } else {
+
+                enemyHit.play();
+                game.action.damage.innerHTML = `Você recebeu ${game.enemy.value.attack} de dano!`;
+                game.action.playerHP.classList.add('damaged');
+                game.player.value.health -= game.enemy.value.attack;
+                game.player.status.health.textContent = game.player.value.health;
+
+                if (game.player.value.health <= 0){
+
+                    game.player.status.health.textContent = '0';
+                    game.action.attack.style.display = "none";
+                    game.action.playerNumber.style.display = "none";
+                    game.action.enemyNumber.innerText = "Oh Não! Você MORREU!";
+                    game.action.damage.style.display = "none";
+                    loseSound.play();
+                    setTimeout(displayGameOver, 2000);
+
+                }
+
+                setTimeout(() => {game.action.playerHP.classList.remove('damaged');}, 300);
             }
-
-            setTimeout(() => {game.action.playerHP.classList.remove('damaged');}, 300);
-
-        } else {
+        } 
+            // if draw
+        else {
             drawSound.play();
             game.action.damage.innerHTML = `Suas armas se batem! Não houve dano!`;
         }
@@ -211,7 +271,6 @@ async function engageAllElements(){
 function init(){
 
     engageAllElements();
-    
 }
 
 init();
