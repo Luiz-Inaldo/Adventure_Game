@@ -233,6 +233,7 @@ h4 {
     color: #fff;
     padding: 1rem;
     border-radius: 10px;
+    overflow-y: scroll;
 }
 
 #player-number,
@@ -274,9 +275,9 @@ h4 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     width: 100%;
-    min-height: 62%;
+    min-height: 80%;
     background-color: #ff9a02;
     border-radius: 15px;
     box-shadow: inset 5px 6px 3px #c97901;
