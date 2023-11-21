@@ -5,8 +5,8 @@ const game = {
         },
         value: {
             maxHealth: 150,
-            health: 150,
-            attack: 15
+            health: 200,
+            attack: 20
         },
         status: {
             health: document.getElementById('player-hp-points'),
@@ -18,7 +18,7 @@ const game = {
             avatar: document.getElementById('monster'),
         },
         value: {
-            health: 350,
+            health: 600,
             attack: 15
         },
         status: {
@@ -53,7 +53,7 @@ const loseSound = new Audio('../assets/audio/lose.wav');
 
 async function showSprites(){
     game.player.visual.avatar.src = "../assets/img/guerreiro.png";
-    game.enemy.visual.avatar.src = "../assets/img/swamp-monster.png";
+    game.enemy.visual.avatar.src = "../assets/img/golem.png";
 }
 
 async function showStatus(){

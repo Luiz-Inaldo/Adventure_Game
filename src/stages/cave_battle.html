@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adventure Game | Forest Battle</title>
+    <title>Adventure Game | Cave Battle</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/style.css">
@@ -18,14 +18,13 @@
     </audio>
 
     <div class="background">
-        <img src="../assets/img/backgrounds & scenes/forest.jpg"/>
+        <img src="../assets/img/backgrounds & scenes/background_cave.png"/>
     </div>
 
-    <div class="container-battle" id="forest">
+    <div class="container-battle" id="swamp">
         <div class="battle-panel">
             <div class="encounter">
-                Depois de muito andar pela floresta (e de matar muitos orcs),
-                você encontrou quem comandava o acampamento na floresta!
+                O Golem está furioso! Derrote-o para prosseguir em sua missão!
             </div>
             <div class="battlers">
                 <div class="player">
@@ -45,7 +44,7 @@
                 </div>
 
                 <div class="monster">
-                    <img class="img-battler-monster-orc" id="monster">
+                    <img class="img-battler-monster-golem" id="monster">
                     <span class="status" id="monster-hp">
                         <span id="monster-hp-icon">❤️</span>
                         <span id="monster-hp-points"></span>
@@ -74,7 +73,7 @@
             
             <div class="action-buttons">
                 <button id="sort-number">⚔️ ATACAR</button>
-                <a href="./swamp_entry.html"><button id="next-battle">👉🏻 PRÓXIMO</button></a>
+                <a href="./cave_entry.html"><button id="next-battle">👉🏻 PRÓXIMO</button></a>
             </div>
             
         </div>
@@ -86,6 +85,6 @@
     </div>
 
     <!-- Scripts Import -->
-    <script src="../scripts/forest_battle.js" defer></script>
+    <script src="../scripts/cave_battle.js" defer></script>
 </body>
 </html>
