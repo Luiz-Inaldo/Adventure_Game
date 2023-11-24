@@ -4,7 +4,7 @@ const game = {
             avatar: document.getElementById('player')
         },
         value: {
-            maxHealth: 150,
+            maxHealth: 200,
             health: 200,
             attack: 20
         },
