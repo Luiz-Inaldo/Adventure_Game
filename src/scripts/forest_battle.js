@@ -52,7 +52,7 @@ const winSound = new Audio('../assets/audio/win.wav');
 const loseSound = new Audio('../assets/audio/lose.wav');
 
 async function showSprites(){
-    game.player.visual.avatar.src = "../assets/img/warrior.png";
+    game.player.visual.avatar.src = "../assets/img/Warrior.png";
     game.enemy.visual.avatar.src = "../assets/img/orc.png";
 }
 
