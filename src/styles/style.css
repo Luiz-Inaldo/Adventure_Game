@@ -1,8 +1,6 @@
 @import url(./reset.css);
 
-a {
-    text-decoration: none;
-}
+/* global configs */
 
 p {
     text-align: justify;
@@ -16,10 +14,79 @@ h4 {
     margin: 2.5rem 0 1.6rem 0;
 }
 
+/* index configs */
+
 .container-init {
     background-color: #000;
-    height: fit-content;
-    transition: ease-in;
+}
+
+header {
+    padding: 2rem 0;
+}
+
+.img-banner {
+    display: block;
+    width: 60%;
+    margin: 0 auto;
+    border: 15px ridge rgba(197, 155, 51, 0.7);
+}
+
+.story-text-container {
+    padding: 2rem 3rem;
+}
+
+.story-text-container p {
+    color: #fff;
+    text-align: justify;
+}
+
+.btn_start_adventure {
+    display: block;
+    font-weight: bold;
+    border-radius: 15px;
+    width: 200px;
+    height: 80px;
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 1.6rem;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.btn_start_adventure:hover {
+    background-color: #ff0000;
+    color: #fff;
+    transition: 0.2s;
+    transform: scale(1.1);
+}
+
+/* battle screen configs ↓ */
+
+/* Background configs */
+
+.background {
+    position: absolute;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+}
+
+.background.forest {
+    background: url('/src/assets/img/backgrounds_&_scenes/forest.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.background.swamp {
+    background: url('/src/assets/img/backgrounds_&_scenes/swamp_inside.png');
+    background-position: center;
+    background-size: cover;
+}
+
+.background.cave {
+    background: url('/src/assets/img/backgrounds_&_scenes/background_cave.png');
+    background-position: center;
+    background-size: cover;
 }
 
 .container-battle {
@@ -27,83 +94,22 @@ h4 {
     position: absolute;
     z-index: 0;
     height: 100vh;
-    width: 100%;
 }
 
-.img-top {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#castle-img,
-#swamp-img,
-#cave-img {
-    margin: 2rem;
-    width: 625px;
-    height: 339px;
-    border-radius: 10px;
-}
-
-.story-text {
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 5rem;
-    color: #fff;
-}
-
-#init {
-    font-weight: bold;
-    border-radius: 15px;
-    width: 200px;
-    height: 80px;
-    padding: 0.5rem;
-    font-size: 1.6rem;
-    transition: 0.2s;
-    cursor: pointer;
-}
-
-#init:hover {
-    background-color: #ff0000;
-    color: #fff;
-    transition: 0.2s;
-    transform: scale(1.1);
-}
-
-.background {
-    position: absolute;
-    z-index: -1;
-    left: -106px;
-    bottom: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-}
+/* right panel (battle) configs */
 
 .battle-panel {
     width: 75%;
     height: 100vh;
-    border-right: 7px solid #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+    border-right: 7px ridge #fff;
+    padding: 0.5rem 0;
 }
 
-.encounter {
+.encounter_text {
     width: 80%;
+    margin: 0 auto;
     border: 3px solid #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
+    font-size: 28px;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
@@ -111,11 +117,11 @@ h4 {
     border-radius: 10px;
 }
 
-.battlers {
-    /* border: 2px solid red; */
-    width: 40%;
+.battlers_container {
+    margin: 0 auto;
+    padding: 0.5rem 0;
+    width: fit-content;
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
     border-radius: 10px;
@@ -127,7 +133,6 @@ h4 {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    border-radius: 10px;
     gap: 0.5rem;
 }
 
@@ -223,19 +228,16 @@ h4 {
 }
 
 #versus {
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
+    width: 120px;
+    height: 120px;
 }
 
 .information {
     width: 80%;
+    margin: 0 auto;
     border: 3px solid #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    font-size: 30px;
+    display: grid;
+    font-size: 28px;
     background-color: rgba(0, 0, 0, 0.9);
     color: #fff;
     padding: 1rem;
