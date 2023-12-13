@@ -1,0 +1,10 @@
+@media (orientation: landscape) and (max-width: 600px) {
+
+    /* Index Configurations */
+
+    .story-text-container {
+        padding: 1rem 1.5rem;
+    }
+
+
+}
