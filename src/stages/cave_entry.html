@@ -7,6 +7,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/responsivity.css">
 
     <!-- FAVICON -->
     <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
@@ -14,9 +15,9 @@
 <body>
     <div class="container-init">
         <header class="img-top">
-            <img src="../assets/img/backgrounds & scenes/Cave_Entrance.png" id="cave-img">
+            <img src="../assets/img/backgrounds_&_scenes/Cave_Entrance.png" class="img-banner">
         </header>
-        <div class="story-text">
+        <div class="story-text-container">
             <p> 
                 Após a batalha cansativa contra o monstro do lago contaminado, você usou os troncos que
                 estavam lá para atravessar até o outro lado. Após mais algumas horas de caminhada, já era
@@ -38,7 +39,9 @@
             <h4>
                 Uma batalha épica estava prestes a começar.
             </h4>
-            <a href="./cave_battle.html"><button id='init'>BATALHAR!</button></a>
+            
+            <button class='btn_start_adventure' onclick="window.location='/src/stages/cave_battle.html'">Batalhar!</button>
+
         </div>
     </div>
 </body>

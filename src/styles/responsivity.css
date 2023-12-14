@@ -40,6 +40,16 @@
         height: 100px;
     }
 
+    .img-battler-monster-swamp {
+        width: 150px;
+        height: 100px;
+    }
+
+    .img-battler-monster-golem {
+        width: 100px;
+        height: 120px;
+    }
+
     .status,
     .status.damaged,
     .status.healed {

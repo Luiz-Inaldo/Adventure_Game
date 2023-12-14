@@ -7,6 +7,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/responsivity.css">
 
     <!-- FAVICON -->
     <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
@@ -14,9 +15,11 @@
 <body>
     <div class="container-init">
         <header class="img-top">
-            <img src="../assets/img/backgrounds & scenes/swap_entry.png" id="swamp-img">
+
+            <img src="../assets/img/backgrounds_&_scenes/swap_entry.png" class="img-banner">
+
         </header>
-        <div class="story-text">
+        <div class="story-text-container">
             <p> 
                 Depois da batalha contra o terrível Orc da floresta, você caminhou por mais algumas
                 horas e se deu conta de que a floresta estava se tornando um pântano. Pouco a pouco,
@@ -35,7 +38,9 @@
             <h4>
                 Uma batalha épica estava prestes a começar.
             </h4>
-            <a href="./swamp_battle.html"><button id='init'>BATALHAR!</button></a>
+            
+            <button class='btn_start_adventure' onclick="window.location='/src/stages/swamp_battle.html'">Batalhar!</button>
+
         </div>
     </div>
 </body>
