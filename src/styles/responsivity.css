@@ -20,17 +20,24 @@
     .encounter_text,
     .information {
         font-size: 14px;
-        padding: 0.5rem;
+        padding: 5px;
+    }
+
+    .player, .monster {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
     }
 
     .img-battler-player {
-        width: 150px;
-        height: 150px;
+        width: 100px;
+        height: 100px;
     }
 
     .img-battler-monster-orc {
-        width: 112.5px;
-        height: 150px;
+        width: 85px;
+        height: 100px;
     }
 
     .status {
