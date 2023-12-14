@@ -14,7 +14,7 @@
     /* ### Left Panel ### */
 
     .battle-panel {
-        width: 70%;
+        width: 75%;
     }
 
     .encounter_text,
@@ -40,7 +40,9 @@
         height: 100px;
     }
 
-    .status {
+    .status,
+    .status.damaged,
+    .status.healed {
         width: 100px;
         height: 30px;
         font-size: 15px;
@@ -54,7 +56,7 @@
     /* ### right panel ### */
 
     .status-panel {
-        width: 30%;
+        width: 25%;
         padding: 0.5rem;
     }
 
@@ -67,7 +69,7 @@
     }
 
     .survival-itens {
-        padding: 0.25rem;
+        padding: 0.5rem;
     }
 
     .item-slot0,
@@ -76,11 +78,13 @@
     .item-slot3,
     .item-slot4 {
         padding: 0;
+        justify-content: unset;
     }
     
     .item-img {
-        width: 25px;
-        height: 25px;
+        width: 30px;
+        height: 30px;
+        margin: 0 3%;
     }
 
     .item-description {
@@ -97,6 +101,15 @@
         width: 100px;
         height: 40px;
         font-size: 12px;
+    }
+
+    .text-game-over {
+        font-size: 80px;
+    }
+
+    #restart {
+        font-size: 20px;
+        padding: 1rem 1.5rem;
     }
 
 }
