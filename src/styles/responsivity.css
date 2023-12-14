@@ -1,0 +1,95 @@
+@media (orientation: landscape) and (max-width: 600px) {
+
+    /* Index Configs */
+
+    .img-banner {
+        width: 60%;
+    }
+
+    .story-text-container {
+        padding: 1rem 1.5rem;
+    }
+
+    /* Battle Configs */
+    /* ### Left Panel ### */
+
+    .battle-panel {
+        width: 70%;
+    }
+
+    .encounter_text,
+    .information {
+        font-size: 14px;
+        padding: 0.5rem;
+    }
+
+    .img-battler-player {
+        width: 150px;
+        height: 150px;
+    }
+
+    .img-battler-monster-orc {
+        width: 112.5px;
+        height: 150px;
+    }
+
+    .status {
+        width: 100px;
+        height: 30px;
+        font-size: 15px;
+    }
+
+    #versus {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* ### right panel ### */
+
+    .status-panel {
+        width: 30%;
+        padding: 0.5rem;
+    }
+
+    .backpack {
+        justify-content: space-evenly;
+    }
+
+    .bag_name {
+        font-size: 20px;
+    }
+
+    .survival-itens {
+        padding: 0.25rem;
+    }
+
+    .item-slot0,
+    .item-slot1,
+    .item-slot2,
+    .item-slot3,
+    .item-slot4 {
+        padding: 0;
+    }
+    
+    .item-img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .item-description {
+        font-size: 11px;
+    }
+
+    #sort-number {
+        width: 100px;
+        height: 40px;
+        font-size: 15px;
+    }
+
+    #next-battle {
+        width: 100px;
+        height: 40px;
+        font-size: 12px;
+    }
+
+}
