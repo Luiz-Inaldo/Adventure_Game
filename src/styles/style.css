@@ -160,14 +160,13 @@ header {
     width: 100vw;
 }
 
-/* right panel (battle) configs */
+/* left panel (battle) configs */
 
 .battle-panel {
     width: 75%;
     height: 100vh;
-    border-right: 7px ridge #fff;
     display: flex;
-    padding: .75rem 0;
+    padding: 5px 0;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -175,6 +174,7 @@ header {
 
 .encounter_text {
     width: 80%;
+    height: 105px;
     color: #fff;
     text-align: center;
 }
@@ -190,28 +190,38 @@ header {
 
 .player, .monster {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 200px;
     justify-content: space-evenly;
-    gap: 0.5rem;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+#player-name-container,
+#monster-name-container {
+    padding: 0;
+    color: #fff;
+    text-shadow: 2px 2px 1px #000;
+    border-image-width: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
 }
 
 .img-battler-player {
     width: 200px;
     height: 200px;
-    border: 5px solid #112d7a;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px #000;
-    background-color: rgba(0, 0, 144, 0.25);
+    /* border: 5px solid #112d7a;
+    border-radius: 10px; */
+    box-shadow: 5px 5px 5px #474747;
+    /* background-color: rgba(0, 0, 144, 0.25); */
 }
 
 .img-battler-monster-orc {
     width: 150px;
     height: 200px;
-    border: 5px solid #820101;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px #000;
-    background-color: rgba(144, 0, 0, 0.45);
+    /* border: 5px solid #820101;
+    border-radius: 10px; */
+    box-shadow: 5px 5px 5px #474747;
+    /* background-color: rgba(144, 0, 0, 0.45); */
 }
 
 .img-battler-monster-swamp {
@@ -233,59 +243,44 @@ header {
 }
 
 .status {
-    width: 150px;
-    height: 50px;
-    background-color: rgba(0, 0, 0, 0.8);
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: space-evenly;
-    font-size: 25px;
+    padding: 5px;
     color: #fff;
+    font-size: 15px;
     border: 1px solid #fff;
     border-radius: 10px;
     transition: 0.3s;
     box-shadow: 5px 5px 5px #000;
+}
+
+.status {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .status.damaged {
-    width: 150px;
-    height: 50px;
     background-color: rgba(255, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    font-size: 25px;
-    color: #fff;
-    border: 1px solid #fff;
-    border-radius: 10px;
     transform: scale(1.06);
-    transition: 0.3s;
-    box-shadow: 5px 5px 5px #000;
 }
 
 .status.healed {
-    width: 150px;
-    height: 50px;
     background-color: rgba(0, 255, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    font-size: 25px;
-    color: #fff;
-    border: 1px solid #fff;
-    border-radius: 10px;
     transform: scale(1.06);
-    transition: 0.3s;
 }
 
-/* .img-versus {
-    width: 120px;
-    height: 120px;
-    border-radius: 10px;
+#player-hp,
+#player-atk,
+#player-def,
+#monster-hp,
+#monster-atk,
+#monster-def {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-} */
+    gap: 5px;
+}
 
 #versus {
     width: 120px;
@@ -294,6 +289,7 @@ header {
 
 .information {
     width: 80%;
+    height: 105px;
     display: flex;
     flex-direction: column;
     color: #fff;
@@ -306,83 +302,98 @@ header {
     text-align: center;
 }
 
+
+
+/* right panel */
+
 .status-panel {
     width: 25%;
     height: 100%;
-    background-color: #000;
-    padding: 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
+    text-shadow: 2px 2px 1px #020202;
+}
+
+.player-status {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.player-status h2 {
+    text-decoration: underline;
+    margin-bottom: 10px;
 }
 
 .backpack {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    gap: 10px;
     width: 100%;
-    height: 75%;
+    margin-bottom: 10px;
 }
 
-.bag_name {
-    font-size: 35px;
+.bp-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bp-title h2 {
+    font-size: 20px;
     color:#fff;
 }
 
+.arrow-icon {
+    width: 15px;
+    transition: .2s;
+}
+
+.arrow-icon.clicked {
+    rotate: 180deg;
+    transition: .2s;
+}
+
 .survival-itens {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    min-height: 80%;
-    background-color: #ff9a02;
+    height: 100px;
+    overflow-y: scroll;
+    padding: 0 !important;
+    /* background-color: #ff9a02;
     border-radius: 15px;
     box-shadow: inset 5px 6px 3px #c97901;
     border: 3px solid #fff;
-    padding: 1rem;
+    padding: 1rem; */
 }
 
-.item-slot0,
-.item-slot1,
-.item-slot2,
-.item-slot3,
-.item-slot4 {
-    border: 2px solid #000;
-    border-radius: 10px;
-    background: linear-gradient(
-        325deg, #fff 0%, #dadada 30%, #afafaf 70%, #8d8d8d 100%);
+.survival-itens.show {
+    display: flex;
+}
+
+.item {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 20%;
-    padding-right: 0.3rem;
-    margin-bottom: 0.3rem;
-    transition: 0.2s;
 }
 
-.item-slot0:hover,
-.item-slot1:hover,
-.item-slot2:hover,
-.item-slot3:hover,
-.item-slot4:hover {
-    transition: 0.2s;
-    transform: scale(1.05);
-    cursor: pointer;
-    background: linear-gradient(
-        325deg, #ffbcbc 0%, #fd9191 30%, #ff5353 70%, #ff3d3d 100%);
+.item span {
+    font-size: 10px;
+    color: #fff;
+    line-height: 1.2;
 }
 
-.item-img {
-    width: 50px;
-    height: 50px;
+.item .item-quantity {
+    flex: 1 0 40px;
 }
 
-.item-description {
-    font-size: 20px;
-}
 
 .action-buttons {
     display: flex;
@@ -390,7 +401,6 @@ header {
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
-    height: 25%;
 }
 
 #sort-number {
@@ -425,7 +435,7 @@ header {
     padding: 0.5rem;
     font-size: 1.6rem;
     transition: 0.2s;
-    display: none;
+    display: block;
 }
 
 #next-battle:hover {

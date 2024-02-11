@@ -280,7 +280,7 @@ async function engageAllElements() {
     await showStatus();
 
     // bag itens
-    await showSupplies(5);
+    // await showSupplies(5);
 
     // attack
     await clickAttack();
@@ -296,3 +296,9 @@ function init() {
 }
 
 init();
+
+// teste de div
+document.querySelector(".bp-title").addEventListener('click', () => {
+    document.querySelector(".survival-itens").classList.toggle("show")
+    document.querySelector(".arrow-icon").classList.toggle("clicked")
+})
