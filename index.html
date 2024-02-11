@@ -8,55 +8,68 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./src/styles/style.css">
     <link rel="stylesheet" href="./src/styles/responsivity.css">
+    <link rel="stylesheet" href="./src/styles/_containers_and_frames.css">
+    <link rel="stylesheet" href="./src/styles/_button.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+
+    <!-- scripts -->
+    <script src="/src/scripts/index.js" defer></script>
 
     <!-- FAVICON -->
     <link rel="shortcut icon" href="./src/assets/img/favicon.png" type="image/x-icon">
 </head>
 <body>
     <div class="container-init">
+        <!-- error warning -->
+        <div id="error-warning"></div>
 
+        <!-- header -->
         <header>
-
-            <img src="./src/assets/img/backgrounds_&_scenes/castle_with_forest.png" class="img-banner">
-
+            <img src="./src/assets/img/backgrounds_&_scenes/medieval_village.avif" class="img-banner">
         </header>
-
-        <div class="story-text-container">
-
-            <p> 
-                Há muito tempo atrás, existia um reino onde tudo era pacífico e seu povo
-                vivia em harmonia. O rei do castelo, era bondoso, e tamanha bondade sempre o 
-                fez prosperar. Seus súditos o amavam, e tudo corria bem.
-            </p>
-
-            <p>
-                Mas longe, bem longe, alguém invejava o seu sucesso, e estava disposto a fazer
-                de tudo para que o rei sucumbisse e seu reino caísse em ruínas.
-            </p>
-
-            <p>
-                Essa pessoa fez um pacto com uma entidade sombria, com a promessa de que teria
-                o reino só para si. Pouco tempo depois, o reino começou a ser atacado por criaturas
-                poderosas, e o rei enviou os seus melhores soldados para a batalha.
-            </p>
-
-            <p>
-                Depois de alguns dias, muitos já haviam morrido em batalha, e a esperança estava
-                quase perdida. Foi aí que você, membro da guarda, percebeu que havia algo de errado.
-                Por mais que lutassem, as criaturas não paravam de aparecer! Então, com a ideia de
-                que algo estava atraindo as criaturas para o reino, você entrou na floresta a procura
-                da raíz do mal.
-            </p>
-
-            <h4>
-                A aventura o aguarda!
-            </h4>
-
-            <button class='btn_start_adventure' onclick="window.location='/src/stages/forest_battle.html'">Iniciar Aventura!</button>
-            
-            
-        </div>
-
+        
+        <!-- main -->
+        <main>
+            <div class="story-text-container rpgui-container framed">
+    
+                <p> 
+                    Há muito tempo atrás, existia um reino onde tudo era pacífico e seu povo
+                    vivia em harmonia. O rei do castelo, era bondoso, e tamanha bondade sempre o 
+                    fez prosperar. Seus súditos o amavam, e tudo corria bem.
+                </p>
+    
+                <p>
+                    Mas longe, bem longe, alguém invejava o seu sucesso, e estava disposto a fazer
+                    de tudo para que o rei sucumbisse e seu reino caísse em ruínas.
+                </p>
+    
+                <p>
+                    Essa pessoa fez um pacto com uma entidade sombria, com a promessa de que teria
+                    o reino só para si. Pouco tempo depois, o reino começou a ser atacado por criaturas
+                    poderosas, e o rei enviou os seus melhores soldados para a batalha.
+                </p>
+    
+                <p>
+                    Depois de alguns dias, muitos já haviam morrido em batalha, e a esperança estava
+                    quase perdida. Foi aí que você, membro da guarda, percebeu que havia algo de errado.
+                    Por mais que lutassem, as criaturas não paravam de aparecer! Então, com a ideia de
+                    que algo estava atraindo as criaturas para o reino, você entrou na floresta a procura
+                    da raíz do mal.
+                </p>
+    
+                <h4>
+                    A aventura o aguarda!
+                </h4>
+    
+                <div id="player-name-input">
+                    <label for="player-name">Qual será o seu nome?</label>
+                    <input type="text" id="player-name" placeholder="Digite seu nome">
+                </div>
+        
+                <button class='rpgui-button' id="init-btn">Iniciar Aventura!</button>
+                 
+            </div>
+        </main>
     </div>
 </body>
 </html>

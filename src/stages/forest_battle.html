@@ -8,6 +8,8 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/responsivity.css">
+    <link rel="stylesheet" href="../styles/_containers_and_frames.css">
+    <link rel="stylesheet" href="../styles/_button.css">
 
     <!-- FAVICON -->
     <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
@@ -22,9 +24,11 @@
 
     <div class="container-battle" id="forest">
         <div class="battle-panel">
-            <div class="encounter_text">
-                Depois de muito andar pela floresta (e de matar muitos orcs),
-                você encontrou quem comandava o acampamento na floresta!
+            <div class="encounter_text rpgui-container framed-golden-2">
+                <p>
+                    Depois de muito andar pela floresta (e de matar muitos orcs),
+                    você encontrou quem comandava o acampamento na floresta!
+                </p>
             </div>
             <div class="battlers_container">
                 <div class="player">
@@ -55,7 +59,7 @@
                     </span>
                 </div>
             </div>
-            <div class="information">
+            <div class="information rpgui-container framed-golden-2">
                 <span id="player-number">Pressione o botão ATACAR.</span>
                 <span id="monster-number">Compare os números.</span>
                 <span id="damage">Ataque ou seja atacado!</span>
@@ -85,7 +89,6 @@
     </div>
 
     <!-- Scripts Import -->
-    <!-- <script src="../scripts/forest_battle.js" defer></script> -->
     <script src="../scripts/battle_turn_test.js" defer></script>
 </body>
 </html>
