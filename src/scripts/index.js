@@ -21,7 +21,7 @@ const playerInitStatus = [
 
 // verificando a existência de um player
 if (localStorage.getItem('jogador')) {
-    window.location.href = "/src/stages/forest_battle.html";
+    window.location.href = "/roadmap.html";
 }
 
 
@@ -40,7 +40,7 @@ initButton.addEventListener('click', () => {
     if (playerNameInput.value.trim() !== "" && playerInitStatus.name !== "") {
 
         localStorage.setItem('jogador', JSON.stringify(playerInitStatus));
-        window.location.href = "/src/stages/forest_battle.html";
+        window.location.href = "/roadmap.html";
 
     } else {
         const warningDiv = document.getElementById('error-warning');

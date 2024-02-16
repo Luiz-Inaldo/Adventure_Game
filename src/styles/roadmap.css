@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('/src/styles/_button.css');
+@import url('/src/styles/_cursor.css');
+@import url('/src/styles/_containers_and_frames.css');
+
+/* global configs */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: 'Press Start 2P', system-ui;
+    user-select: none;
+    cursor: url("../assets/rpg/cursor/default.png"), default;
+}
+
+/* background */
+#roadmap-bg {
+    position: absolute;
+    z-index: -1;
+    background: url('/src/assets/img/backgrounds_&_scenes/map-background.jpg');
+    background-position: center;
+    background-size: contain;
+    width: 100vw;
+    height: 100vh;
+    filter: blur(3px);
+}
+
+/* container */
+#roadmap-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    color: #fff;
+    text-shadow: 0 1px 5px #000;
+}
+
+
+/* market & equipment div */
+#market,
+#equipment {
+    position: absolute;
+    top: 10px;
+    width: 120px;
+    height: 106px;
+    display: flex;
+    padding: 5px;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
+#market {
+    left: 20px;
+}
+
+#equipment {
+    right: 20px;
+}
+
+#market-icon,
+#equipment-icon {
+    width: 40px;
+}
+
+#market p,
+#equipment p {
+    font-size: 13px;
+    top: 0;
+}
+
+#market,
+#market-icon,
+#market p,
+#equipment,
+#equipment-icon,
+#equipment p {
+    cursor: url('/src/assets/rpg/cursor/point.png'), default;
+}
+
+/* title */
+h1 {
+    font-size: 45px;
+}
+
+/* phases */
+#all-phases-container {
+    width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.normal-phase {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 !important;
+    gap: 5px;
+}
+
+#monster-icon {
+    width: 50px;
+}
+
+.normal-phase p {
+    font-size: 8px;
+}
