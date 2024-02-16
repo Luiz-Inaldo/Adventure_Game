@@ -43,6 +43,10 @@
                             <span id="player-hp-icon">❤️</span>
                             <span id="player-hp-points"></span>
                         </div>
+                        <div id="player-mp">
+                            <span id="player-mp-icon">🔷</span>
+                            <span id="player-mp-points">20</span>
+                        </div>
                         <div id="player-atk">
                             <span id="player-atk-icon">⚔️</span>
                             <span id="player-atk-points"></span>
@@ -97,23 +101,38 @@
                 <span class="player-gold">Gold: 0</span>
             </div>
 
-            <div class="backpack">
+            <div class="backpack-and-skills">
                 <div class="bp-title">
                     <h2>Mochila</h2>
-                    <img src="../assets/img/icons/arrow-down.svg" alt="arrow-down" class="arrow-icon">
+                    <img src="../assets/img/icons/arrow-down.svg" alt="arrow-down" id="arrow-icon-1">
                 </div>
                 <div class="survival-itens rpgui-container framed-golden">
                     <div class="item">
-                        <img src="../assets/img/pocao.png" alt="potion" class="item-icon" style="width: 50px;">
+                        <img src="../assets/img/pocao.png" alt="potion" class="item-icon">
                         <span class="item-description">poção de vida (+100)</span>
                         <span class="item-quantity">x 3</span>
                     </div>
                 </div>
+
+                <div class="skills-title">
+                    <h2>Habilidades</h2>
+                    <img src="../assets/img/icons/arrow-down.svg" alt="arrow-down" id="arrow-icon-2">
+                </div>
+                <div class="skills rpgui-container framed-golden">
+                    <div class="skill">
+                        <img src="/src/assets/img/icons/icone-espada.png" alt="atk-skill" class="skill-icon">
+                        <span class="skill-description">golpe forte com + 10atk</span>
+                        <span class="skill-mana-requer">mp 5</span>
+                    </div>
+                </div>
             </div>
 
+            
+            
+
             <div class="action-buttons">
-                <button id="sort-number">⚔️ ATACAR</button>
-                <a href="./swamp_entry.html"><button id="next-battle">👉🏻 PRÓXIMO</button></a>
+                <button class="rpgui-button" id="atk-btn">⚔️ ATACAR</button>
+                <a href="./swamp_entry.html"><button class="rpgui-button" id="next-battle">🗺️ MAPA</button></a>
             </div>
 
         </div>

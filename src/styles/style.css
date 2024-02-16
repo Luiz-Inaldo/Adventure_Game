@@ -273,6 +273,7 @@ header {
 #player-hp,
 #player-atk,
 #player-def,
+#player-mp,
 #monster-hp,
 #monster-atk,
 #monster-def {
@@ -321,6 +322,7 @@ header {
     flex-direction: column;
     gap: 5px;
     width: 100%;
+    height: 20%;
     font-size: 12px;
     margin-bottom: 20px;
 }
@@ -330,68 +332,87 @@ header {
     margin-bottom: 10px;
 }
 
-.backpack {
+.backpack-and-skills {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     width: 100%;
+    height: 60%;
     margin-bottom: 10px;
 }
 
-.bp-title {
+.bp-title,
+.skills-title {
     display: inline-flex;
     align-items: center;
     gap: 10px;
 }
 
-.bp-title h2 {
+.bp-title h2,
+.skills-title h2 {
     font-size: 20px;
     color:#fff;
 }
 
-.arrow-icon {
+#arrow-icon-1,
+#arrow-icon-2 {
     width: 15px;
     transition: .2s;
 }
 
-.arrow-icon.clicked {
+.clicked {
     rotate: 180deg;
     transition: .2s;
 }
 
-.survival-itens {
+.survival-itens,
+.skills {
     display: none;
     flex-direction: column;
     align-items: center;
     width: 100%;
     height: 100px;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 0 !important;
-    /* background-color: #ff9a02;
-    border-radius: 15px;
-    box-shadow: inset 5px 6px 3px #c97901;
-    border: 3px solid #fff;
-    padding: 1rem; */
 }
 
-.survival-itens.show {
+.survival-itens.show,
+.skills.show {
     display: flex;
 }
 
-.item {
+.item,
+.skill {
+    width: 100%;
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
-.item span {
-    font-size: 10px;
+.item:hover, .item :nth-child(1), .item :nth-child(2), .item :nth-child(3),
+.skill:hover, .skill :nth-child(1), .skill :nth-child(2), .skill :nth-child(3) {
+    cursor: url('/src/assets/rpg/cursor/point.png'), default;
+}
+
+.item-icon {
+    width: 50px;
+}
+
+.skill-icon {
+    width: 40px;
+}
+
+.item span,
+.skill span {
+    font-size: 9px;
     color: #fff;
     line-height: 1.2;
 }
 
-.item .item-quantity {
-    flex: 1 0 40px;
+.item .item-quantity,
+.skill .skill-mana-requer {
+    min-width: 50px;
 }
 
 
@@ -401,16 +422,13 @@ header {
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
+    height: 20%;
 }
 
-#sort-number {
-    font-weight: bold;
-    border-radius: 15px;
+#atk-btn,
+#next-battle {
     width: 200px;
-    height: 80px;
-    padding: 0.5rem;
-    font-size: 1.6rem;
-    transition: 0.2s;
+    height: 50px;
 }
 
 #sort-number:hover {
@@ -425,17 +443,6 @@ header {
     cursor: not-allowed;
     background-color: #2e2e2e;
     color: #4b4b4b;
-}
-
-#next-battle {
-    font-weight: bold;
-    border-radius: 15px;
-    width: 200px;
-    height: 80px;
-    padding: 0.5rem;
-    font-size: 1.6rem;
-    transition: 0.2s;
-    display: block;
 }
 
 #next-battle:hover {

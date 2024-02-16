@@ -41,6 +41,10 @@ const game = {
     }
 };
 
+let playerInfoContainer;
+playerInfoContainer = JSON.parse(localStorage.getItem('jogador'))
+console.log(playerInfoContainer);
+
 const itemSpanNumber = [0, 1, 2, 3, 4];
 
 const swordStab = new Audio('../assets/audio/sword_stab.wav');
@@ -300,5 +304,11 @@ init();
 // teste de div
 document.querySelector(".bp-title").addEventListener('click', () => {
     document.querySelector(".survival-itens").classList.toggle("show")
-    document.querySelector(".arrow-icon").classList.toggle("clicked")
+    document.getElementById('arrow-icon-1').classList.toggle("clicked")
+})
+
+document.querySelector(".skills-title").addEventListener('click', () => {
+    document.querySelector(".skills").classList.toggle("show")
+    document.getElementById('arrow-icon-2').classList.toggle("clicked")
+
 })
