@@ -23,16 +23,55 @@
         </div>
 
         <!-- título -->
-        <h1>MAPA</h1>
+        <h1></h1>
 
-        <!-- primeira fase (floresta) -->
         <div id="all-phases-container">
-            <div class="normal-phase rpgui-container framed-golden-2" id="phase-1-1">
+            <!-- primeira fase (floresta) -->
+            <div class="normal-phase rpgui-container framed-golden-2" id="p1">
+                <div class="locked hidden">
+                    <img src="/src/assets/img/icons/lock-icon.png" alt="lock-icon" class="lock-icon">
+                </div>
                 <img src="/src/assets/img/icons/goblin-icon.png" alt="goblin" id="monster-icon">
                 <p>fase 1-1</p>
             </div>
+
+            <div class="separator"></div>
+
+            <div class="normal-phase rpgui-container framed-golden-2" id="p2">
+                <div class="locked">
+                    <img src="/src/assets/img/icons/lock-icon.png" alt="lock-icon" class="lock-icon">
+                </div>
+                <img src="/src/assets/img/icons/goblin-icon.png" alt="goblin" id="monster-icon">
+                <p>fase 1-2</p>
+            </div>
+            
+            <div class="separator"></div>
+
+            <div class="normal-phase rpgui-container framed-golden-2" id="p3">
+                <div class="locked">
+                    <img src="/src/assets/img/icons/lock-icon.png" alt="lock-icon" class="lock-icon">
+                </div>
+                <img src="/src/assets/img/icons/boss-icon.png" alt="boss" id="monster-icon">
+                <p>boss 1</p>
+            </div>
+
+            <div class="separator"></div>
+
+            <!-- segunda fase (pântano) -->
+
+            <div class="normal-phase rpgui-container framed-golden-2" id="p4">
+                <div class="locked">
+                    <img src="/src/assets/img/icons/lock-icon.png" alt="lock-icon" class="lock-icon">
+                </div>
+                <img src="/src/assets/img/icons/goblin-icon.png" alt="boss" id="monster-icon">
+                <p>fase 2-1</p>
+            </div>
+
+            <div class="separator"></div>
+
         </div>
     </div>
+    <script src="/src/scripts/roadmap.js"></script>
 
 </body>
 </html>

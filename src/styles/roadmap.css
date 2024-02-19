@@ -83,23 +83,50 @@
 
 /* title */
 h1 {
-    font-size: 45px;
+    font-size: 40px;
+    text-transform: uppercase;
+    max-width: 700px;
+    text-align: center;
 }
 
 /* phases */
 #all-phases-container {
-    width: 1200px;
+    width: 900px;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .normal-phase {
-    width: fit-content;
+    position: relative;
+    width: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0 !important;
     gap: 5px;
+    margin-bottom: 20px;
+}
+
+.locked {
+    position: absolute;
+    z-index: 1;
+    width: 140%;
+    height: 145%;
+    top: -13px;
+    background-color: #2f2f2f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lock-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.hidden {
+    visibility: hidden;
 }
 
 #monster-icon {
@@ -108,4 +135,10 @@ h1 {
 
 .normal-phase p {
     font-size: 8px;
+}
+
+.separator {
+    border: 1px solid #fff;
+    width: 40px;
+    height: 0;
 }

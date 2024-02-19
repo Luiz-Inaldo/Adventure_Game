@@ -1,3 +1,4 @@
+// informações básicas do jogador
 const playerInitStatus = [
     /* índice [0]*/
     general = {
@@ -5,7 +6,10 @@ const playerInitStatus = [
         attack: 10,
         defense: 10,
         health: 100,
-        mana: 10
+        mana: 10,
+        level: 1,
+        exp: 0,
+        gold: 0
     },
     /* índice [1]*/
     equipment = [
@@ -14,8 +18,12 @@ const playerInitStatus = [
     ],
     /* índice [2]*/
     items = [
-        { nome: "poção de hp", descricao: "cura 100 hp", quantidade: 3, icon: "" }
-    ]
+        { nome: "poção de hp", tipo: "poção", descricao: "cura 100 hp", quantidade: 3, icon: "" }
+    ],
+    /* índice [3] */
+    others = { 
+        concluded: 0  
+    }
 
 ];
 
