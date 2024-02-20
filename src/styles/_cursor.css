@@ -39,7 +39,7 @@ label
 .rpgui-dropdown-imp,
 .rpgui-content input[type=checkbox].rpgui-checkbox + label
 {
-    cursor: url("img/cursor/point.png") 10 0, auto;
+    cursor: url("../assets/rpg/cursor/point.png") 10 0, auto;
 }
 
 

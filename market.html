@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/styles/roadmap.css">
+    <title>Market - Adventure Game</title>
+</head>
+<body>
+
+    <div id="market-container">
+        <div id="market-window" class="rpgui-container framed">
+            <div id="player-gold-coins">
+                <img src="/src/assets/img/icons/gold-coin.png" alt="player-gold-coin" id="player-gold">
+                <p>0</p>
+            </div>
+
+            <h1>loja</h1>
+
+            <div id="seller-quote">
+                <img src="/src/assets/img/vendedor.png" alt="seller" id="seller-img">
+                <p>"O que posso fazer por você hoje, aventureiro?"</p>
+            </div>
+
+            <div id="market-options">
+                <button id="buy-btn" class="rpgui-button">comprar</button>
+                <button id="sell-btn" class="rpgui-button">vender</button>
+            </div>
+
+            <ul id="items-showcase">
+
+                <h2 id="showcase-title">Comprar</h2>
+
+                <li class="mkt-item">
+                    <img src="/src/assets/img/icons/frost-blade.png" alt="sword-icon" class="mkt-item-icon">
+                    <span class="mkt-item-description">Espada longa de aço</span>
+                    <span class="mkt-item-attribute">+ 10 atk</span>
+                    <span class="mkt-item-value">500G</span>
+                </li>
+
+                <li class="mkt-item">
+                    <img src="/src/assets/img/icons/ramsir-armor.png" alt="armor-icon" class="mkt-item-icon">
+                    <span class="mkt-item-description">Armadura pesada</span>
+                    <span class="mkt-item-attribute">+ 7 def</span>
+                    <span class="mkt-item-value">800G</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+</body>
+</html>

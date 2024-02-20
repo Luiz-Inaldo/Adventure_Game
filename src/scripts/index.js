@@ -13,12 +13,12 @@ const playerInitStatus = [
     },
     /* índice [1]*/
     equipment = [
-        { nome: "armadura simples", descricao: "armadura de metal simples", tipo: "defesa", atributo: 3, icon: "" },
-        { nome: "espada dupla simples", descricao: "espada dupla pesada de metal", tipo: "ataque", atributo: 5, icon: "" }
+        { nome: "armadura simples", descricao: "armadura de metal simples", tipo: "defesa", atributo: 3, icon: "/src/assets/img/icons/armor-icon.png" },
+        { nome: "espada dupla simples", descricao: "espada dupla pesada de metal", tipo: "ataque", atributo: 5, icon: "/src/assets/img/icons/sword-icon.png" }
     ],
     /* índice [2]*/
     items = [
-        { nome: "poção de hp", tipo: "poção", descricao: "cura 100 hp", quantidade: 3, icon: "" }
+        { nome: "poção de hp", tipo: "poção", descricao: "cura 100 hp", quantidade: 3, icon: "/src/assets/img/icons/hp-potion-icon.png" }
     ],
     /* índice [3] */
     others = { 

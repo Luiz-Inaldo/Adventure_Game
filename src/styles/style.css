@@ -9,7 +9,7 @@
     box-sizing: border-box;
     list-style: none;
     /* font-family: 'MedievalSharp', cursive; */
-    font-family: 'Press Start 2P', system-ui;
+    font-family: 'Press Start 2P', sans-serif;
     user-select: none;
     text-decoration: none;
     cursor: url("../assets/rpg/cursor/default.png"), default;

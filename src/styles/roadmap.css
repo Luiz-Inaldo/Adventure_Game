@@ -66,18 +66,23 @@
     width: 40px;
 }
 
-#market p,
-#equipment p {
+#market-icon {
+    margin-bottom: 8px;
+}
+
+#market a,
+#equipment a {
     font-size: 13px;
-    top: 0;
+    text-decoration: none;
+    color: #fff;
 }
 
 #market,
 #market-icon,
-#market p,
+#market a,
 #equipment,
 #equipment-icon,
-#equipment p {
+#equipment a {
     cursor: url('/src/assets/rpg/cursor/point.png'), default;
 }
 
@@ -142,3 +147,117 @@ h1 {
     width: 40px;
     height: 0;
 }
+
+
+/* market styles */
+#market-container {
+    min-height: 100vh;
+    padding: 50px 0;
+    background: #000;
+    display: flex;
+    align-items: center;
+    color: #f1f1f1;
+}
+
+#market-window {
+    position: relative;
+    width: 1000px;
+    margin: 0 auto;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#market-window h1 {
+    margin: 15px auto;
+}
+
+#player-gold-coins {
+    position: absolute;
+    right: 5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#player-gold {
+    width: 20px;
+}
+
+#seller-quote {
+    display: flex;
+    gap: 10px;
+    align-items: end;
+    margin-bottom: 100px;
+}
+
+#seller-img {
+    width: 70px;
+}
+
+#seller-quote p {
+    font-size: 12px;
+    font-style: italic;
+}
+
+#market-options {
+    display: inline-flex;
+    gap: 20px;
+}
+
+/* market-showcase */
+#items-showcase {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+    background: #8F806D;
+    /* background: #2f2f2f; */
+    padding: 10px;
+    gap: 10px;
+}
+
+#showcase-title {
+    margin: 30px 0;
+}
+
+.mkt-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 16px;
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+.mkt-item:hover {
+    cursor: url("../assets/rpg/cursor/point.png"), default;
+    color: #333;
+    /* background: #fff; */
+}
+
+.mkt-item-icon,
+.mkt-item-description:hover,
+.mkt-item-attribute:hover,
+.mkt-item-value:hover {
+    cursor: url("../assets/rpg/cursor/point.png"), default;
+}
+
+.mkt-item-icon {
+    width: 50px;
+}
+
+.mkt-item-description {
+    flex: 3 0 0;
+    text-align: center;
+}
+
+.mkt-item-attribute {
+    flex: 2 0 0;
+    text-align: center;
+}
+
