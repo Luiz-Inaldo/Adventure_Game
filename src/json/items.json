@@ -1,0 +1,20 @@
+{
+    "combatItem": [
+        {
+            "nome": "armadura básica",
+            "descricao": "armadura básica com placas de ferro",
+            "tipo": "defesa",
+            "elemento": "fisico",
+            "atributo": 3,
+            "icon": "/src/assets/img/icons/armors/basic-armor.png"
+        },
+        {
+            "nome": "armadura simples",
+            "descricao": "armadura de metal simples",
+            "tipo": "defesa",
+            "elemento": "fisico",
+            "atributo": 3,
+            "icon": "/src/assets/img/icons/armors/basic-armor.png"
+        }
+    ]
+}
