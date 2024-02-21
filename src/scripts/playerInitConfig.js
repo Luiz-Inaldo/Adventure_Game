@@ -24,8 +24,8 @@ const playerInitStatus = [
             icon: "/src/assets/img/icons/armors/basic-armor.png"
         },
         {
-            nome: "espada dupla simples",
-            descricao: "espada dupla pesada e frágil",
+            nome: "espada longa simples",
+            descricao: "espada pesada e frágil",
             tipo: "ataque",
             elemento: "fisico",
             atributo: 5,

@@ -1,20 +1,199 @@
 {
-    "combatItem": [
+    "armaduras": [
+
         {
             "nome": "armadura básica",
             "descricao": "armadura básica com placas de ferro",
-            "tipo": "defesa",
+            "tipo": "proteção",
             "elemento": "fisico",
-            "atributo": 3,
+            "atributo": 5,
+            "atributo-elemental": 0,
             "icon": "/src/assets/img/icons/armors/basic-armor.png"
         },
         {
             "nome": "armadura simples",
             "descricao": "armadura de metal simples",
-            "tipo": "defesa",
+            "tipo": "proteção",
             "elemento": "fisico",
-            "atributo": 3,
+            "atributo": 10,
+            "atributo-elemental": 0,
             "icon": "/src/assets/img/icons/armors/basic-armor.png"
+        },
+        {
+            "nome": "armadura reforçada",
+            "descricao": "armadura pesada com placas de aço",
+            "tipo": "proteção",
+            "elemento": "fisico",
+            "atributo": 15,
+            "atributo-elemental": 0,
+            "icon": "/src/assets/img/icons/armors/reinforced-armor.png"
+        },
+        {
+            "nome": "armadura espinhosa",
+            "descricao": "armadura leve com espinhos nos ombros",
+            "tipo": "proteção",
+            "elemento": "fisico",
+            "atributo": 20,
+            "atributo-elemental": 0,
+            "icon": "/src/assets/img/icons/armors/spiked-armor.png"
+        },
+        {
+            "nome": "armadura nobre",
+            "descricao": "armadura leve revestida com o melhor aço",
+            "tipo": "proteção",
+            "elemento": "fisico",
+            "atributo": 30,
+            "atributo-elemental": 0,
+            "icon": "/src/assets/img/icons/armors/noble-armor.png"
+        },
+        {
+            "nome": "armadura gigante de terra",
+            "descricao": "armadura forjada no coração da natureza",
+            "tipo": "proteção",
+            "elemento": "terra",
+            "atributo": 15,
+            "atributo-elemental": 25,
+            "icon": "/src/assets/img/icons/armors/earth-giant-armor.png"
+        },
+        {
+            "nome": "armadura vento do norte",
+            "descricao": "armadura tomada pelo poder do norte",
+            "tipo": "proteção",
+            "elemento": "gelo",
+            "atributo": 15,
+            "atributo-elemental": 25,
+            "icon": "/src/assets/img/icons/armors/frostborn-armor.png"
+        },
+        {
+            "nome": "armadura do Ramsir",
+            "descricao": "feita a partir das escamas do Ramsir",
+            "tipo": "proteção",
+            "elemento": "fogo",
+            "atributo": 15,
+            "atributo-elemental": 25,
+            "icon": "/src/assets/img/icons/armors/ramsir-armor.png"
+        },
+        {
+            "nome": "armadura do senhor das tempestades",
+            "descricao": "armadura capaz de suportar ataques de raio",
+            "tipo": "proteção",
+            "elemento": "raio",
+            "atributo": 15,
+            "atributo-elemental": 25,
+            "icon": "/src/assets/img/icons/armors/thunderlord-armor.png"
+        }
+        
+    ],
+
+    "armas": [
+
+        {
+            "nome": "espada longa simples",
+            "descricao": "espada pesada e frágil",
+            "tipo": "arma",
+            "elemento": "fisico",
+            "atributo": 5,
+            "atributo-elemental": 0,
+            "icon": "/src/assets/img/icons/weapons/cheap-longsword.png"
+        },
+        {
+            "nome": "espada longa de ferro",
+            "descricao": "espada pesada de ferro",
+            "tipo": "arma",
+            "elemento": "fisico",
+            "atributo": 10,
+            "atributo-elemental": 0,
+            "icon": "/src/assets/img/icons/weapons/iron-longsword.png"
+        },
+        {
+            "nome": "espada longa de aço",
+            "descricao": "espada leve e resistente",
+            "tipo": "arma",
+            "elemento": "fisico",
+            "atributo": 15,
+            "atributo-elemental": 0,
+            "icon": "/src/assets/img/icons/weapons/steel-longsword.png"
+        },
+        {
+            "nome": "espada grande",
+            "descricao": "espada pesada e poderosa",
+            "tipo": "arma",
+            "elemento": "fisico",
+            "atributo": 20,
+            "atributo-elemental": 0,
+            "icon": "/src/assets/img/icons/weapons/great-sword.png"
+        },
+        {
+            "nome": "espada longa de ouro",
+            "descricao": "espada bem adornada com algumas jóias",
+            "tipo": "arma",
+            "elemento": "fisico",
+            "atributo": 25,
+            "atributo-elemental": 0,
+            "icon": "/src/assets/img/icons/weapons/golden-longsword.png"
+        },
+        {
+            "nome": "lâmina do senhor da natureza",
+            "descricao": "espada forjada no coração da natureza",
+            "tipo": "arma",
+            "elemento": "terra",
+            "atributo": 5,
+            "atributo-elemental": 30,
+            "icon": "/src/assets/img/icons/weapons/nature-lord-blade.png"
+        },
+        {
+            "nome": "lâmina de gelo",
+            "descricao": "espada com uma aura congelante",
+            "tipo": "arma",
+            "elemento": "gelo",
+            "atributo": 5,
+            "atributo-elemental": 30,
+            "icon": "/src/assets/img/icons/weapons/frostblade.png"
+        },
+        {
+            "nome": "ira do vulcão",
+            "descricao": "espada feita dentro de um vulcão",
+            "tipo": "arma",
+            "elemento": "fogo",
+            "atributo": 5,
+            "atributo-elemental": 30,
+            "icon": "/src/assets/img/icons/weapons/volcano-sword.png"
+        },
+        {
+            "nome": "lâmina do senhor das tempestades",
+            "descricao": "espada revestida de raios",
+            "tipo": "arma",
+            "elemento": "raio",
+            "atributo": 5,
+            "atributo-elemental": 30,
+            "icon": "/src/assets/img/icons/weapons/thunderblade.png"
+        },
+        {
+            "nome": "vingadora",
+            "descricao": "espada feita com os materias da mais alta qualidade",
+            "tipo": "arma",
+            "elemento": "fisico",
+            "atributo": 40,
+            "atributo-elemental": 0,
+            "icon": "/src/assets/img/icons/weapons/sky-avenger.png"
+        },
+        {
+            "nome": "espada arco-iris",
+            "descricao": "arma feita por um povo antigo, mas muito poderosa",
+            "tipo": "arma",
+            "elemento": "puro",
+            "atributo": 0,
+            "atributo-elemental": 60,
+            "icon": "/src/assets/img/icons/weapons/rainbow-sword.png"
+        }
+    ],
+
+    "sobrevivencia": [
+        {
+            "nome": "poção de hp",
+            "tipo": "suporte",
+            "descricao": "cura 100 hp",
+            "icon": "/src/assets/img/icons/potions/hp-potion-icon.png"
         }
     ]
 }
