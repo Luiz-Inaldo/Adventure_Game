@@ -1,31 +1,5 @@
 // informações básicas do jogador
-const playerInitStatus = [
-    /* índice [0]*/
-    general = {
-        name: "",
-        attack: 10,
-        defense: 10,
-        health: 100,
-        mana: 10,
-        level: 1,
-        exp: 0,
-        gold: 0
-    },
-    /* índice [1]*/
-    equipment = [
-        { nome: "armadura simples", descricao: "armadura de metal simples", tipo: "defesa", atributo: 3, icon: "/src/assets/img/icons/armor-icon.png" },
-        { nome: "espada dupla simples", descricao: "espada dupla pesada de metal", tipo: "ataque", atributo: 5, icon: "/src/assets/img/icons/sword-icon.png" }
-    ],
-    /* índice [2]*/
-    items = [
-        { nome: "poção de hp", tipo: "poção", descricao: "cura 100 hp", quantidade: 3, icon: "/src/assets/img/icons/hp-potion-icon.png" }
-    ],
-    /* índice [3] */
-    others = { 
-        concluded: 0  
-    }
-
-];
+import playerInitStatus from "./playerInitConfig.js";
 
 // verificando a existência de um player
 if (localStorage.getItem('jogador')) {
