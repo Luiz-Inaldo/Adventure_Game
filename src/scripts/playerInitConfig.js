@@ -37,13 +37,38 @@ const playerInitStatus = [
     [
         {
             nome: "poção de hp",
-            tipo: "poção",
-            descricao: "cura 100 hp",
+            tipo: "suporte",
+            descricao: "+ 100 hp",
+            atributo: 100,
+            acumulavel: true,
             quantidade: 3,
-            icon: "/src/assets/img/icons/hp-potion-icon.png"
+            icon: "/src/assets/img/icons/hp-potion.png"
         }
     ],
-    /* índice [3] informações de conclusão de fase*/
+
+    /* índice [3] habilidades */
+    [
+        {
+            nome: "golpe poderoso",
+            tipo: "ataque",
+            descricao: "ataque base + 5 dano adicional",
+            dano: 5,
+            mp: 5,
+            incapacitacao: false,
+            icon: ""
+        },
+        {
+            nome: "batida pesada",
+            tipo: "ataque",
+            descricao: "ataque base + 5 dano adicional e incapacita o alvo",
+            dano: 5,
+            mp: 15,
+            incapacitacao: true,
+            icon: ""
+        }
+    ],
+
+    /* índice [4] informações de conclusão de fase*/
     {
         concluded: 0
     }

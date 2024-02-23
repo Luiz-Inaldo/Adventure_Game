@@ -1,15 +1,15 @@
-// verificando se o player existe
+// verificando se o player não existe
 if (!localStorage.getItem('jogador')) {
     window.location.href = "/index.html";
 }
 
 // recebendo informações atualizadas do localStorage
 const infoPlayer = JSON.parse(localStorage.getItem('jogador'))
-const concludedStages = infoPlayer[3].concluded;
+const concludedStages = infoPlayer[4].concluded;
 console.log(infoPlayer, concludedStages);
 
 // preenchendo título da página
-document.querySelector('h1').innerHTML = `Mapa da aventura do ${infoPlayer[0].name}`
+document.querySelector('h1').innerHTML = `Mapa da aventura de ${infoPlayer[0].name}`
 
 // liberando fases
 let phase = 2;

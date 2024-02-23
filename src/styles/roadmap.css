@@ -149,6 +149,9 @@ h1 {
 }
 
 
+/* ============================================================== */
+
+
 /* market styles */
 #market-container {
     min-height: 100vh;
@@ -186,6 +189,16 @@ h1 {
     width: 20px;
 }
 
+#back-to-map {
+    position: absolute;
+    left: 15px;
+}
+
+#back-to-map a {
+    line-height: 60px;
+    text-decoration: none;
+}
+
 #seller-quote {
     display: flex;
     gap: 10px;
@@ -215,8 +228,6 @@ h1 {
     align-items: center;
     margin: 30px 0;
     background: #927E6A;
-    /* background: #2f2f2f; */
-    padding: 10px;
     gap: 10px;
 }
 
@@ -240,15 +251,13 @@ h1 {
     /* background: #fff; */
 }
 
-.mkt-item-icon,
-.mkt-item-description:hover,
-.mkt-item-attribute:hover,
-.mkt-item-value:hover {
-    cursor: url("../assets/rpg/cursor/point.png"), default;
-}
 
 .mkt-item-icon {
     width: 50px;
+}
+
+.mkt-item-potion-icon {
+    width: 30px;
 }
 
 .mkt-item-description {
@@ -261,3 +270,10 @@ h1 {
     text-align: center;
 }
 
+.mkt-item-icon:hover,
+.mkt-item-potion-icon:hover,
+.mkt-item-description:hover,
+.mkt-item-attribute:hover,
+.mkt-item-value:hover {
+    cursor: url("../assets/rpg/cursor/point.png"), default;
+}

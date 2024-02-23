@@ -8,7 +8,10 @@
             "elemento": "fisico",
             "atributo": 5,
             "atributo-elemental": 0,
-            "icon": "/src/assets/img/icons/armors/basic-armor.png"
+            "valor": 100,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/armors/basic-armor.png",
+            "disponivel": true
         },
         {
             "nome": "armadura simples",
@@ -17,7 +20,10 @@
             "elemento": "fisico",
             "atributo": 10,
             "atributo-elemental": 0,
-            "icon": "/src/assets/img/icons/armors/basic-armor.png"
+            "valor": 200,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/armors/simple-armor.png",
+            "disponivel": true
         },
         {
             "nome": "armadura reforçada",
@@ -26,25 +32,34 @@
             "elemento": "fisico",
             "atributo": 15,
             "atributo-elemental": 0,
-            "icon": "/src/assets/img/icons/armors/reinforced-armor.png"
-        },
-        {
-            "nome": "armadura espinhosa",
-            "descricao": "armadura leve com espinhos nos ombros",
-            "tipo": "proteção",
-            "elemento": "fisico",
-            "atributo": 20,
-            "atributo-elemental": 0,
-            "icon": "/src/assets/img/icons/armors/spiked-armor.png"
+            "valor": 400,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/armors/reinforced-armor.png",
+            "disponivel": true
         },
         {
             "nome": "armadura nobre",
             "descricao": "armadura leve revestida com o melhor aço",
             "tipo": "proteção",
             "elemento": "fisico",
+            "atributo": 20,
+            "atributo-elemental": 0,
+            "valor": 800,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/armors/noble-armor.png",
+            "disponivel": true
+        },
+        {
+            "nome": "armadura espinhosa",
+            "descricao": "armadura leve com espinhos nos ombros",
+            "tipo": "proteção",
+            "elemento": "fisico",
             "atributo": 30,
             "atributo-elemental": 0,
-            "icon": "/src/assets/img/icons/armors/noble-armor.png"
+            "valor": 1200,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/armors/spiked-armor.png",
+            "disponivel": true
         },
         {
             "nome": "armadura gigante de terra",
@@ -53,7 +68,10 @@
             "elemento": "terra",
             "atributo": 15,
             "atributo-elemental": 25,
-            "icon": "/src/assets/img/icons/armors/earth-giant-armor.png"
+            "valor": 0,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/armors/earth-giant-armor.png",
+            "disponivel": false
         },
         {
             "nome": "armadura vento do norte",
@@ -62,7 +80,10 @@
             "elemento": "gelo",
             "atributo": 15,
             "atributo-elemental": 25,
-            "icon": "/src/assets/img/icons/armors/frostborn-armor.png"
+            "valor": 0,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/armors/frostborn-armor.png",
+            "disponivel": false
         },
         {
             "nome": "armadura do Ramsir",
@@ -71,7 +92,10 @@
             "elemento": "fogo",
             "atributo": 15,
             "atributo-elemental": 25,
-            "icon": "/src/assets/img/icons/armors/ramsir-armor.png"
+            "valor": 0,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/armors/ramsir-armor.png",
+            "disponivel": false
         },
         {
             "nome": "armadura do senhor das tempestades",
@@ -80,7 +104,10 @@
             "elemento": "raio",
             "atributo": 15,
             "atributo-elemental": 25,
-            "icon": "/src/assets/img/icons/armors/thunderlord-armor.png"
+            "valor": 0,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/armors/thunderlord-armor.png",
+            "disponivel": false
         }
         
     ],
@@ -94,7 +121,10 @@
             "elemento": "fisico",
             "atributo": 5,
             "atributo-elemental": 0,
-            "icon": "/src/assets/img/icons/weapons/cheap-longsword.png"
+            "valor": 50,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/weapons/cheap-longsword.png",
+            "disponivel": true
         },
         {
             "nome": "espada longa de ferro",
@@ -103,7 +133,10 @@
             "elemento": "fisico",
             "atributo": 10,
             "atributo-elemental": 0,
-            "icon": "/src/assets/img/icons/weapons/iron-longsword.png"
+            "valor": 150,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/weapons/iron-longsword.png",
+            "disponivel": true
         },
         {
             "nome": "espada longa de aço",
@@ -112,7 +145,10 @@
             "elemento": "fisico",
             "atributo": 15,
             "atributo-elemental": 0,
-            "icon": "/src/assets/img/icons/weapons/steel-longsword.png"
+            "valor": 300,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/weapons/steel-longsword.png",
+            "disponivel": true
         },
         {
             "nome": "espada grande",
@@ -121,7 +157,10 @@
             "elemento": "fisico",
             "atributo": 20,
             "atributo-elemental": 0,
-            "icon": "/src/assets/img/icons/weapons/great-sword.png"
+            "valor": 500,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/weapons/great-sword.png",
+            "disponivel": true
         },
         {
             "nome": "espada longa de ouro",
@@ -130,7 +169,10 @@
             "elemento": "fisico",
             "atributo": 25,
             "atributo-elemental": 0,
-            "icon": "/src/assets/img/icons/weapons/golden-longsword.png"
+            "valor": 800,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/weapons/golden-longsword.png",
+            "disponivel": true
         },
         {
             "nome": "lâmina do senhor da natureza",
@@ -139,7 +181,10 @@
             "elemento": "terra",
             "atributo": 5,
             "atributo-elemental": 30,
-            "icon": "/src/assets/img/icons/weapons/nature-lord-blade.png"
+            "valor": 0,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/weapons/nature-lord-blade.png",
+            "disponivel": false
         },
         {
             "nome": "lâmina de gelo",
@@ -148,7 +193,10 @@
             "elemento": "gelo",
             "atributo": 5,
             "atributo-elemental": 30,
-            "icon": "/src/assets/img/icons/weapons/frostblade.png"
+            "valor": 0,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/weapons/frostblade.png",
+            "disponivel": false
         },
         {
             "nome": "ira do vulcão",
@@ -157,7 +205,10 @@
             "elemento": "fogo",
             "atributo": 5,
             "atributo-elemental": 30,
-            "icon": "/src/assets/img/icons/weapons/volcano-sword.png"
+            "valor": 0,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/weapons/volcano-sword.png",
+            "disponivel": false
         },
         {
             "nome": "lâmina do senhor das tempestades",
@@ -166,7 +217,10 @@
             "elemento": "raio",
             "atributo": 5,
             "atributo-elemental": 30,
-            "icon": "/src/assets/img/icons/weapons/thunderblade.png"
+            "valor": 0,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/weapons/thunderblade.png",
+            "disponivel": false
         },
         {
             "nome": "vingadora",
@@ -175,7 +229,10 @@
             "elemento": "fisico",
             "atributo": 40,
             "atributo-elemental": 0,
-            "icon": "/src/assets/img/icons/weapons/sky-avenger.png"
+            "valor": 0,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/weapons/sky-avenger.png",
+            "disponivel": false
         },
         {
             "nome": "espada arco-iris",
@@ -184,7 +241,10 @@
             "elemento": "puro",
             "atributo": 0,
             "atributo-elemental": 60,
-            "icon": "/src/assets/img/icons/weapons/rainbow-sword.png"
+            "valor": 0,
+            "acumulavel": false,
+            "icon": "/src/assets/img/icons/weapons/rainbow-sword.png",
+            "disponivel": false
         }
     ],
 
@@ -192,8 +252,22 @@
         {
             "nome": "poção de hp",
             "tipo": "suporte",
-            "descricao": "cura 100 hp",
-            "icon": "/src/assets/img/icons/potions/hp-potion-icon.png"
+            "descricao": "+ 100 hp",
+            "atributo": 100,
+            "valor": 20,
+            "acumulavel": true,
+            "icon": "/src/assets/img/icons/potions/hp-potion.png",
+            "disponivel": true
+        },
+        {
+            "nome": "poção de mp",
+            "tipo": "suporte",
+            "descricao": "+ 20 mp",
+            "atributo": 20,
+            "valor": 20,
+            "acumulavel": true,
+            "icon": "/src/assets/img/icons/potions/mp-potion.png",
+            "disponivel": true
         }
     ]
 }
