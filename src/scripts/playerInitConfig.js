@@ -16,20 +16,26 @@ const playerInitStatus = [
     /* índice [1] equipamentos*/
     [
         {
-            nome: "armadura simples",
-            descricao: "armadura de metal simples",
-            tipo: "defesa",
-            elemento: "fisico",
-            atributo: 3,
-            icon: "/src/assets/img/icons/armors/basic-armor.png"
-        },
-        {
             nome: "espada longa simples",
             descricao: "espada pesada e frágil",
             tipo: "ataque",
             elemento: "fisico",
             atributo: 5,
+            atributoElemental: 0,
+            valor: 50,
+            acumulavel: false,
             icon: "/src/assets/img/icons/weapons/cheap-longsword.png"
+        },
+        {
+            nome: "armadura básica",
+            descricao: "armadura básica com placas de ferro",
+            tipo: "proteção",
+            elemento: "fisico",
+            atributo: 5,
+            atributoElemental: 0,
+            valor: 100,
+            acumulavel: false,
+            icon: "/src/assets/img/icons/armors/basic-armor.png"
         }
     ],
 
@@ -40,9 +46,10 @@ const playerInitStatus = [
             tipo: "suporte",
             descricao: "+ 100 hp",
             atributo: 100,
+            valor: 20,
             acumulavel: true,
             quantidade: 3,
-            icon: "/src/assets/img/icons/hp-potion.png"
+            icon: "/src/assets/img/icons/potions/hp-potion.png",
         }
     ],
 
