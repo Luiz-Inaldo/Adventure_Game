@@ -153,7 +153,31 @@ h1 {
 
 
 /* market styles */
+#market-warning {
+    position: fixed;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+}
+
+#no-money-warning {
+    color: #f1f1f1;
+    text-align: center;
+    padding: 30px;
+    max-width: 500px;
+    align-items: center;
+}
+
+
 #market-container {
+    position: relative;
+    z-index: 0;
     min-height: 100vh;
     padding: 50px 0;
     background: #000;

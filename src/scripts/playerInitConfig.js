@@ -10,7 +10,7 @@ const playerInitStatus = [
         mana: 10,
         level: 1,
         exp: 0,
-        gold: 0
+        gold: 1000
     },
 
     /* índice [1] equipamentos*/

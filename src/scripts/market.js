@@ -41,10 +41,10 @@ async function displayBuyableItems(endpoint) {
         .then(res => res.json())
         .then(items => {
             itemList = items;
-            const {allItems} = itemList;
-            const armaduras = allItems.filter(element => {return element.tipo === "proteção"})
-            const armas = allItems.filter(element => {return element.tipo === "ataque"})
-            const suporte = allItems.filter(element => {return element.tipo === "suporte"})
+            const { allItems } = itemList;
+            const armaduras = allItems.filter(element => { return element.tipo === "proteção" })
+            const armas = allItems.filter(element => { return element.tipo === "ataque" })
+            const suporte = allItems.filter(element => { return element.tipo === "suporte" })
 
             refreshMarket()
 
@@ -53,9 +53,9 @@ async function displayBuyableItems(endpoint) {
             `
 
             for (const armadura of armaduras) {
-                
+
                 if (armadura.disponivel) {
-                    
+
                     showcase.innerHTML += `
                     
                         <li class="mkt-item">
@@ -73,9 +73,9 @@ async function displayBuyableItems(endpoint) {
             }
 
             for (const arma of armas) {
-                
+
                 if (arma.disponivel) {
-                    
+
                     showcase.innerHTML += `
                     
                         <li class="mkt-item">
@@ -93,9 +93,9 @@ async function displayBuyableItems(endpoint) {
             }
 
             for (const supplie of suporte) {
-                
+
                 if (supplie.disponivel) {
-                    
+
                     showcase.innerHTML += `
                     
                         <li class="mkt-item">
@@ -107,7 +107,7 @@ async function displayBuyableItems(endpoint) {
                         </li>
                       
                     `
-                    
+
                 }
 
             }
@@ -123,38 +123,33 @@ async function displaySellableItems(backpack) {
     showcase.innerHTML = `
         <h2 id="showcase-title">Vender</h2>
     `
+    const sellableItems = backpack.filter(item => { return item.tipo !== "suporte" });
 
-    for (const item of backpack) {
+    if (sellableItems.length > 0) {
 
-        if (item.tipo !== "suporte") {
-            
+        for (const item of sellableItems) {
+
             showcase.innerHTML += `
-                        
-                <li class="mkt-item">
-                    <img src="${item.icon}" alt="armor-icon" class="mkt-item-icon">
-                    <span class="mkt-item-description">${item.nome}</span>
-                    <span class="mkt-item-attribute">+ ${item.atributo} ${item.tipo}</span>
-                    <span class="mkt-item-value">${item.valor / 2}G</span>
-                    <button class="sell-item rpgui-button">vender</button>
-                </li>
-                        
-            `
-
-        } else {
-
-                       
-            showcase.innerHTML += `
-            
-                <p>Você não tem itens para vender</P>
-
+                            
+                    <li class="mkt-item">
+                        <img src="${item.icon}" alt="armor-icon" class="mkt-item-icon">
+                        <span class="mkt-item-description">${item.nome}</span>
+                        <span class="mkt-item-attribute">+ ${item.atributo} ${item.tipo}</span>
+                        <span class="mkt-item-value">${item.valor / 2}G</span>
+                        <button class="sell-item rpgui-button">vender</button>
+                    </li>
+                            
             `
 
         }
+
+    } else {
+        showcase.innerHTML += `
         
+        <p>Você não tem itens para vender</p>
 
+        `;
     }
-
-    return displayedItems = "sellable"
 
 }
 
@@ -168,28 +163,51 @@ function refreshMarket() {
 showcase.addEventListener('click', async (button) => {
 
     if (button.target.classList.contains('buy-item')) {
-        
+
         const buttonID = parseInt(button.target.id);
-        const itemToBuy = itemList.allItems.filter(element => {return element.id === buttonID});
+        const itemToBuy = itemList.allItems.filter(element => { return element.id === buttonID });
         const itemValue = itemToBuy[0].valor;
 
         if (infoPlayer[0].gold >= itemValue) {
 
             purchaseSound.play();
-            infoPlayer[2].push(itemToBuy);
-            
+            infoPlayer[0].gold -= itemValue;
+            infoPlayer[2].push(itemToBuy[0]);
+            await updateDisplayedPlayerGold();
+
         } else {
 
-            console.log("não tem dinheiro");
+            document.getElementById('market-warning').style.visibility = "visible";
+            document.getElementById('market-warning').innerHTML = `
+            
+                <div id="no-money-warning" class="rpgui-container framed-golden-2">
+                    <p>Opa! parece que você não tem dinheiro suficiente, viajante!</p>
+                </div>
+            
+            `;
+
+            setTimeout(() => { document.getElementById('market-warning').style.visibility = "hidden" }, 1500);
 
         }
-        
+
+    } else if (button.target.classList.contains('sell-item')) {
+        const itemName = button.target.parentElement
+        .querySelector('.mkt-item-description').textContent;
+
+        purchaseSound.play();
+        const index = infoPlayer[2].findIndex(item => item.nome === itemName);
+        const itemToSell = infoPlayer[2][index];
+        infoPlayer[0].gold += itemToSell.valor / 2;
+        button.target.parentElement.remove();
+        infoPlayer[2].splice(index, 1);
+        await updateDisplayedPlayerGold();
+        await displaySellableItems(infoPlayer[2]);
     }
 
 })
 
-async function updatePlayerGold() {
+async function updateDisplayedPlayerGold() {
 
-
+    playerCurrentGold.textContent = infoPlayer[0].gold;
 
 }
