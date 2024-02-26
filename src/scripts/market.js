@@ -168,12 +168,38 @@ showcase.addEventListener('click', async (button) => {
         const itemToBuy = itemList.allItems.filter(element => { return element.id === buttonID });
         const itemValue = itemToBuy[0].valor;
 
-        if (infoPlayer[0].gold >= itemValue) {
+        if (infoPlayer[0].gold >= itemValue && itemToBuy[0].tipo !== "suporte") {
 
             purchaseSound.play();
             infoPlayer[0].gold -= itemValue;
             infoPlayer[2].push(itemToBuy[0]);
             await updateDisplayedPlayerGold();
+
+        } else if (infoPlayer[0].gold >= itemValue && itemToBuy[0].tipo === "suporte") {
+
+            let checkItemMatch = false;
+
+            for (let i = 0; i < infoPlayer[2].length; i++) {
+                if (infoPlayer[2][i].nome === itemToBuy[0].nome) {
+                    infoPlayer[2][i].quantidade++
+                    purchaseSound.play();
+                    infoPlayer[0].gold -= itemValue;
+                    checkItemMatch = true;
+                    await updateDisplayedPlayerGold();
+                    console.log(infoPlayer[2]);
+                    return
+                }
+            }
+            if (!checkItemMatch) {
+
+                purchaseSound.play();
+                infoPlayer[0].gold -= itemValue;
+                infoPlayer[2].push(itemToBuy[0]);
+                await updateDisplayedPlayerGold();
+
+            }
+
+            console.log(infoPlayer[2]);
 
         } else {
 
@@ -192,7 +218,7 @@ showcase.addEventListener('click', async (button) => {
 
     } else if (button.target.classList.contains('sell-item')) {
         const itemName = button.target.parentElement
-        .querySelector('.mkt-item-description').textContent;
+            .querySelector('.mkt-item-description').textContent;
 
         purchaseSound.play();
         const index = infoPlayer[2].findIndex(item => item.nome === itemName);
