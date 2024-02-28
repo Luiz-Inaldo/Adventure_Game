@@ -237,3 +237,11 @@ async function updateDisplayedPlayerGold() {
     playerCurrentGold.textContent = infoPlayer[0].gold;
 
 }
+
+// função de atualização do localStorage
+document.getElementById('back-to-map').addEventListener('click', () => {
+
+    localStorage.setItem('jogador', JSON.stringify(infoPlayer));
+    window.location.href = "/roadmap.html";
+
+})

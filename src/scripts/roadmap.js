@@ -5,7 +5,7 @@ if (!localStorage.getItem('jogador')) {
 
 // recebendo informações atualizadas do localStorage
 const infoPlayer = JSON.parse(localStorage.getItem('jogador'))
-const concludedStages = infoPlayer[4].concluded;
+const concludedStages = infoPlayer[0].concluded;
 console.log(infoPlayer, concludedStages);
 
 // preenchendo título da página

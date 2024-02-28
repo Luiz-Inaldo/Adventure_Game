@@ -10,7 +10,8 @@ const playerInitStatus = [
         mana: 10,
         level: 1,
         exp: 0,
-        gold: 1000
+        gold: 1000,
+        concluded: 0
     },
 
     /* índice [1] equipamentos*/
@@ -73,12 +74,7 @@ const playerInitStatus = [
             incapacitacao: true,
             icon: ""
         }
-    ],
-
-    /* índice [4] informações de conclusão de fase*/
-    {
-        concluded: 0
-    }
+    ]
 
 ];
 
