@@ -10,6 +10,7 @@ const playerInitStatus = [
         mana: 10,
         level: 1,
         exp: 0,
+        next: 10,
         gold: 1000,
         concluded: 0
     },
@@ -25,7 +26,8 @@ const playerInitStatus = [
             atributoElemental: 0,
             valor: 50,
             acumulavel: false,
-            icon: "/src/assets/img/icons/weapons/cheap-longsword.png"
+            icon: "/src/assets/img/icons/weapons/cheap-longsword.png",
+            equipavel: true
         },
         {
             nome: "armadura básica",
@@ -36,7 +38,8 @@ const playerInitStatus = [
             atributoElemental: 0,
             valor: 100,
             acumulavel: false,
-            icon: "/src/assets/img/icons/armors/basic-armor.png"
+            icon: "/src/assets/img/icons/armors/basic-armor.png",
+            equipavel: true
         }
     ],
 
@@ -51,6 +54,7 @@ const playerInitStatus = [
             acumulavel: true,
             quantidade: 3,
             icon: "/src/assets/img/icons/potions/hp-potion.png",
+            equipavel: false
         }
     ],
 

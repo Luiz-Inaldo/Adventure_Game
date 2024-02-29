@@ -11,44 +11,88 @@
     <div id="equips-container">
         <div id="equips-window" class="rpgui-container framed-golden-2">
 
-            <div id="player-profile-img" class="rpgui-container framed">
-                <img src="/src/assets/img/player-profile.png" alt="player-prof-img">
-            </div>
+            <div id="equips-left-container">
 
-            <div id="equiped-items" class="rpgui-container framed-golden">
-                <h3>Equipment</h3>
-                <div class="equip-slot" id="weapon">
-                    <div id="weapon-img">
-                        <img src="/src/assets/img/icons/weapons/cheap-longsword.png" alt="equipped-weapon">
-                    </div>
-                    <span id="weapon-description">Espada Longa Fraca</span>
+                <div id="player-profile-img" class="rpgui-container framed">
+                    <img src="/src/assets/img/player-profile.png" alt="player-prof-img">
                 </div>
-                <div class="equip-slot" id="armor">
-                    <div id="armor-img">
-                        <img src="/src/assets/img/icons/armors/basic-armor.png" alt="">
-                    </div>
-                    <span id="armor-description">Armadura Básica</span>
+                
+                <div id="player-info" class="rpgui-container framed-golden">
+                    <h3>Status</h3>
+    
+                    <span id="player-name"></span>
+                    <span id="player-level"></span>
+                    <span id="player-exp"></span>
+                    <span id="next-level-exp"></span>
+                    <span id="player-health"></span>
+                    <span id="player-mana"></span>
+                    <span id="player-attack"></span>
+                    <span id="player-defense"></span>
+                    <span id="player-mattack"></span>
+                    <span id="player-mdefense"></span>
+                    <span id="player-cash"></span>
                 </div>
+
             </div>
 
-            <div id="player-info" class="rpgui-container framed-golden">
-                <h3>Player Status</h3>
+            <div id="equip-right-container">
 
-                <span>nome: Luiz</span>
-                <span>level: 1</span>
-                <span>exp: 0</span>
-                <span>health: 100</span>
-                <span>mana: 10</span>
-                <span>attack: 10</span>
-                <span>defense: 10</span>
-                <span>magAttack: 10</span>
-                <span>magDefense: 10</span>
-                <span>gold: 10</span>
+                <div id="equiped-items" class="rpgui-container framed-golden">
+                    <h3>Equipamento</h3>
+                    <div id="equip-slots-wrapper">
+
+                        <div class="equip-slot" id="weapon">
+                            <div id="weapon-img">
+                                <img src="/src/assets/img/icons/weapons/cheap-longsword.png" alt="equipped-weapon">
+                            </div>
+                            <span id="weapon-description">Espada Longa Fraca</span>
+                        </div>
+                        <div class="equip-slot" id="armor">
+                            <div id="armor-img">
+                                <img src="/src/assets/img/icons/armors/basic-armor.png" alt="">
+                            </div>
+                            <span id="armor-description">Armadura Básica</span>
+                        </div>
+
+                    </div>
+                </div>
+    
+    
+                <div id="player-backpack" class="rpgui-container framed-golden">
+                    <h3>Itens</h3>
+                    <ul id="player-items">
+                        <li class="player-backpack-item">
+                            <div class="player-bp-img-wrapper">
+                                <img src="/src/assets/img/icons/potions/hp-potion.png" alt="icon" class="bp-item-sup-icon">
+                            </div>
+                            <span class="bp-item-description">poção de hp (+100 hp)</span>
+                            <span class="bp-item-quantity">x 3</span>
+                            <button id="use-item" class="buy-item rpgui-button">usar</button>
+                        </li>
+                        <li class="player-backpack-item">
+                            <div class="player-bp-img-wrapper">
+                                <img src="/src/assets/img/icons/weapons/cheap-longsword.png" alt="icon" class="bp-item-icon">
+                            </div>
+                            <span class="bp-item-description">espada longa velha e suja imunda</span>
+                            <span class="bp-item-attribute">+ 5 atk</span>
+                            <button id="equip" class="buy-item rpgui-button">equipar</button>
+                        </li>
+                        <li class="player-backpack-item">
+                            <div class="player-bp-img-wrapper">
+                                <img src="/src/assets/img/icons/weapons/cheap-longsword.png" alt="icon" class="bp-item-icon">
+                            </div>
+                            <span class="bp-item-description">espada longa velha e suja imunda</span>
+                            <span class="bp-item-attribute">+ 5 atk</span>
+                            <button id="equip" class="buy-item rpgui-button">equipar</button>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
-
-            <div id="player-backpack"></div>
         </div>
     </div>
+
+    <script src="/src/scripts/equipments.js" defer></script>
 
 </body>
 </html>

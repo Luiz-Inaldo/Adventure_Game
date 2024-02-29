@@ -12,7 +12,8 @@
             "valor": 100,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/armors/basic-armor.png",
-            "disponivel": true
+            "disponivel": true,
+            "equippable": true
         },
         {
             "id": 1,
@@ -25,7 +26,8 @@
             "valor": 200,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/armors/simple-armor.png",
-            "disponivel": true
+            "disponivel": true,
+            "equippable": true
         },
         {
             "id": 2,
@@ -38,7 +40,8 @@
             "valor": 400,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/armors/reinforced-armor.png",
-            "disponivel": true
+            "disponivel": true,
+            "equippable": true
         },
         {
             "id": 3,
@@ -51,7 +54,8 @@
             "valor": 800,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/armors/noble-armor.png",
-            "disponivel": true
+            "disponivel": true,
+            "equippable": true
         },
         {
             "id": 4,
@@ -64,7 +68,8 @@
             "valor": 1200,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/armors/spiked-armor.png",
-            "disponivel": true
+            "disponivel": true,
+            "equippable": true
         },
         {
             "id": 5,
@@ -77,7 +82,8 @@
             "valor": 0,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/armors/earth-giant-armor.png",
-            "disponivel": false
+            "disponivel": false,
+            "equippable": true
         },
         {
             "id": 6,
@@ -90,7 +96,8 @@
             "valor": 0,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/armors/frostborn-armor.png",
-            "disponivel": false
+            "disponivel": false,
+            "equippable": true
         },
         {
             "id": 7,
@@ -103,7 +110,8 @@
             "valor": 0,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/armors/ramsir-armor.png",
-            "disponivel": false
+            "disponivel": false,
+            "equippable": true
         },
         {
             "id": 8,
@@ -116,7 +124,8 @@
             "valor": 0,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/armors/thunderlord-armor.png",
-            "disponivel": false
+            "disponivel": false,
+            "equippable": true
         },
         {
             "id": 9,
@@ -129,7 +138,8 @@
             "valor": 50,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/weapons/cheap-longsword.png",
-            "disponivel": true
+            "disponivel": true,
+            "equippable": true
         },
         {
             "id": 10,
@@ -142,7 +152,8 @@
             "valor": 150,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/weapons/iron-longsword.png",
-            "disponivel": true
+            "disponivel": true,
+            "equippable": true
         },
         {
             "id": 11,
@@ -155,7 +166,8 @@
             "valor": 300,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/weapons/steel-longsword.png",
-            "disponivel": true
+            "disponivel": true,
+            "equippable": true
         },
         {
             "id": 12,
@@ -168,7 +180,8 @@
             "valor": 500,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/weapons/great-sword.png",
-            "disponivel": true
+            "disponivel": true,
+            "equippable": true
         },
         {
             "id": 13,
@@ -181,7 +194,8 @@
             "valor": 800,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/weapons/golden-longsword.png",
-            "disponivel": true
+            "disponivel": true,
+            "equippable": true
         },
         {
             "id": 14,
@@ -194,7 +208,8 @@
             "valor": 0,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/weapons/nature-lord-blade.png",
-            "disponivel": false
+            "disponivel": false,
+            "equippable": true
         },
         {
             "id": 15,
@@ -207,7 +222,8 @@
             "valor": 0,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/weapons/frostblade.png",
-            "disponivel": false
+            "disponivel": false,
+            "equippable": true
         },
         {
             "id": 16,
@@ -220,7 +236,8 @@
             "valor": 0,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/weapons/volcano-sword.png",
-            "disponivel": false
+            "disponivel": false,
+            "equippable": true
         },
         {
             "id": 17,
@@ -233,7 +250,8 @@
             "valor": 0,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/weapons/thunderblade.png",
-            "disponivel": false
+            "disponivel": false,
+            "equippable": true
         },
         {
             "id": 18,
@@ -246,7 +264,8 @@
             "valor": 0,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/weapons/sky-avenger.png",
-            "disponivel": false
+            "disponivel": false,
+            "equippable": true
         },
         {
             "id": 19,
@@ -259,7 +278,8 @@
             "valor": 0,
             "acumulavel": false,
             "icon": "/src/assets/img/icons/weapons/rainbow-sword.png",
-            "disponivel": false
+            "disponivel": false,
+            "equippable": true
         },
         {
             "id": 20,
@@ -271,7 +291,8 @@
             "acumulavel": true,
             "quantidade": 1,
             "icon": "/src/assets/img/icons/potions/hp-potion.png",
-            "disponivel": true
+            "disponivel": true,
+            "equippable": false
         },
         {
             "id": 21,
@@ -283,7 +304,8 @@
             "acumulavel": true,
             "quantidade": 1,
             "icon": "/src/assets/img/icons/potions/mp-potion.png",
-            "disponivel": true
+            "disponivel": true,
+            "equippable": false
         }
         
     ]
