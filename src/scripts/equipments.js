@@ -28,6 +28,7 @@ async function ready() {
 
     // variáveis de aúdio
     const healingSound = new Audio('/src/assets/audio/healing.wav');
+    const equipSound = new Audio('/src/assets/audio/item-equip.mp3');
 
     // recebendo informações atualizadas do localStorage
     const infoPlayer = JSON.parse(localStorage.getItem('jogador'));
@@ -42,7 +43,7 @@ async function ready() {
     // carregando itens equipados
     await loadEquipedItems(infoPlayer[1]);
 
-    // usando item de suporte
+    // usando item de suporte e equipando itens
     playerBackpack.addEventListener('click', async (event) => {
 
         const button = event.target;
@@ -117,7 +118,45 @@ async function ready() {
 
             }
 
+        } else if (button.classList.contains('equip')) {
+            const index = infoPlayer[2].findIndex(item => item.id === buttonID);
+            const item = infoPlayer[2][index];
+            
+            if (item.tipo === "ataque") {
+                
+                infoPlayer[1].unshift(item);
+                infoPlayer[2].splice(index, 1);
+                infoPlayer[2].splice(index, 0 ,infoPlayer[1][1]);
+                infoPlayer[1].splice(1, 1);
+                equipSound.play()
+                await loadEquipedItems(infoPlayer[1]);
+                await loadBpItems();
+                await refreshStatusValues();
+                console.log(infoPlayer);
+
+            } else if (item.tipo === "proteção") {
+                
+                infoPlayer[1].push(item);
+                infoPlayer[2].splice(index, 1);
+                infoPlayer[2].splice(index, 0 ,infoPlayer[1][1]);
+                infoPlayer[1].splice(1, 1);
+                equipSound.play();
+                await loadEquipedItems(infoPlayer[1]);
+                await loadBpItems();
+                await refreshStatusValues();
+                console.log(infoPlayer);
+
+            }
+
         }
+
+    });
+
+    // botão para salvar as conf e voltar para o mapa
+    document.querySelector('.back-map').addEventListener('click', () => {
+
+        localStorage.setItem("jogador", JSON.stringify(infoPlayer));
+        window.location.href = "/roadmap.html";
 
     })
 

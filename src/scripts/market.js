@@ -1,62 +1,71 @@
-// verificando se o player não existe
-if (!localStorage.getItem('jogador')) {
-    window.location.href = "/index.html";
-}
+window.addEventListener('DOMContentLoaded', ready);
 
-// variáveis gerais
-const playerCurrentGold = document.querySelector('#player-gold-coins p');
-const openMarketBuyButton = document.getElementById('buy-btn');
-const openMarketSellButton = document.getElementById('sell-btn');
-const showcase = document.getElementById('items-showcase');
-const itemJsonListEndpoint = "/src/json/items.json";
-let itemList;
+async function ready() {
 
-// variáveis de audio
-const purchaseSound = new Audio('/src/assets/audio/purchase.wav');
+    // verificando se o player não existe
+    if (!localStorage.getItem('jogador')) {
+        window.location.href = "/index.html";
+    }
 
-/*Recebendo informações atualizadas do localStorage*/
-const infoPlayer = JSON.parse(localStorage.getItem('jogador'))
+    // variáveis gerais
+    const playerCurrentGold = document.querySelector('#player-gold-coins p');
+    const openMarketBuyButton = document.getElementById('buy-btn');
+    const openMarketSellButton = document.getElementById('sell-btn');
+    const showcase = document.getElementById('items-showcase');
+    const itemJsonListEndpoint = "/src/json/items.json";
+    let itemList;
 
-// atribuindo valor do dinheiro atual a loja
-playerCurrentGold.textContent = infoPlayer[0].gold;
+    // variáveis de audio
+    const purchaseSound = new Audio('/src/assets/audio/purchase.wav');
+    const selectSound = new Audio('/src/assets/audio/select.wav');
+    selectSound.volume = 0.2;
 
-// eventos de clique
-openMarketBuyButton.addEventListener('click', async () => {
+    /*Recebendo informações atualizadas do localStorage*/
+    const infoPlayer = JSON.parse(localStorage.getItem('jogador'))
 
-    await displayBuyableItems(itemJsonListEndpoint);
+    // atribuindo valor do dinheiro atual a loja
+    playerCurrentGold.textContent = infoPlayer[0].gold;
 
-});
+    // eventos de clique
+    openMarketBuyButton.addEventListener('click', async () => {
 
-openMarketSellButton.addEventListener('click', async () => {
+        selectSound.play();
+        await displayBuyableItems(itemJsonListEndpoint);
 
-    await displaySellableItems(infoPlayer[2]);
+    });
 
-});
+    openMarketSellButton.addEventListener('click', async () => {
+
+        selectSound.play();
+        await displaySellableItems(infoPlayer[2]);
+
+    });
 
 
-// funções de aparição da loja
-async function displayBuyableItems(endpoint) {
+    // funções de aparição da loja
+    async function displayBuyableItems(endpoint) {
 
-    fetch(endpoint)
-        .then(res => res.json())
-        .then(items => {
-            itemList = items;
-            const { allItems } = itemList;
-            const armaduras = allItems.filter(element => { return element.tipo === "proteção" })
-            const armas = allItems.filter(element => { return element.tipo === "ataque" })
-            const suporte = allItems.filter(element => { return element.tipo === "suporte" })
+        fetch(endpoint)
+            .then(res => res.json())
+            .then(items => {
+                itemList = items;
+                const { allItems } = itemList;
+                const armaduras = allItems.filter(element => { return element.tipo === "proteção" })
+                const armas = allItems.filter(element => { return element.tipo === "ataque" })
+                const suporte = allItems.filter(element => { return element.tipo === "suporte" })
 
-            refreshMarket()
+                refreshMarket()
 
-            showcase.innerHTML = `
+                showcase.style.padding = "20px";
+                showcase.innerHTML = `
                 <h2 id="showcase-title">Comprar</h2>
             `
 
-            for (const armadura of armaduras) {
+                for (const armadura of armaduras) {
 
-                if (armadura.disponivel) {
+                    if (armadura.disponivel) {
 
-                    showcase.innerHTML += `
+                        showcase.innerHTML += `
                     
                         <li class="mkt-item">
                             <img src="${armadura.icon}" alt="armor-icon" class="mkt-item-icon">
@@ -68,15 +77,15 @@ async function displayBuyableItems(endpoint) {
                  
                     `
 
+                    }
+
                 }
 
-            }
+                for (const arma of armas) {
 
-            for (const arma of armas) {
+                    if (arma.disponivel) {
 
-                if (arma.disponivel) {
-
-                    showcase.innerHTML += `
+                        showcase.innerHTML += `
                     
                         <li class="mkt-item">
                             <img src="${arma.icon}" alt="armor-icon" class="mkt-item-icon">
@@ -88,15 +97,15 @@ async function displayBuyableItems(endpoint) {
                  
                     `
 
+                    }
+
                 }
 
-            }
+                for (const supplie of suporte) {
 
-            for (const supplie of suporte) {
+                    if (supplie.disponivel) {
 
-                if (supplie.disponivel) {
-
-                    showcase.innerHTML += `
+                        showcase.innerHTML += `
                     
                         <li class="mkt-item">
                             <img src="${supplie.icon}" alt="armor-icon" class="mkt-item-potion-icon">
@@ -108,28 +117,29 @@ async function displayBuyableItems(endpoint) {
                       
                     `
 
+                    }
+
                 }
 
-            }
+            })
+            .catch(error => console.error(`erro: ${error}`))
 
-        })
-        .catch(error => console.error(`erro: ${error}`))
+    }
 
-}
+    async function displaySellableItems(backpack) {
 
-async function displaySellableItems(backpack) {
-
-    refreshMarket()
-    showcase.innerHTML = `
+        refreshMarket()
+        showcase.style.padding = "20px";
+        showcase.innerHTML = `
         <h2 id="showcase-title">Vender</h2>
     `
-    const sellableItems = backpack.filter(item => { return item.tipo !== "suporte" });
+        const sellableItems = backpack.filter(item => { return item.tipo !== "suporte" });
 
-    if (sellableItems.length > 0) {
+        if (sellableItems.length > 0) {
 
-        for (const item of sellableItems) {
+            for (const item of sellableItems) {
 
-            showcase.innerHTML += `
+                showcase.innerHTML += `
                             
                     <li class="mkt-item">
                         <img src="${item.icon}" alt="armor-icon" class="mkt-item-icon">
@@ -141,70 +151,70 @@ async function displaySellableItems(backpack) {
                             
             `
 
-        }
+            }
 
-    } else {
-        showcase.innerHTML += `
+        } else {
+            showcase.innerHTML += `
         
         <p>Você não tem itens para vender</p>
 
         `;
+        }
+
     }
 
-}
+    function refreshMarket() {
 
-function refreshMarket() {
+        showcase.innerHTML = "";
 
-    showcase.innerHTML = "";
+    }
 
-}
+    // funções de compra e venda
+    showcase.addEventListener('click', async (button) => {
 
-// funções de compra e venda
-showcase.addEventListener('click', async (button) => {
+        if (button.target.classList.contains('buy-item')) {
 
-    if (button.target.classList.contains('buy-item')) {
+            const buttonID = parseInt(button.target.id);
+            const itemToBuy = itemList.allItems.filter(element => { return element.id === buttonID });
+            const itemValue = itemToBuy[0].valor;
 
-        const buttonID = parseInt(button.target.id);
-        const itemToBuy = itemList.allItems.filter(element => { return element.id === buttonID });
-        const itemValue = itemToBuy[0].valor;
-
-        if (infoPlayer[0].gold >= itemValue && itemToBuy[0].tipo !== "suporte") {
-
-            purchaseSound.play();
-            infoPlayer[0].gold -= itemValue;
-            infoPlayer[2].push(itemToBuy[0]);
-            await updateDisplayedPlayerGold();
-
-        } else if (infoPlayer[0].gold >= itemValue && itemToBuy[0].tipo === "suporte") {
-
-            let checkItemMatch = false;
-
-            for (let i = 0; i < infoPlayer[2].length; i++) {
-                if (infoPlayer[2][i].nome === itemToBuy[0].nome) {
-                    infoPlayer[2][i].quantidade++
-                    purchaseSound.play();
-                    infoPlayer[0].gold -= itemValue;
-                    checkItemMatch = true;
-                    await updateDisplayedPlayerGold();
-                    console.log(infoPlayer[2]);
-                    return
-                }
-            }
-            if (!checkItemMatch) {
+            if (infoPlayer[0].gold >= itemValue && itemToBuy[0].tipo !== "suporte") {
 
                 purchaseSound.play();
                 infoPlayer[0].gold -= itemValue;
                 infoPlayer[2].push(itemToBuy[0]);
                 await updateDisplayedPlayerGold();
 
-            }
+            } else if (infoPlayer[0].gold >= itemValue && itemToBuy[0].tipo === "suporte") {
 
-            console.log(infoPlayer[2]);
+                let checkItemMatch = false;
 
-        } else {
+                for (let i = 0; i < infoPlayer[2].length; i++) {
+                    if (infoPlayer[2][i].nome === itemToBuy[0].nome) {
+                        infoPlayer[2][i].quantidade++
+                        purchaseSound.play();
+                        infoPlayer[0].gold -= itemValue;
+                        checkItemMatch = true;
+                        await updateDisplayedPlayerGold();
+                        console.log(infoPlayer[2]);
+                        return
+                    }
+                }
+                if (!checkItemMatch) {
 
-            document.getElementById('market-warning').style.visibility = "visible";
-            document.getElementById('market-warning').innerHTML = `
+                    purchaseSound.play();
+                    infoPlayer[0].gold -= itemValue;
+                    infoPlayer[2].push(itemToBuy[0]);
+                    await updateDisplayedPlayerGold();
+
+                }
+
+                console.log(infoPlayer[2]);
+
+            } else {
+
+                document.getElementById('market-warning').style.visibility = "visible";
+                document.getElementById('market-warning').innerHTML = `
             
                 <div id="warning-message" class="rpgui-container framed-golden-2">
                     <p>Opa! parece que você não tem dinheiro suficiente, viajante!</p>
@@ -212,36 +222,38 @@ showcase.addEventListener('click', async (button) => {
             
             `;
 
-            setTimeout(() => { document.getElementById('market-warning').style.visibility = "hidden" }, 1500);
+                setTimeout(() => { document.getElementById('market-warning').style.visibility = "hidden" }, 1500);
 
+            }
+
+        } else if (button.target.classList.contains('sell-item')) {
+            const itemName = button.target.parentElement
+                .querySelector('.mkt-item-description').textContent;
+
+            purchaseSound.play();
+            const index = infoPlayer[2].findIndex(item => item.nome === itemName);
+            const itemToSell = infoPlayer[2][index];
+            infoPlayer[0].gold += itemToSell.valor / 2;
+            button.target.parentElement.remove();
+            infoPlayer[2].splice(index, 1);
+            await updateDisplayedPlayerGold();
+            await displaySellableItems(infoPlayer[2]);
         }
 
-    } else if (button.target.classList.contains('sell-item')) {
-        const itemName = button.target.parentElement
-            .querySelector('.mkt-item-description').textContent;
+    })
 
-        purchaseSound.play();
-        const index = infoPlayer[2].findIndex(item => item.nome === itemName);
-        const itemToSell = infoPlayer[2][index];
-        infoPlayer[0].gold += itemToSell.valor / 2;
-        button.target.parentElement.remove();
-        infoPlayer[2].splice(index, 1);
-        await updateDisplayedPlayerGold();
-        await displaySellableItems(infoPlayer[2]);
+    async function updateDisplayedPlayerGold() {
+
+        playerCurrentGold.textContent = infoPlayer[0].gold;
+
     }
 
-})
+    // função de atualização do localStorage
+    document.getElementById('back-to-map').addEventListener('click', () => {
 
-async function updateDisplayedPlayerGold() {
+        localStorage.setItem('jogador', JSON.stringify(infoPlayer));
+        window.location.href = "/roadmap.html";
 
-    playerCurrentGold.textContent = infoPlayer[0].gold;
+    })
 
 }
-
-// função de atualização do localStorage
-document.getElementById('back-to-map').addEventListener('click', () => {
-
-    localStorage.setItem('jogador', JSON.stringify(infoPlayer));
-    window.location.href = "/roadmap.html";
-
-})

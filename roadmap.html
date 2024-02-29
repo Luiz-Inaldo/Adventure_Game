@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/src/styles/roadmap_and_others.css">
     <title>Roadmap | Adventure Game</title>
 </head>
+
 <body>
 
+    <!-- bg img -->
     <div id="roadmap-bg"></div>
-    
+
     <div id="roadmap-container">
         <!-- market & equipment -->
         <div id="market" class="rpgui-container framed">
@@ -44,7 +47,7 @@
                 <img src="/src/assets/img/icons/monsters/goblin-icon.png" alt="goblin" id="monster-icon">
                 <p>fase 1-2</p>
             </div>
-            
+
             <div class="separator"></div>
 
             <div class="normal-phase rpgui-container framed-golden-2" id="p3">
@@ -71,7 +74,14 @@
 
         </div>
     </div>
+
+    <!-- bgm -->
+    <audio autoplay loop>
+        <source src="/src/assets/audio/bgm/roadmap-theme.mp3" type="audio/mp3" />
+    </audio>
+
     <script src="/src/scripts/roadmap.js"></script>
 
 </body>
+
 </html>

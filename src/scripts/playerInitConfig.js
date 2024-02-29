@@ -38,7 +38,7 @@ const playerInitStatus = [
             descricao: "armadura básica com placas de ferro",
             tipo: "proteção",
             elemento: "fisico",
-            atributo: 5,
+            atributo: 3,
             atributoElemental: 0,
             valor: 100,
             acumulavel: false,
