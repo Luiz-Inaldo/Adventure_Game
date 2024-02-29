@@ -50,9 +50,9 @@ async function ready() {
             .then(items => {
                 itemList = items;
                 const { allItems } = itemList;
-                const armaduras = allItems.filter(element => { return element.tipo === "proteção" })
-                const armas = allItems.filter(element => { return element.tipo === "ataque" })
-                const suporte = allItems.filter(element => { return element.tipo === "suporte" })
+                const armaduras = allItems.filter(element => { return element.type === "proteção" })
+                const armas = allItems.filter(element => { return element.type === "ataque" })
+                const suporte = allItems.filter(element => { return element.type === "suporte" })
 
                 refreshMarket()
 
@@ -63,15 +63,15 @@ async function ready() {
 
                 for (const armadura of armaduras) {
 
-                    if (armadura.disponivel) {
+                    if (armadura.avaliable) {
 
                         showcase.innerHTML += `
                     
                         <li class="mkt-item">
                             <img src="${armadura.icon}" alt="armor-icon" class="mkt-item-icon">
-                            <span class="mkt-item-description">${armadura.nome}</span>
-                            <span class="mkt-item-attribute">+ ${armadura.atributo} ${armadura.tipo}</span>
-                            <span class="mkt-item-value">${armadura.valor}G</span>
+                            <span class="mkt-item-description">${armadura.name}</span>
+                            <span class="mkt-item-attribute">+ ${armadura.attribute} ${armadura.type}</span>
+                            <span class="mkt-item-value">${armadura.value}G</span>
                             <button id="${armadura.id}" class="buy-item rpgui-button">comprar</button>
                         </li>
                  
@@ -83,15 +83,15 @@ async function ready() {
 
                 for (const arma of armas) {
 
-                    if (arma.disponivel) {
+                    if (arma.avaliable) {
 
                         showcase.innerHTML += `
                     
                         <li class="mkt-item">
                             <img src="${arma.icon}" alt="armor-icon" class="mkt-item-icon">
-                            <span class="mkt-item-description">${arma.nome}</span>
-                            <span class="mkt-item-attribute">+ ${arma.atributo} ${arma.tipo}</span>
-                            <span class="mkt-item-value">${arma.valor}G</span>
+                            <span class="mkt-item-description">${arma.name}</span>
+                            <span class="mkt-item-attribute">+ ${arma.attribute} ${arma.type}</span>
+                            <span class="mkt-item-value">${arma.value}G</span>
                             <button id="${arma.id}" class="buy-item rpgui-button">comprar</button>
                         </li>
                  
@@ -103,15 +103,15 @@ async function ready() {
 
                 for (const supplie of suporte) {
 
-                    if (supplie.disponivel) {
+                    if (supplie.avaliable) {
 
                         showcase.innerHTML += `
                     
                         <li class="mkt-item">
                             <img src="${supplie.icon}" alt="armor-icon" class="mkt-item-potion-icon">
-                            <span class="mkt-item-description">${supplie.nome}</span>
-                            <span class="mkt-item-attribute">${supplie.descricao}</span>
-                            <span class="mkt-item-value">${supplie.valor}G</span>
+                            <span class="mkt-item-description">${supplie.name}</span>
+                            <span class="mkt-item-attribute">${supplie.description}</span>
+                            <span class="mkt-item-value">${supplie.value}G</span>
                             <button id="${supplie.id}" class="buy-item rpgui-button">comprar</button>
                         </li>
                       
@@ -133,7 +133,7 @@ async function ready() {
         showcase.innerHTML = `
         <h2 id="showcase-title">Vender</h2>
     `
-        const sellableItems = backpack.filter(item => { return item.tipo !== "suporte" });
+        const sellableItems = backpack.filter(item => { return item.type !== "suporte" });
 
         if (sellableItems.length > 0) {
 
@@ -143,9 +143,9 @@ async function ready() {
                             
                     <li class="mkt-item">
                         <img src="${item.icon}" alt="armor-icon" class="mkt-item-icon">
-                        <span class="mkt-item-description">${item.nome}</span>
-                        <span class="mkt-item-attribute">+ ${item.atributo} ${item.tipo}</span>
-                        <span class="mkt-item-value">${item.valor / 2}G</span>
+                        <span class="mkt-item-description">${item.name}</span>
+                        <span class="mkt-item-attribute">+ ${item.attribute} ${item.type}</span>
+                        <span class="mkt-item-value">${item.value / 2}G</span>
                         <button class="sell-item rpgui-button">vender</button>
                     </li>
                             
@@ -176,7 +176,7 @@ async function ready() {
 
             const buttonID = parseInt(button.target.id);
             const itemToBuy = itemList.allItems.filter(element => { return element.id === buttonID });
-            const itemValue = itemToBuy[0].valor;
+            const itemValue = itemToBuy[0].value;
 
             if (infoPlayer[0].gold >= itemValue && itemToBuy[0].tipo !== "suporte") {
 
@@ -231,9 +231,9 @@ async function ready() {
                 .querySelector('.mkt-item-description').textContent;
 
             purchaseSound.play();
-            const index = infoPlayer[2].findIndex(item => item.nome === itemName);
+            const index = infoPlayer[2].findIndex(item => item.name === itemName);
             const itemToSell = infoPlayer[2][index];
-            infoPlayer[0].gold += itemToSell.valor / 2;
+            infoPlayer[0].gold += itemToSell.value / 2;
             button.target.parentElement.remove();
             infoPlayer[2].splice(index, 1);
             await updateDisplayedPlayerGold();

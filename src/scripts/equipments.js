@@ -52,14 +52,14 @@ async function ready() {
         if (button.classList.contains('use-item')) {
 
             const index = infoPlayer[2].findIndex(item => item.id === buttonID);
-            const healType = infoPlayer[2][index].nome.split("de ")[1];
+            const healType = infoPlayer[2][index].name.split("de ")[1];
 
             if (healType === "hp") {
 
                 if (infoPlayer[0].health < infoPlayer[0].maxHealth) {
 
-                    infoPlayer[2][index].quantidade--;
-                    infoPlayer[0].health += infoPlayer[2][index].atributo;
+                    infoPlayer[2][index].quantity--;
+                    infoPlayer[0].health += infoPlayer[2][index].attribute;
 
                     if (infoPlayer[0].health >= infoPlayer[0].maxHealth) {
 
@@ -90,8 +90,8 @@ async function ready() {
 
                 if (infoPlayer[0].mana < infoPlayer[0].maxMana) {
 
-                    infoPlayer[2][index].quantidade--
-                    infoPlayer[0].mana += infoPlayer[2][index].atributo;
+                    infoPlayer[2][index].quantity--
+                    infoPlayer[0].mana += infoPlayer[2][index].attribute;
 
                     if (infoPlayer[0].mana > infoPlayer[0].maxMana) {
                         infoPlayer[0].mana = infoPlayer[0].maxMana;
@@ -122,7 +122,7 @@ async function ready() {
             const index = infoPlayer[2].findIndex(item => item.id === buttonID);
             const item = infoPlayer[2][index];
             
-            if (item.tipo === "ataque") {
+            if (item.type === "ataque") {
                 
                 infoPlayer[1].unshift(item);
                 infoPlayer[2].splice(index, 1);
@@ -134,7 +134,7 @@ async function ready() {
                 await refreshStatusValues();
                 console.log(infoPlayer);
 
-            } else if (item.tipo === "proteção") {
+            } else if (item.type === "proteção") {
                 
                 infoPlayer[1].push(item);
                 infoPlayer[2].splice(index, 1);
@@ -171,10 +171,10 @@ async function ready() {
         status.nextLevel.innerHTML = `next: ${infoPlayer[0].next - infoPlayer[0].exp}`;
         status.health.innerHTML = `health: ${infoPlayer[0].health}/${infoPlayer[0].maxHealth}`;
         status.mana.innerHTML = `mana: ${infoPlayer[0].mana}/${infoPlayer[0].maxMana}`;
-        status.atk.innerHTML = `attack: ${infoPlayer[0].attack} + ${infoPlayer[1][0].atributo}`;
-        status.def.innerHTML = `defense: ${infoPlayer[0].defense} + ${infoPlayer[1][1].atributo}`;
-        status.matk.innerHTML = `mattack: ${infoPlayer[0].magicAttack} + ${infoPlayer[1][0].atributoElemental}`;
-        status.mdef.innerHTML = `mdefense: ${infoPlayer[0].magicDefense} + ${infoPlayer[1][1].atributoElemental}`;
+        status.atk.innerHTML = `attack: ${infoPlayer[0].attack} + ${infoPlayer[1][0].attribute}`;
+        status.def.innerHTML = `defense: ${infoPlayer[0].defense} + ${infoPlayer[1][1].attribute}`;
+        status.matk.innerHTML = `mattack: ${infoPlayer[0].magicAttack} + ${infoPlayer[1][0].elementalAttribute}`;
+        status.mdef.innerHTML = `mdefense: ${infoPlayer[0].magicDefense} + ${infoPlayer[1][1].elementalAttribute}`;
         status.gold.innerHTML = `gold: ${infoPlayer[0].gold}`
 
     }
@@ -185,28 +185,28 @@ async function ready() {
 
         for (const item of infoPlayer[2]) {
 
-            if (!item.equipavel && item.quantidade > 0) {
+            if (!item.equippable && item.quantity > 0) {
                 playerBackpack.innerHTML += `
             
                     <li class="player-backpack-item">
                         <div class="player-bp-img-wrapper">
                             <img src="${item.icon}" alt="icon" class="bp-item-sup-icon">
                         </div>
-                        <span class="bp-item-description">${item.nome} (${item.descricao})</span>
-                        <span class="bp-item-quantity">x ${item.quantidade}</span>
+                        <span class="bp-item-description">${item.name} (${item.description})</span>
+                        <span class="bp-item-quantity">x ${item.quantity}</span>
                         <button id="${item.id}" class="use-item rpgui-button">usar</button>
                     </li>
             
                 `;
-            } else if (item.equipavel) {
+            } else if (item.equippable) {
                 playerBackpack.innerHTML += `
                 
                     <li class="player-backpack-item">
                         <div class="player-bp-img-wrapper">
                             <img src="${item.icon}" alt="icon" class="bp-item-icon">
                         </div>
-                        <span class="bp-item-description">${item.nome}</span>
-                        <span class="bp-item-attribute">+ ${item.atributo} ${item.tipo}</span>
+                        <span class="bp-item-description">${item.name}</span>
+                        <span class="bp-item-attribute">+ ${item.attribute} ${item.type}</span>
                         <button id="${item.id}" class="equip rpgui-button">equipar</button>
                     </li>
                 
@@ -225,7 +225,7 @@ async function ready() {
             <div id="weapon-img">
                 <img src="${equipment[0].icon}" alt="equipped-weapon">
             </div>
-            <span id="weapon-description">${equipment[0].nome}</span>
+            <span id="weapon-description">${equipment[0].name}</span>
         
         `;
 
@@ -234,7 +234,7 @@ async function ready() {
             <div id="armor-img">
             <img src="${equipment[1].icon}" alt="">
             </div>
-            <span id="armor-description">${equipment[1].nome}</span>
+            <span id="armor-description">${equipment[1].name}</span>
         
         `;
 

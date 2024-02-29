@@ -21,29 +21,29 @@ const playerInitStatus = [
     [
         {
             id: 9,
-            nome: "espada longa simples",
-            descricao: "espada pesada e frágil",
-            tipo: "ataque",
-            elemento: "fisico",
-            atributo: 5,
-            atributoElemental: 0,
-            valor: 50,
-            acumulavel: false,
+            name: "espada longa simples",
+            description: "espada pesada e frágil",
+            type: "ataque",
+            element: "fisico",
+            attribute: 5,
+            elementalAttribute: 0,
+            value: 50,
+            cumulative: false,
             icon: "/src/assets/img/icons/weapons/cheap-longsword.png",
-            equipavel: true
+            equippable: true
         },
         {
             id: 0,
-            nome: "armadura básica",
-            descricao: "armadura básica com placas de ferro",
-            tipo: "proteção",
-            elemento: "fisico",
-            atributo: 3,
-            atributoElemental: 0,
-            valor: 100,
-            acumulavel: false,
+            name: "armadura básica",
+            description: "armadura básica com placas de ferro",
+            type: "proteção",
+            element: "fisico",
+            attribute: 3,
+            elementalAttribute: 0,
+            value: 100,
+            cumulative: false,
             icon: "/src/assets/img/icons/armors/basic-armor.png",
-            equipavel: true
+            equippable: true
         }
     ],
 
@@ -51,36 +51,36 @@ const playerInitStatus = [
     [
         {
             id: 20,
-            nome: "poção de hp",
-            tipo: "suporte",
-            descricao: "+ 100 hp",
-            atributo: 100,
-            valor: 20,
-            acumulavel: true,
-            quantidade: 3,
+            name: "poção de hp",
+            type: "suporte",
+            description: "+ 100 hp",
+            attribute: 100,
+            value: 20,
+            cumulative: true,
+            quantity: 3,
             icon: "/src/assets/img/icons/potions/hp-potion.png",
-            equipavel: false
+            equippable: false
         }
     ],
 
     /* índice [3] habilidades */
     [
         {
-            nome: "golpe poderoso",
-            tipo: "ataque",
-            descricao: "ataque base + 5 dano adicional",
-            dano: 5,
-            mp: 5,
-            incapacitacao: false,
+            name: "golpe poderoso",
+            type: "ataque",
+            description: "ataque base + 5 dano adicional",
+            damage: 5,
+            mpCost: 5,
+            stunning: false,
             icon: ""
         },
         {
-            nome: "batida pesada",
-            tipo: "ataque",
-            descricao: "ataque base + 5 dano adicional e incapacita o alvo",
+            name: "batida pesada",
+            type: "ataque",
+            description: "ataque base + 5 dano adicional e incapacita o alvo",
             dano: 5,
-            mp: 15,
-            incapacitacao: true,
+            mpCost: 15,
+            stunning: true,
             icon: ""
         }
     ]
