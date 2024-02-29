@@ -206,7 +206,7 @@ showcase.addEventListener('click', async (button) => {
             document.getElementById('market-warning').style.visibility = "visible";
             document.getElementById('market-warning').innerHTML = `
             
-                <div id="no-money-warning" class="rpgui-container framed-golden-2">
+                <div id="warning-message" class="rpgui-container framed-golden-2">
                     <p>Opa! parece que você não tem dinheiro suficiente, viajante!</p>
                 </div>
             

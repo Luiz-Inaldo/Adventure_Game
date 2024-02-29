@@ -153,7 +153,8 @@ h1 {
 
 
 /* market styles */
-#market-warning {
+#market-warning,
+#equips-warning {
     position: fixed;
     z-index: 1;
     display: flex;
@@ -166,7 +167,7 @@ h1 {
     visibility: hidden;
 }
 
-#no-money-warning {
+#warning-message {
     color: #f1f1f1;
     text-align: center;
     padding: 30px;
@@ -344,6 +345,7 @@ h3 {
     max-height: 155px;
     max-width: fit-content;
     margin-bottom: 30px;
+    padding-bottom: 0;
 }
 
 #player-info {
@@ -430,6 +432,11 @@ h3 {
 
     & .bp-item-icon {
         width: 50px;
+    }
+
+    & .use-item,
+    .equip {
+        font-size: 10px;
     }
 
 }

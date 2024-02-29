@@ -7,7 +7,9 @@ const playerInitStatus = [
         defense: 5,
         magicDefense: 0,
         health: 100,
+        maxHealth: 100,
         mana: 10,
+        maxMana: 10,
         level: 1,
         exp: 0,
         next: 10,
@@ -18,6 +20,7 @@ const playerInitStatus = [
     /* índice [1] equipamentos*/
     [
         {
+            id: 9,
             nome: "espada longa simples",
             descricao: "espada pesada e frágil",
             tipo: "ataque",
@@ -30,6 +33,7 @@ const playerInitStatus = [
             equipavel: true
         },
         {
+            id: 0,
             nome: "armadura básica",
             descricao: "armadura básica com placas de ferro",
             tipo: "proteção",
@@ -46,6 +50,7 @@ const playerInitStatus = [
     /* índice [2] Itens da bolsa (sobrevivência)*/
     [
         {
+            id: 20,
             nome: "poção de hp",
             tipo: "suporte",
             descricao: "+ 100 hp",

@@ -7,6 +7,8 @@
     <title>Equipments - Adventure Game</title>
 </head>
 <body>
+
+    <div id="equips-warning"></div>
     
     <div id="equips-container">
         <div id="equips-window" class="rpgui-container framed-golden-2">
@@ -41,18 +43,8 @@
                     <h3>Equipamento</h3>
                     <div id="equip-slots-wrapper">
 
-                        <div class="equip-slot" id="weapon">
-                            <div id="weapon-img">
-                                <img src="/src/assets/img/icons/weapons/cheap-longsword.png" alt="equipped-weapon">
-                            </div>
-                            <span id="weapon-description">Espada Longa Fraca</span>
-                        </div>
-                        <div class="equip-slot" id="armor">
-                            <div id="armor-img">
-                                <img src="/src/assets/img/icons/armors/basic-armor.png" alt="">
-                            </div>
-                            <span id="armor-description">Armadura Básica</span>
-                        </div>
+                        <div class="equip-slot" id="weapon"></div>
+                        <div class="equip-slot" id="armor"></div>
 
                     </div>
                 </div>
@@ -60,32 +52,7 @@
     
                 <div id="player-backpack" class="rpgui-container framed-golden">
                     <h3>Itens</h3>
-                    <ul id="player-items">
-                        <li class="player-backpack-item">
-                            <div class="player-bp-img-wrapper">
-                                <img src="/src/assets/img/icons/potions/hp-potion.png" alt="icon" class="bp-item-sup-icon">
-                            </div>
-                            <span class="bp-item-description">poção de hp (+100 hp)</span>
-                            <span class="bp-item-quantity">x 3</span>
-                            <button id="use-item" class="buy-item rpgui-button">usar</button>
-                        </li>
-                        <li class="player-backpack-item">
-                            <div class="player-bp-img-wrapper">
-                                <img src="/src/assets/img/icons/weapons/cheap-longsword.png" alt="icon" class="bp-item-icon">
-                            </div>
-                            <span class="bp-item-description">espada longa velha e suja imunda</span>
-                            <span class="bp-item-attribute">+ 5 atk</span>
-                            <button id="equip" class="buy-item rpgui-button">equipar</button>
-                        </li>
-                        <li class="player-backpack-item">
-                            <div class="player-bp-img-wrapper">
-                                <img src="/src/assets/img/icons/weapons/cheap-longsword.png" alt="icon" class="bp-item-icon">
-                            </div>
-                            <span class="bp-item-description">espada longa velha e suja imunda</span>
-                            <span class="bp-item-attribute">+ 5 atk</span>
-                            <button id="equip" class="buy-item rpgui-button">equipar</button>
-                        </li>
-                    </ul>
+                    <ul id="player-items"></ul>
                 </div>
 
             </div>
