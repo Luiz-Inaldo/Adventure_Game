@@ -23,3 +23,16 @@ for (let i = 0; i < concludedStages; i++) {
     phase++
     
 }
+
+// botões de link (market e equipamentos)
+document.getElementById('market').addEventListener('click', () => {
+
+    window.location.href = "/market.html";
+
+});
+
+document.getElementById('equipment').addEventListener('click', () => {
+
+    window.location.href = "/equipment.html";
+
+})

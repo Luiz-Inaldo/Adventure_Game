@@ -1,0 +1,325 @@
+{
+    "monsters": [
+
+        [
+            {
+                "name": "goblin",
+                "health": 50,
+                "attack": 5,
+                "defense": 5,
+                "localization": "forest",
+                "weakTo": "fogo",
+                "strongTo": "terra",
+                "immuneTo": "",
+                "sprite": "/src/assets/img/monsters/goblin-battler.png"
+            },
+            [
+                {
+                    "id": 20,
+                    "name": "poção de hp",
+                    "type": "suporte",
+                    "description": "+ 100 hp",
+                    "attribute": 100,
+                    "value": 20,
+                    "cumulative": true,
+                    "quantity": 1,
+                    "icon": "/src/assets/img/icons/potions/hp-potion.png",
+                    "avaliable": true,
+                    "equippable": false
+                }
+            ],
+            [
+                {
+                    "name": "golpe poderoso",
+                    "type": "ataque",
+                    "description": "ataque base + 5 dano adicional",
+                    "damage": 5,
+                    "mpCost": 5,
+                    "stunning": false,
+                    "icon": ""
+                }
+            ]
+        ],
+
+        [
+            {
+                "name": "goblin guerr.",
+                "health": 80,
+                "attack": 10,
+                "defense": 8,
+                "localization": "forest",
+                "weakTo": "fogo",
+                "strongTo": "terra",
+                "immuneTo": "",
+                "sprite": "/src/assets/img/monsters/goblin-warrior-battler.png"
+            },
+            [
+                {
+                    "id": 20,
+                    "name": "poção de hp",
+                    "type": "suporte",
+                    "description": "+ 100 hp",
+                    "attribute": 100,
+                    "value": 20,
+                    "cumulative": true,
+                    "quantity": 1,
+                    "icon": "/src/assets/img/icons/potions/hp-potion.png",
+                    "avaliable": true,
+                    "equippable": false
+                },
+                {
+                    "id": 9,
+                    "name": "espada longa simples",
+                    "description": "espada pesada e frágil",
+                    "type": "ataque",
+                    "element": "fisico",
+                    "attribute": 5,
+                    "elementalAttribute": 0,
+                    "value": 50,
+                    "cumulative": false,
+                    "icon": "/src/assets/img/icons/weapons/cheap-longsword.png",
+                    "avaliable": true,
+                    "equippable": true
+                }
+            ],
+            [
+                {
+                    "name": "golpe poderoso",
+                    "type": "ataque",
+                    "description": "ataque base + 5 dano adicional",
+                    "damage": 5,
+                    "mpCost": 5,
+                    "stunning": false,
+                    "icon": ""
+                }
+            ]
+        ],
+
+        [
+            {
+                "name": "goblin sold.",
+                "health": 110,
+                "attack": 15,
+                "defense": 12,
+                "localization": "forest",
+                "weakTo": "fogo",
+                "strongTo": "terra",
+                "immuneTo": "",
+                "sprite": "/src/assets/img/monsters/goblin-soldier-battler.png"
+            },
+            [
+                {
+                    "id": 20,
+                    "name": "poção de hp",
+                    "type": "suporte",
+                    "description": "+ 100 hp",
+                    "attribute": 100,
+                    "value": 20,
+                    "cumulative": true,
+                    "quantity": 1,
+                    "icon": "/src/assets/img/icons/potions/hp-potion.png",
+                    "avaliable": true,
+                    "equippable": false
+                },
+                {
+                    "id": 21,
+                    "name": "poção de mp",
+                    "type": "suporte",
+                    "description": "+ 20 mp",
+                    "attribute": 20,
+                    "value": 20,
+                    "cumulative": true,
+                    "quantity": 1,
+                    "icon": "/src/assets/img/icons/potions/mp-potion.png",
+                    "avaliable": true,
+                    "equippable": false
+                },
+                {
+                    "id": 9,
+                    "name": "espada longa simples",
+                    "description": "espada pesada e frágil",
+                    "type": "ataque",
+                    "element": "fisico",
+                    "attribute": 5,
+                    "elementalAttribute": 0,
+                    "value": 50,
+                    "cumulative": false,
+                    "icon": "/src/assets/img/icons/weapons/cheap-longsword.png",
+                    "avaliable": true,
+                    "equippable": true
+                }
+            ],
+            [
+                {
+                    "name": "golpe poderoso",
+                    "type": "ataque",
+                    "description": "ataque base + 5 dano adicional",
+                    "damage": 5,
+                    "mpCost": 5,
+                    "stunning": false,
+                    "icon": ""
+                }
+            ]
+        ],
+
+        [
+            {
+                "name": "goblin rider",
+                "health": 80,
+                "attack": 18,
+                "defense": 8,
+                "localization": "forest",
+                "weakTo": "fogo",
+                "strongTo": "terra",
+                "immuneTo": "",
+                "sprite": "/src/assets/img/monsters/goblin-rider-battler.png"
+            },
+            [
+                {
+                    "id": 20,
+                    "name": "poção de hp",
+                    "type": "suporte",
+                    "description": "+ 100 hp",
+                    "attribute": 100,
+                    "value": 20,
+                    "cumulative": true,
+                    "quantity": 1,
+                    "icon": "/src/assets/img/icons/potions/hp-potion.png",
+                    "avaliable": true,
+                    "equippable": false
+                },
+                {
+                    "id": 21,
+                    "name": "poção de mp",
+                    "type": "suporte",
+                    "description": "+ 20 mp",
+                    "attribute": 20,
+                    "value": 20,
+                    "cumulative": true,
+                    "quantity": 1,
+                    "icon": "/src/assets/img/icons/potions/mp-potion.png",
+                    "avaliable": true,
+                    "equippable": false
+                },
+                {
+                    "id": 10,
+                    "name": "espada longa de ferro",
+                    "description": "espada pesada de ferro",
+                    "type": "ataque",
+                    "element": "fisico",
+                    "attribute": 10,
+                    "elementalAttribute": 0,
+                    "value": 150,
+                    "cumulative": false,
+                    "icon": "/src/assets/img/icons/weapons/iron-longsword.png",
+                    "avaliable": true,
+                    "equippable": true
+                }
+            ],
+            [
+                {
+                    "name": "golpe poderoso",
+                    "type": "ataque",
+                    "description": "ataque base + 5 dano adicional",
+                    "damage": 5,
+                    "mpCost": 5,
+                    "stunning": false,
+                    "icon": ""
+                }
+            ]
+        ]
+
+    ],
+
+    "boss": [
+        [
+            {
+                "name": "Ormruc",
+                "health": 250,
+                "attack": 15,
+                "defense": 13,
+                "localization": "forest",
+                "weakTo": "fogo",
+                "strongTo": "terra",
+                "immuneTo": "",
+                "sprite": "/src/assets/img/monsters/ormruc.png"
+            },
+            [
+                {
+                    "id": 20,
+                    "name": "poção de hp",
+                    "type": "suporte",
+                    "description": "+ 100 hp",
+                    "attribute": 100,
+                    "value": 20,
+                    "cumulative": true,
+                    "quantity": 3,
+                    "icon": "/src/assets/img/icons/potions/hp-potion.png",
+                    "avaliable": true,
+                    "equippable": false
+                },
+                {
+                    "id": 21,
+                    "name": "poção de mp",
+                    "type": "suporte",
+                    "description": "+ 20 mp",
+                    "attribute": 20,
+                    "value": 20,
+                    "cumulative": true,
+                    "quantity": 2,
+                    "icon": "/src/assets/img/icons/potions/mp-potion.png",
+                    "avaliable": true,
+                    "equippable": false
+                },
+                {
+                    "id": 10,
+                    "name": "espada longa de ferro",
+                    "description": "espada pesada de ferro",
+                    "type": "ataque",
+                    "element": "fisico",
+                    "attribute": 10,
+                    "elementalAttribute": 0,
+                    "value": 150,
+                    "cumulative": false,
+                    "icon": "/src/assets/img/icons/weapons/iron-longsword.png",
+                    "avaliable": true,
+                    "equippable": true
+                },
+                {
+                    "id": 11,
+                    "name": "espada longa de aço",
+                    "description": "espada leve e resistente",
+                    "type": "ataque",
+                    "element": "fisico",
+                    "attribute": 15,
+                    "elementalAttribute": 0,
+                    "value": 300,
+                    "cumulative": false,
+                    "icon": "/src/assets/img/icons/weapons/steel-longsword.png",
+                    "avaliable": true,
+                    "equippable": true
+                }
+            ],
+            [
+                {
+                    "name": "golpe poderoso",
+                    "type": "ataque",
+                    "description": "ataque base + 5 dano adicional",
+                    "damage": 5,
+                    "mpCost": 5,
+                    "stunning": false,
+                    "icon": ""
+                },
+                {
+                    "name": "batida pesada",
+                    "type": "ataque",
+                    "description": "ataque base + 5 dano adicional e incapacita o alvo",
+                    "dano": 5,
+                    "mpCost": 15,
+                    "stunning": true,
+                    "icon": ""
+                }
+            ]
+        ]
+    ]
+}

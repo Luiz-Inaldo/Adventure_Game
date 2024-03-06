@@ -175,22 +175,22 @@ async function ready() {
         if (button.target.classList.contains('buy-item')) {
 
             const buttonID = parseInt(button.target.id);
-            const itemToBuy = itemList.allItems.filter(element => { return element.id === buttonID });
-            const itemValue = itemToBuy[0].value;
+            const itemToBuy = itemList.allItems.find(element => { return element.id === buttonID });
+            const itemValue = itemToBuy.value;
 
-            if (infoPlayer[0].gold >= itemValue && itemToBuy[0].tipo !== "suporte") {
+            if (infoPlayer[0].gold >= itemValue && itemToBuy.tipo !== "suporte") {
 
                 purchaseSound.play();
                 infoPlayer[0].gold -= itemValue;
-                infoPlayer[2].push(itemToBuy[0]);
+                infoPlayer[2].push(itemToBuy);
                 await updateDisplayedPlayerGold();
 
-            } else if (infoPlayer[0].gold >= itemValue && itemToBuy[0].tipo === "suporte") {
+            } else if (infoPlayer[0].gold >= itemValue && itemToBuy.tipo === "suporte") {
 
                 let checkItemMatch = false;
 
                 for (let i = 0; i < infoPlayer[2].length; i++) {
-                    if (infoPlayer[2][i].nome === itemToBuy[0].nome) {
+                    if (infoPlayer[2][i].nome === itemToBuy.nome) {
                         infoPlayer[2][i].quantidade++
                         purchaseSound.play();
                         infoPlayer[0].gold -= itemValue;
@@ -204,7 +204,7 @@ async function ready() {
 
                     purchaseSound.play();
                     infoPlayer[0].gold -= itemValue;
-                    infoPlayer[2].push(itemToBuy[0]);
+                    infoPlayer[2].push(itemToBuy);
                     await updateDisplayedPlayerGold();
 
                 }

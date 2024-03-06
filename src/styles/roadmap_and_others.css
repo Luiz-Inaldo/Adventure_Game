@@ -70,8 +70,8 @@
     margin-bottom: 8px;
 }
 
-#market a,
-#equipment a {
+#market p,
+#equipment p {
     font-size: 13px;
     text-decoration: none;
     color: #fff;
@@ -79,10 +79,10 @@
 
 #market,
 #market-icon,
-#market a,
+#market p,
 #equipment,
 #equipment-icon,
-#equipment a {
+#equipment p {
     cursor: url('/src/assets/rpg/cursor/point.png'), default;
 }
 
@@ -97,6 +97,7 @@ h1 {
 /* phases */
 #all-phases-container {
     width: 900px;
+    height: 80%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;

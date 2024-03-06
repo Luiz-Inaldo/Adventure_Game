@@ -56,8 +56,8 @@ const winSound = new Audio('../assets/audio/win.wav');
 const loseSound = new Audio('../assets/audio/lose.wav');
 
 async function showSprites() {
-    game.player.visual.avatar.src = "../assets/img/Warrior.png";
-    game.enemy.visual.avatar.src = "../assets/img/orc.png";
+    game.player.visual.avatar.src = "../assets/img/player/Warrior.png";
+    game.enemy.visual.avatar.src = "../assets/img/monsters/goblin-rider-battler.png";
 }
 
 async function showStatus() {
