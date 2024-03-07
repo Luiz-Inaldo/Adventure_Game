@@ -7,19 +7,19 @@
     <title>Adventure Game | Forest Battle</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../styles/style.css">
-    <link rel="stylesheet" href="../styles/responsivity.css">
-    <link rel="stylesheet" href="../styles/_containers_and_frames.css">
-    <link rel="stylesheet" href="../styles/_button.css">
+    <link rel="stylesheet" href="/src/styles/style.css">
+    <link rel="stylesheet" href="/src/styles/responsivity.css">
+    <link rel="stylesheet" href="/src/styles/_containers_and_frames.css">
+    <link rel="stylesheet" href="/src/styles/_button.css">
 
     <!-- FAVICON -->
-    <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/src/assets/img/others/favicon.png" type="image/x-icon">
 </head>
 
 <body>
 
     <audio autoplay loop>
-        <source src="../assets/audio/bgm/battle_theme.wav" type="audio/wav" />
+        <source src="/src/assets/audio/bgm/battle_theme.wav" type="audio/wav" />
     </audio>
 
     <div class="background forest"></div>
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="img-versus">
-                    <img src="../assets/img/others/versus.png" id="versus" />
+                    <img src="/src/assets/img/others/versus.png" id="versus" />
                 </div>
 
                 <div class="monster">
@@ -108,11 +108,11 @@
             <div class="backpack-and-skills">
                 <div class="bp-title">
                     <h2>Mochila</h2>
-                    <img src="../assets/img/icons/arrow-down.svg" alt="arrow-down" id="arrow-icon-1">
+                    <img src="/src/assets/img/icons/others/arrow-down.svg" alt="arrow-down" id="arrow-icon-1">
                 </div>
                 <div class="survival-itens rpgui-container framed-golden">
                     <div class="item">
-                        <img src="../assets/img/pocao.png" alt="potion" class="item-icon">
+                        <img src="/src/assets/img/icons/potions/hp-potion.png" alt="potion" class="item-icon">
                         <span class="item-description">poção de vida (+100)</span>
                         <span class="item-quantity">x 3</span>
                     </div>
@@ -120,11 +120,11 @@
 
                 <div class="skills-title">
                     <h2>Habilidades</h2>
-                    <img src="../assets/img/icons/arrow-down.svg" alt="arrow-down" id="arrow-icon-2">
+                    <img src="/src/assets/img/icons/others/arrow-down.svg" alt="arrow-down" id="arrow-icon-2">
                 </div>
                 <div class="skills rpgui-container framed-golden">
                     <div class="skill">
-                        <img src="/src/assets/img/icons/icone-espada.png" alt="atk-skill" class="skill-icon">
+                        <img src="/src/assets/img/icons/weapons/cheap-longsword.png" alt="atk-skill" class="skill-icon">
                         <span class="skill-description">golpe forte com + 10atk</span>
                         <span class="skill-mana-requer">mp 5</span>
                     </div>
@@ -148,7 +148,8 @@
     </div>
 
     <!-- Scripts Import -->
-    <script src="../scripts/battle_turn_test.js" defer></script>
+    <script src="/src/scripts/battle_turn_test.js" defer></script>
+    <script src="/src/scripts/forest_battle.js" defer></script>
 </body>
 
 </html>

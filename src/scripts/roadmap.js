@@ -36,3 +36,16 @@ document.getElementById('equipment').addEventListener('click', () => {
     window.location.href = "/equipment.html";
 
 })
+
+// verificando clique nas fases
+document.getElementById('monster-icon').addEventListener('click', (e) => {
+
+    const phaseName = e.target.parentElement.querySelector('p').textContent;
+    localStorage.setItem('fase', JSON.stringify([
+        {
+            name: phaseName
+        }
+    ]))
+    window.location.href = "/src/stages/forest/forest_battle.html";
+
+})

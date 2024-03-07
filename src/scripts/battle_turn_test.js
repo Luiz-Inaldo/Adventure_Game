@@ -47,17 +47,17 @@ console.log(playerInfoContainer);
 
 const itemSpanNumber = [0, 1, 2, 3, 4];
 
-const swordStab = new Audio('../assets/audio/sword_stab.wav');
-const enemyHit = new Audio('../assets/audio/enemy_hit.wav');
-const criticalHit = new Audio('../assets/audio/critical_hit.mp3');
-const drawSound = new Audio('../assets/audio/swords_draw.wav');
-const healing = new Audio('../assets/audio/healing.wav');
-const winSound = new Audio('../assets/audio/win.wav');
-const loseSound = new Audio('../assets/audio/lose.wav');
+const swordStab = new Audio('/src/assets/audio/sword_stab.wav');
+const enemyHit = new Audio('/src/assets/audio/enemy_hit.wav');
+const criticalHit = new Audio('/src/assets/audio/critical_hit.mp3');
+const drawSound = new Audio('/src/assets/audio/swords_draw.wav');
+const healing = new Audio('/src/assets/audio/healing.wav');
+const winSound = new Audio('/src/assets/audio/win.wav');
+const loseSound = new Audio('/src/assets/audio/lose.wav');
 
 async function showSprites() {
-    game.player.visual.avatar.src = "../assets/img/player/Warrior.png";
-    game.enemy.visual.avatar.src = "../assets/img/monsters/goblin-rider-battler.png";
+    game.player.visual.avatar.src = "/src/assets/img/player/Warrior.png";
+    game.enemy.visual.avatar.src = "/src/assets/img/monsters/ormruc.png";
 }
 
 async function showStatus() {

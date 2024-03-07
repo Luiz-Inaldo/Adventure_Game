@@ -82,7 +82,8 @@
 #market p,
 #equipment,
 #equipment-icon,
-#equipment p {
+#equipment p,
+#monster-icon {
     cursor: url('/src/assets/rpg/cursor/point.png'), default;
 }
 

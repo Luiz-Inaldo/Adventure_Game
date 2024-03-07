@@ -197,6 +197,9 @@ header {
 
 #player-name-container,
 #monster-name-container {
+    width: 200px;
+    text-align: center;
+    font-size: 12px;
     padding: 0;
     color: #fff;
     text-shadow: 2px 2px 1px #000;
