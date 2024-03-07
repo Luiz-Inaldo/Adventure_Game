@@ -10,9 +10,10 @@
 .rpgui-content input[type=range]:disabled + .rpgui-slider-container,
 .rpgui-content :disabled + .rpgui-dropdown-imp,
 .rpgui-content :disabled + .rpgui-dropdown-imp + .rpgui-dropdown-imp,
-.rpgui-content :disabled + .rpgui-list-imp
+.rpgui-content :disabled + .rpgui-list-imp,
+.rpgui-button :disabled
 {
-  cursor: url("../assets/rpg/cursor/default.png"), auto;
+  cursor: url("../assets/rpg/cursor/default.png"), default;
   -webkit-filter: grayscale(1);
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);

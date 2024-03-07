@@ -176,22 +176,23 @@ async function ready() {
 
             const buttonID = parseInt(button.target.id);
             const itemToBuy = itemList.allItems.find(element => { return element.id === buttonID });
+            console.log(itemToBuy);
             const itemValue = itemToBuy.value;
 
-            if (infoPlayer[0].gold >= itemValue && itemToBuy.tipo !== "suporte") {
+            if (infoPlayer[0].gold >= itemValue && itemToBuy.type !== "suporte") {
 
                 purchaseSound.play();
                 infoPlayer[0].gold -= itemValue;
                 infoPlayer[2].push(itemToBuy);
                 await updateDisplayedPlayerGold();
 
-            } else if (infoPlayer[0].gold >= itemValue && itemToBuy.tipo === "suporte") {
+            } else if (infoPlayer[0].gold >= itemValue && itemToBuy.type === "suporte") {
 
                 let checkItemMatch = false;
 
                 for (let i = 0; i < infoPlayer[2].length; i++) {
-                    if (infoPlayer[2][i].nome === itemToBuy.nome) {
-                        infoPlayer[2][i].quantidade++
+                    if (infoPlayer[2][i].name === itemToBuy.name) {
+                        infoPlayer[2][i].quantity++
                         purchaseSound.play();
                         infoPlayer[0].gold -= itemValue;
                         checkItemMatch = true;

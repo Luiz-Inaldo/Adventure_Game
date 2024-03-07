@@ -272,14 +272,19 @@ header {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-.status.damaged {
-    background-color: rgba(255, 0, 0, 0.8);
+.damaged,
+.healed {
     transform: scale(1.06);
+    transition: all 0.2s;
+    border-radius: 10px;
 }
 
-.status.healed {
+.damaged {
+    background-color: rgba(255, 0, 0, 0.8);
+}
+
+.healed {
     background-color: rgba(0, 255, 0, 0.8);
-    transform: scale(1.06);
 }
 
 #player-hp,
@@ -295,6 +300,16 @@ header {
     gap: 5px;
 }
 
+#player-hp-points,
+#player-atk-points,
+#player-def-points,
+#player-mp-points,
+#monster-hp-points,
+#monster-atk-points,
+#monster-def-points {
+    padding: 5px;
+}
+
 #versus {
     width: 120px;
     height: 120px;
@@ -305,13 +320,12 @@ header {
     height: 105px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     color: #fff;
     text-shadow: 2px 2px 1px #020202;
 }
 
-#player-number,
-#monster-number,
-#damage {
+#battle-text {
     text-align: center;
 }
 
@@ -387,6 +401,7 @@ header {
     height: 100px;
     overflow-y: auto;
     padding: 0 !important;
+    gap: 5px;
 }
 
 .survival-itens.show,
@@ -407,8 +422,18 @@ header {
     cursor: url('/src/assets/rpg/cursor/point.png'), default;
 }
 
+.survival-itens::-webkit-scrollbar,
+.skills::-webkit-scrollbar {
+    width: 5px;
+}
+
+.survival-itens::-webkit-scrollbar-thumb,
+.skills::-webkit-scrollbar-thumb {
+    background: #fff;
+}
+
 .item-icon {
-    width: 50px;
+    width: 30px;
 }
 
 .skill-icon {
@@ -441,28 +466,13 @@ header {
 #next-battle {
     width: 200px;
     height: 50px;
-}
-
-#sort-number:hover {
-    transition: 0.2s;
-    transform: scale(1.1);
-    background-color: #ff0000;
-    color: #fff;
-    cursor: pointer;
+    font-size: 13px;
 }
 
 #sort-number:disabled {
     cursor: not-allowed;
     background-color: #2e2e2e;
     color: #4b4b4b;
-}
-
-#next-battle:hover {
-    transition: 0.2s;
-    transform: scale(1.1);
-    background-color: #ff9500;
-    color: #fff;
-    cursor: pointer;
 }
 
 .game-over {

@@ -71,17 +71,17 @@ const playerInitStatus = [
             description: "ataque base + 5 dano adicional",
             damage: 5,
             mpCost: 5,
-            stunning: false,
-            icon: ""
+            status: "normal",
+            icon: "/src/assets/img/icons/skills/skill-sword-1.png"
         },
         {
             name: "batida pesada",
             type: "ataque",
             description: "ataque base + 5 dano adicional e incapacita o alvo",
-            dano: 5,
+            damage: 5,
             mpCost: 15,
-            stunning: true,
-            icon: ""
+            status: "stun",
+            icon: "/src/assets/img/icons/skills/skill-stun-1.png"
         }
     ]
 

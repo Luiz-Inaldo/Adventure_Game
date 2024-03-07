@@ -10,7 +10,7 @@
                 "localization": "forest",
                 "weakTo": "fogo",
                 "strongTo": "terra",
-                "immuneTo": "",
+                "immuneTo": "none",
                 "sprite": "/src/assets/img/monsters/goblin-battler.png"
             },
             [
@@ -50,7 +50,7 @@
                 "localization": "forest",
                 "weakTo": "fogo",
                 "strongTo": "terra",
-                "immuneTo": "",
+                "immuneTo": "none",
                 "sprite": "/src/assets/img/monsters/goblin-warrior-battler.png"
             },
             [
@@ -104,7 +104,7 @@
                 "localization": "forest",
                 "weakTo": "fogo",
                 "strongTo": "terra",
-                "immuneTo": "",
+                "immuneTo": "none",
                 "sprite": "/src/assets/img/monsters/goblin-soldier-battler.png"
             },
             [
@@ -171,7 +171,7 @@
                 "localization": "forest",
                 "weakTo": "fogo",
                 "strongTo": "terra",
-                "immuneTo": "",
+                "immuneTo": "none",
                 "sprite": "/src/assets/img/monsters/goblin-rider-battler.png"
             },
             [
@@ -241,7 +241,7 @@
                 "localization": "forest",
                 "weakTo": "fogo",
                 "strongTo": "terra",
-                "immuneTo": "",
+                "immuneTo": "none",
                 "sprite": "/src/assets/img/monsters/ormruc.png"
             },
             [
