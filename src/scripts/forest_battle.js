@@ -22,7 +22,9 @@ async function ready() {
         exp: document.querySelector('.player-exp'),
         gold: document.querySelector('.player-gold'),
         totalAttack: infoPlayer[0].attack + infoPlayer[1][0].attribute,
-        totalDefense: infoPlayer[0].defense + infoPlayer[1][1].attribute
+        totalMagicAttack: infoPlayer[0].attack + infoPlayer[1][0].attribute + infoPlayer[1][0].elementalAttribute,
+        totalDefense: infoPlayer[0].defense + infoPlayer[1][1].attribute,
+        totalMagicDefense: infoPlayer[0].defense + infoPlayer[1][1].attribute + infoPlayer[1][1].elementalAttribute,
     }
     const monster = {
         name: document.getElementById('monster-name-container'),
@@ -91,8 +93,34 @@ async function ready() {
 
     });
 
+    // capturando o tipo do ataque do player (elemental)
+    const playerAttackType = infoPlayer[1][0].element;
+
+    // definindo o ataque total do player mediante fraqueza/resistência do monstro
+    if (playerAttackType == "fisico") {
+        if (playerAttackType == enemy[0].weakTo) {
+            player.totalAttack *= 2;
+        } else if (playerAttackType == enemy[0].strongTo) {
+            player.totalAttack /= 2;
+        } else if (playerAttackType == enemy[0].immuneTo) {
+            player.totalAttack = 1;
+        }
+    } else {
+        if (playerAttackType == enemy[0].weakTo) {
+            player.totalMagicAttack *= 2;
+        } else if (playerAttackType == enemy[0].strongTo) {
+            player.totalMagicAttack /= 2;
+        } else if (playerAttackType == enemy[0].immuneTo) {
+            player.totalMagicAttack = 1;
+        }
+    }
+
     // evento de clique no botão de ataque
     attackButton.addEventListener('click', initiateTurn);
+
+
+
+
 
 
     // funções
@@ -205,39 +233,111 @@ async function ready() {
 
         attackButton.style.visibility = 'hidden';
 
-        // capturando o tipo do ataque do player (elemental)
-        const playerAttackType = infoPlayer[1][0].element;
-
         // variáveis das provavéis ações
         const playerCritNumber = Math.floor(Math.random() * 5);
         const enemyEvadeNumber = Math.floor(Math.random() * 6);
         console.log(playerCritNumber, enemyEvadeNumber);
         battleTexts.innerHTML = `Você atacou!`;
 
-        if (enemyEvadeNumber === 3) {
+        // variáveis de fórmulas
+        const normalAttackFormula = infoPlayer[0].level + ((player.totalAttack * 2) - (enemy[0].defense * 2));
+        const magicAttackFormula = infoPlayer[0].level + player.totalAttack + ((player.totalMagicAttack * 2) - (enemy[0].magicDefense * 2));
+        const criticalAttackFormula = Math.round(normalAttackFormula * 1.5);
+        const criticalMagicFormula = Math.round(magicAttackFormula * 1.5);
+
+        if (enemyEvadeNumber === 3 && playerCritNumber !== 3) {
             battleTexts.innerHTML += ` O inimigo se esquivou do ataque!`;
+            setTimeout(enemyTurn, 1000);
         } else if (playerCritNumber === 3 && enemyEvadeNumber !== 3) {
+
             sound.criticalHit.play();
-            if (playerAttackType == enemy[0].weakTo) {
-                player.totalAttack *= 2;
-            } else if (playerAttackType == enemy[0].strongTo) {
-                player.totalAttack /= 2;
-            } else if (playerAttackType == enemy[0].immuneTo) {
-                player.totalAttack = 1;
+
+            if (playerAttackType == "fisico") {
+                enemy[0].health -= criticalAttackFormula;
+                battleTexts.innerHTML += ` O seu dano foi crítico! você desferiu ${criticalAttackFormula} de dano!`;
+            } else {
+                enemy[0].health -= criticalMagicFormula;
+                battleTexts.innerHTML += ` O seu dano foi crítico! você desferiu ${criticalMagicFormula} de dano!`;
             }
-            battleTexts.innerHTML += ` O seu dano foi crítico!
-            você desferiu ${player.totalAttack * 2} de dano!`;
+
             monster.health.classList.add('damaged');
-            enemy[0].health -= player.totalAttack * 2;
             setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
             await updateInfoEnemy();
+
             if (enemy[0].health <= 0) {
                 monster.health.textContent = "0";
                 // await winBattle();
             }
+
+            setTimeout(enemyTurn, 1000);
+
+        } else {
+
+            sound.swordStab.play();
+
+            if (playerAttackType == "fisico") {
+                enemy[0].health -= normalAttackFormula;
+                battleTexts.innerHTML += ` Você desferiu ${normalAttackFormula} de dano!`;
+            } else {
+                enemy[0].health -= magicAttackFormulaAttackFormula;
+                battleTexts.innerHTML += ` Você desferiu ${magicAttackFormula} de dano!`;
+            }
+
+            monster.health.classList.add('damaged');
+            setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
+            await updateInfoEnemy();
+
+            if (enemy[0].health <= 0) {
+                monster.health.textContent = "0";
+                // await winBattle();
+            }
+
+            setTimeout(enemyTurn, 1000);
+
         }
 
-        setTimeout(() => { attackButton.style.visibility = 'visible' }, 1000)
+        setTimeout(() => { attackButton.style.visibility = 'visible' }, 2000)
+
+    }
+
+    async function enemyTurn() {
+
+        // variáveis de prováveis chances (ataque ou habilidade)
+        let enemyAttackType;
+        const enemyRandomNumber = Math.floor(Math.random() * 10);
+        enemyRandomNumber >= 0 && enemyRandomNumber <= 7
+            ? enemyAttackType = "normal" : enemyAttackType = "skill";
+
+        if (enemyAttackType == "normal") {
+
+            // variáveis das provavéis chances
+            const enemyCritNumber = Math.floor(Math.random() * 5);
+            const playerEvadeNumber = Math.floor(Math.random() * 6);
+            console.log(enemyCritNumber, playerEvadeNumber);
+            battleTexts.innerHTML = `O inimigo atacou!`;
+
+            // variáveis de fórmulas
+            const normalAttackFormula = (enemy[0].attack * 2) - (player.totalDefense * 2);
+            const criticalAttackFormula = Math.round(normalAttackFormula * 1.5);
+
+            if (playerEvadeNumber === 3 && enemyCritNumber !== 3) {
+                battleTexts.innerHTML += ` Você desviou do ataque!`;
+            } else if (enemyCritNumber === 3 && playerEvadeNumber !== 3) {
+
+                sound.enemyHit.play();
+                infoPlayer[0].health -= criticalAttackFormula;
+                battleTexts.innerHTML += ` Você recebeu ${normalAttackFormula} de dano!`;
+                player.health.classList.add('damaged');
+                setTimeout(() => { player.health.classList.remove('damaged') }, 300);
+                await updateInfoPlayer();
+
+            }
+
+        } else {
+
+        }
+
+
 
     }
 
