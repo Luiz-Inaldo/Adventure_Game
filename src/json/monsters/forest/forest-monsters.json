@@ -5,7 +5,7 @@
             {
                 "name": "goblin",
                 "health": 50,
-                "attack": 5,
+                "attack": 10,
                 "defense": 5,
                 "magicAttack": 0,
                 "magicDefense": 0,

@@ -22,9 +22,9 @@ async function ready() {
         exp: document.querySelector('.player-exp'),
         gold: document.querySelector('.player-gold'),
         totalAttack: infoPlayer[0].attack + infoPlayer[1][0].attribute,
-        totalMagicAttack: infoPlayer[0].attack + infoPlayer[1][0].attribute + infoPlayer[1][0].elementalAttribute,
+        totalMagicAttack: infoPlayer[0].magicAttack + infoPlayer[1][0].elementalAttribute,
         totalDefense: infoPlayer[0].defense + infoPlayer[1][1].attribute,
-        totalMagicDefense: infoPlayer[0].defense + infoPlayer[1][1].attribute + infoPlayer[1][1].elementalAttribute,
+        totalMagicDefense: infoPlayer[0].magicDefense + infoPlayer[1][1].elementalAttribute,
     }
     const monster = {
         name: document.getElementById('monster-name-container'),
@@ -57,6 +57,7 @@ async function ready() {
 
     // escolhendo ação de acordo com o tipo de batalha
     let enemy;
+    let enemyAlive = true;
     if (battleType == "normal") {
         await loadMonster();
         document.querySelector('.encounter_text').innerHTML = `
@@ -72,6 +73,8 @@ async function ready() {
     }
 
     console.log(enemy, infoPlayer);
+    console.log(enemy[0].attack, player.totalAttack, player.totalMagicAttack);
+    console.log(enemy[0].defense, player.totalDefense, player.totalMagicDefense);
 
     // carregando informações visuais na tela
     Promise.all([
@@ -114,6 +117,8 @@ async function ready() {
             player.totalMagicAttack = 1;
         }
     }
+
+    console.log(player.totalAttack, player.totalMagicAttack);
 
     // evento de clique no botão de ataque
     attackButton.addEventListener('click', initiateTurn);
@@ -236,16 +241,17 @@ async function ready() {
         // variáveis das provavéis ações
         const playerCritNumber = Math.floor(Math.random() * 5);
         const enemyEvadeNumber = Math.floor(Math.random() * 6);
-        console.log(playerCritNumber, enemyEvadeNumber);
+
         battleTexts.innerHTML = `Você atacou!`;
 
         // variáveis de fórmulas
-        const normalAttackFormula = infoPlayer[0].level + ((player.totalAttack * 2) - (enemy[0].defense * 2));
-        const magicAttackFormula = infoPlayer[0].level + player.totalAttack + ((player.totalMagicAttack * 2) - (enemy[0].magicDefense * 2));
+        const normalAttackFormula = infoPlayer[0].level + (player.totalAttack * 2) - (enemy[0].defense * 2);
+        const magicAttackFormula = infoPlayer[0].level + infoPlayer[0].attack + (player.totalMagicAttack * 2) - (enemy[0].magicDefense * 2);
         const criticalAttackFormula = Math.round(normalAttackFormula * 1.5);
         const criticalMagicFormula = Math.round(magicAttackFormula * 1.5);
+        console.log(`formula atk: ${normalAttackFormula}`, `formula crit: ${criticalAttackFormula}`);
 
-        if (enemyEvadeNumber === 3 && playerCritNumber !== 3) {
+        if (enemyEvadeNumber === 3 && playerCritNumber !== 3 || normalAttackFormula <= 0) {
             battleTexts.innerHTML += ` O inimigo se esquivou do ataque!`;
             setTimeout(enemyTurn, 1000);
         } else if (playerCritNumber === 3 && enemyEvadeNumber !== 3) {
@@ -267,9 +273,12 @@ async function ready() {
             if (enemy[0].health <= 0) {
                 monster.health.textContent = "0";
                 // await winBattle();
+                enemyAlive = false;
             }
 
-            setTimeout(enemyTurn, 1000);
+            if (enemyAlive) {
+                setTimeout(enemyTurn, 1000);    
+            }
 
         } else {
 
@@ -290,9 +299,12 @@ async function ready() {
             if (enemy[0].health <= 0) {
                 monster.health.textContent = "0";
                 // await winBattle();
+                enemyAlive = false;
             }
 
-            setTimeout(enemyTurn, 1000);
+            if (enemyAlive) {
+                setTimeout(enemyTurn, 1000);
+            }
 
         }
 
@@ -313,20 +325,21 @@ async function ready() {
             // variáveis das provavéis chances
             const enemyCritNumber = Math.floor(Math.random() * 5);
             const playerEvadeNumber = Math.floor(Math.random() * 6);
-            console.log(enemyCritNumber, playerEvadeNumber);
+            
             battleTexts.innerHTML = `O inimigo atacou!`;
 
             // variáveis de fórmulas
             const normalAttackFormula = (enemy[0].attack * 2) - (player.totalDefense * 2);
             const criticalAttackFormula = Math.round(normalAttackFormula * 1.5);
+            console.log(`formula atk: ${normalAttackFormula}`, `formula crit: ${criticalAttackFormula}`);
 
-            if (playerEvadeNumber === 3 && enemyCritNumber !== 3) {
+            if (playerEvadeNumber === 3 && enemyCritNumber !== 3 || normalAttackFormula <= 0) {
                 battleTexts.innerHTML += ` Você desviou do ataque!`;
             } else if (enemyCritNumber === 3 && playerEvadeNumber !== 3) {
 
                 sound.enemyHit.play();
                 infoPlayer[0].health -= criticalAttackFormula;
-                battleTexts.innerHTML += ` Você recebeu ${normalAttackFormula} de dano!`;
+                battleTexts.innerHTML += ` Golpe crítico! Você recebeu ${criticalAttackFormula} de dano!`;
                 player.health.classList.add('damaged');
                 setTimeout(() => { player.health.classList.remove('damaged') }, 300);
                 await updateInfoPlayer();
