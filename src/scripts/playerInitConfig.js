@@ -68,7 +68,8 @@ const playerInitStatus = [
         {
             name: "golpe poderoso",
             type: "ataque",
-            description: "ataque base + 5 dano adicional",
+            element: "fisico",
+            description: "ataque base + 30% dano adicional",
             damage: 5,
             mpCost: 5,
             status: "normal",
@@ -77,7 +78,8 @@ const playerInitStatus = [
         {
             name: "batida pesada",
             type: "ataque",
-            description: "ataque base + 5 dano adicional e incapacita o alvo",
+            element: "fisico",
+            description: "ataque base + 30% dano adicional e incapacita o alvo",
             damage: 5,
             mpCost: 15,
             status: "stun",

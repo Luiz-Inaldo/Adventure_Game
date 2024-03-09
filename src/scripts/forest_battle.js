@@ -73,8 +73,6 @@ async function ready() {
     }
 
     console.log(enemy, infoPlayer);
-    console.log(enemy[0].attack, player.totalAttack, player.totalMagicAttack);
-    console.log(enemy[0].defense, player.totalDefense, player.totalMagicDefense);
 
     // carregando informações visuais na tela
     Promise.all([
@@ -118,10 +116,19 @@ async function ready() {
         }
     }
 
-    console.log(player.totalAttack, player.totalMagicAttack);
-
     // evento de clique no botão de ataque
     attackButton.addEventListener('click', initiateTurn);
+
+    // evento de clique no botão de suprimentos
+    const bagSupplies = document.querySelectorAll('.item');
+    bagSupplies.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const itemName = e.target.parentElement.querySelector('.item-description')
+                .textContent.split("(")[0];
+            console.log(itemName);
+            useSupply(itemName);
+        })
+    });
 
 
 
@@ -245,11 +252,10 @@ async function ready() {
         battleTexts.innerHTML = `Você atacou!`;
 
         // variáveis de fórmulas
-        const normalAttackFormula = infoPlayer[0].level + (player.totalAttack * 2) - (enemy[0].defense * 2);
-        const magicAttackFormula = infoPlayer[0].level + infoPlayer[0].attack + (player.totalMagicAttack * 2) - (enemy[0].magicDefense * 2);
+        const normalAttackFormula = Math.round(infoPlayer[0].level + ((player.totalAttack * 1.5) - enemy[0].defense));
+        const magicAttackFormula = Math.round(infoPlayer[0].level + infoPlayer[0].attack + ((player.totalMagicAttack * 1.5) - enemy[0].magicDefense));
         const criticalAttackFormula = Math.round(normalAttackFormula * 1.5);
         const criticalMagicFormula = Math.round(magicAttackFormula * 1.5);
-        console.log(`formula atk: ${normalAttackFormula}`, `formula crit: ${criticalAttackFormula}`);
 
         if (enemyEvadeNumber === 3 && playerCritNumber !== 3 || normalAttackFormula <= 0) {
             battleTexts.innerHTML += ` O inimigo se esquivou do ataque!`;
@@ -277,7 +283,7 @@ async function ready() {
             }
 
             if (enemyAlive) {
-                setTimeout(enemyTurn, 1000);    
+                setTimeout(enemyTurn, 1000);
             }
 
         } else {
@@ -325,32 +331,152 @@ async function ready() {
             // variáveis das provavéis chances
             const enemyCritNumber = Math.floor(Math.random() * 5);
             const playerEvadeNumber = Math.floor(Math.random() * 6);
-            
+
             battleTexts.innerHTML = `O inimigo atacou!`;
 
             // variáveis de fórmulas
-            const normalAttackFormula = (enemy[0].attack * 2) - (player.totalDefense * 2);
+            const normalAttackFormula = Math.round((enemy[0].attack * 1.5) - player.totalDefense);
             const criticalAttackFormula = Math.round(normalAttackFormula * 1.5);
-            console.log(`formula atk: ${normalAttackFormula}`, `formula crit: ${criticalAttackFormula}`);
 
             if (playerEvadeNumber === 3 && enemyCritNumber !== 3 || normalAttackFormula <= 0) {
                 battleTexts.innerHTML += ` Você desviou do ataque!`;
             } else if (enemyCritNumber === 3 && playerEvadeNumber !== 3) {
 
-                sound.enemyHit.play();
+                sound.criticalHit.play();
                 infoPlayer[0].health -= criticalAttackFormula;
                 battleTexts.innerHTML += ` Golpe crítico! Você recebeu ${criticalAttackFormula} de dano!`;
                 player.health.classList.add('damaged');
                 setTimeout(() => { player.health.classList.remove('damaged') }, 300);
                 await updateInfoPlayer();
 
+                if (infoPlayer[0].health <= 0) {
+                    player.health.textContent = "0";
+                    // await loseBattle();
+                }
+
+            } else {
+
+                sound.enemyHit.play();
+                infoPlayer[0].health -= normalAttackFormula;
+                battleTexts.innerHTML += ` Você recebeu ${normalAttackFormula} de dano!`;
+                player.health.classList.add('damaged');
+                setTimeout(() => { player.health.classList.remove('damaged') }, 300);
+                await updateInfoPlayer();
+
+                if (infoPlayer[0].health <= 0) {
+                    player.health.textContent = "0";
+                    // await loseBattle();
+                }
+
             }
 
         } else {
 
+            // variáveis para escolher uma habilidade aleatória
+            const randomSkillIndex = Math.floor(Math.random() * enemy[2].length);
+            const skillSpelled = enemy[2][randomSkillIndex];
+
+            // variáveis de fórmula
+            const normalSkillFormula = Math.round((enemy[0].attack * 1.5) + (enemy[0].attack * skillSpelled.damage) - player.totalDefense);
+            const magicSkillFormula = Math.round((enemy[0].magicAttack * 1.5) + (enemy[0].magicAttack * skillSpelled.damage) - player.totalMagicDefense);
+            const critNormalSkillFormula = Math.round(normalSkillFormula * 1.5);
+            const critMagicSkillFormula = Math.round(magicSkillFormula * 1.5);
+            console.log(`normalskdamage: ${normalSkillFormula}`, `magicskformula: ${magicSkillFormula}`);
+
+
+            // variáveis de prováveis chances de crítico
+            const enemySkillCriticalChance = Math.floor(Math.random() * 8);
+
+            battleTexts.innerHTML = `O inimigo usou a habilidade ${skillSpelled.name}!`;
+
+            if (enemySkillCriticalChance === 4) {
+
+                sound.criticalHit.play();
+                if (skillSpelled.element == "fisico") {
+                    infoPlayer[0].health -= critNormalSkillFormula;
+                    battleTexts.innerHTML += ` Dano critico! Você recebeu ${critNormalSkillFormula} de dano!`;
+                } else {
+                    infoPlayer[0].health -= critMagicSkillFormula;
+                    battleTexts.innerHTML += ` Dano critico! Você recebeu ${critMagicSkillFormula} de dano!`;
+                }
+                player.health.classList.add('damaged');
+                setTimeout(() => { player.health.classList.remove('damaged') }, 300);
+                await updateInfoPlayer();
+
+                if (infoPlayer[0].health <= 0) {
+                    player.health.textContent = "0";
+                    // await loseBattle();
+                }
+
+
+            } else {
+
+                sound.enemyHit.play();
+                if (skillSpelled.element == "fisico") {
+                    infoPlayer[0].health -= normalSkillFormula;
+                    battleTexts.innerHTML += ` Você recebeu ${normalSkillFormula} de dano!`;
+                } else {
+                    infoPlayer[0].health -= magicSkillFormula;
+                    battleTexts.innerHTML += ` Você recebeu ${magicSkillFormula} de dano!`;
+                }
+                player.health.classList.add('damaged');
+                setTimeout(() => { player.health.classList.remove('damaged') }, 300);
+                await updateInfoPlayer();
+
+                if (infoPlayer[0].health <= 0) {
+                    player.health.textContent = "0";
+                    // await loseBattle();
+                }
+
+            }
+
         }
 
+    }
 
+    async function useSupply(itemName) {
+
+        const index = infoPlayer[2].findIndex(item => item.name === itemName);
+        console.log(index);
+        // const healType = infoPlayer[2][index].name.split("de ")[1];
+
+        if (healType === "hp") {
+
+            if (infoPlayer[0].health < infoPlayer[0].maxHealth) {
+
+                infoPlayer[2][index].quantity--;
+                infoPlayer[0].health += infoPlayer[2][index].attribute;
+
+                if (infoPlayer[0].health >= infoPlayer[0].maxHealth) {
+
+                    infoPlayer[0].health = infoPlayer[0].maxHealth;
+
+                }
+
+                sound.healingSound.play();
+                await uploadPlayerItems(infoPlayer[2]);
+                await updateInfoPlayer();
+
+            }
+
+        } else if (healType === "mp") {
+
+            if (infoPlayer[0].mana < infoPlayer[0].maxMana) {
+
+                infoPlayer[2][index].quantity--
+                infoPlayer[0].mana += infoPlayer[2][index].attribute;
+
+                if (infoPlayer[0].mana > infoPlayer[0].maxMana) {
+                    infoPlayer[0].mana = infoPlayer[0].maxMana;
+                }
+
+                sound.healingSound.play();
+                await uploadPlayerItems(infoPlayer[2]);
+                await updateInfoPlayer();
+
+            }
+
+        }
 
     }
 

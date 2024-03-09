@@ -34,8 +34,9 @@
                 {
                     "name": "golpe poderoso",
                     "type": "ataque",
-                    "description": "ataque base + 5 dano adicional",
-                    "damage": 5,
+                    "element": "fisico",
+                    "description": "ataque base + 30% dano adicional",
+                    "damage": 0.3,
                     "mpCost": 5,
                     "stunning": false,
                     "icon": ""
@@ -90,8 +91,9 @@
                 {
                     "name": "golpe poderoso",
                     "type": "ataque",
-                    "description": "ataque base + 5 dano adicional",
-                    "damage": 5,
+                    "element": "fisico",
+                    "description": "ataque base + 30% dano adicional",
+                    "damage": 0.3,
                     "mpCost": 5,
                     "stunning": false,
                     "icon": ""
@@ -159,8 +161,9 @@
                 {
                     "name": "golpe poderoso",
                     "type": "ataque",
-                    "description": "ataque base + 5 dano adicional",
-                    "damage": 5,
+                    "element": "fisico",
+                    "description": "ataque base + 30% dano adicional",
+                    "damage": 0.3,
                     "mpCost": 5,
                     "stunning": false,
                     "icon": ""
@@ -228,8 +231,9 @@
                 {
                     "name": "golpe poderoso",
                     "type": "ataque",
-                    "description": "ataque base + 5 dano adicional",
-                    "damage": 5,
+                    "element": "fisico",
+                    "description": "ataque base + 30% dano adicional",
+                    "damage": 0.3,
                     "mpCost": 5,
                     "stunning": false,
                     "icon": ""
@@ -314,8 +318,9 @@
                 {
                     "name": "golpe poderoso",
                     "type": "ataque",
-                    "description": "ataque base + 5 dano adicional",
-                    "damage": 5,
+                    "element": "fisico",
+                    "description": "ataque base + 30% dano adicional",
+                    "damage": 0.3,
                     "mpCost": 5,
                     "stunning": false,
                     "icon": ""
@@ -323,8 +328,9 @@
                 {
                     "name": "batida pesada",
                     "type": "ataque",
-                    "description": "ataque base + 5 dano adicional e incapacita o alvo",
-                    "dano": 5,
+                    "element": "fisico",
+                    "description": "ataque base + 30% dano adicional e incapacita o alvo",
+                    "dano": 0.3,
                     "mpCost": 15,
                     "stunning": true,
                     "icon": ""
