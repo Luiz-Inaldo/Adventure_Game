@@ -400,7 +400,7 @@ header {
     width: 100%;
     height: 100px;
     overflow-y: auto;
-    padding: 0 !important;
+    padding: 5px !important;
     gap: 5px;
 }
 
@@ -409,12 +409,23 @@ header {
     display: flex;
 }
 
-.item,
+.item {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30px 1fr 50px 60px;
+    align-items: center;
+    gap: 5px;
+}
+
 .skill {
     width: 100%;
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+.skill.disabled {
+    filter: grayscale(1);
 }
 
 .item:hover, .item :nth-child(1), .item :nth-child(2), .item :nth-child(3),
@@ -445,11 +456,19 @@ header {
     font-size: 9px;
     color: #fff;
     line-height: 1.2;
+    text-align: center;
 }
 
 .item .item-quantity,
 .skill .skill-mana-requer {
     min-width: 50px;
+}
+
+.item .use-supply {
+    font-size: 8px;
+    min-width: fit-content;
+    padding: 10px;
+    height: 30px;
 }
 
 

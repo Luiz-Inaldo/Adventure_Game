@@ -120,13 +120,24 @@ async function ready() {
     attackButton.addEventListener('click', initiateTurn);
 
     // evento de clique no botão de suprimentos
-    const bagSupplies = document.querySelectorAll('.item');
-    bagSupplies.forEach(item => {
-        item.addEventListener('click', (e) => {
-            const itemName = e.target.parentElement.querySelector('.item-description')
-                .textContent.split("(")[0];
-            console.log(itemName);
-            useSupply(itemName);
+    playerBackpack.addEventListener('click', async (e) => {
+        const button = e.target;
+        if (button.classList.contains('use-supply')) {
+            const itemId = parseInt(button.id);
+            await useSupply(itemId);
+        }
+    });
+
+    // evento de clique de habilidade
+    const skill = document.querySelectorAll('.skill');
+    skill.forEach(sk => {
+        sk.addEventListener('click', async () => {
+            const separator = sk.querySelector('.skill-description').textContent
+                .split("+")[0]
+            const skillName = separator.slice(0, separator.length - 1);
+            const skillToUse = infoPlayer[3].find(skill => skill.name === skillName);
+            console.log(skillToUse);
+            await useSkill(skillToUse);
         })
     });
 
@@ -193,8 +204,10 @@ async function ready() {
 
     async function uploadPlayerItems(items) {
 
+        playerBackpack.innerHTML = "";
+
         for (const item of items) {
-            if (item.type === "suporte") {
+            if (item.type === "suporte" && item.quantity > 0) {
 
                 playerBackpack.innerHTML += `
                 
@@ -202,6 +215,7 @@ async function ready() {
                         <img src="${item.icon}" alt="potion" class="item-icon">
                         <span class="item-description">${item.name} (+${item.attribute})</span>
                         <span class="item-quantity">x ${item.quantity}</span>
+                        <button id="${item.id}" class="use-supply rpgui-button">usar</button>
                     </div>
     
                 `
@@ -215,22 +229,22 @@ async function ready() {
 
         for (const skill of skills) {
 
-            if (skill.status == "normal") {
+            if (skill.status == "normal" && infoPlayer[0].mana >= skill.mpCost) {
                 playerSkills.innerHTML += `
                 
                     <div class="skill">
                         <img src="${skill.icon}" alt="atk-skill" class="skill-icon">
-                        <span class="skill-description">${skill.name} | + ${skill.damage}</span>
+                        <span class="skill-description">${skill.name} + ${skill.damage * 100}%</span>
                         <span class="skill-mana-requer">mp ${skill.mpCost}</span>
                     </div>
                 
                 `
-            } else {
+            } else if (skill.status != "normal" && infoPlayer[0].mana >= skill.mpCost) {
                 playerSkills.innerHTML += `
                 
                     <div class="skill">
                         <img src="${skill.icon}" alt="atk-skill" class="skill-icon">
-                        <span class="skill-description">${skill.name} | + ${skill.damage} (${skill.status})</span>
+                        <span class="skill-description">${skill.name} + ${skill.damage * 100}% (${skill.status})</span>
                         <span class="skill-mana-requer">mp ${skill.mpCost}</span>
                     </div>
                 
@@ -434,11 +448,10 @@ async function ready() {
 
     }
 
-    async function useSupply(itemName) {
+    async function useSupply(itemId) {
 
-        const index = infoPlayer[2].findIndex(item => item.name === itemName);
-        console.log(index);
-        // const healType = infoPlayer[2][index].name.split("de ")[1];
+        const index = infoPlayer[2].findIndex(item => item.id === itemId);
+        const healType = infoPlayer[2][index].name.split("de ")[1];
 
         if (healType === "hp") {
 
@@ -453,7 +466,9 @@ async function ready() {
 
                 }
 
-                sound.healingSound.play();
+                sound.healing.play();
+                player.health.classList.add('healed');
+                setTimeout(() => { player.health.classList.remove('healed') }, 300);
                 await uploadPlayerItems(infoPlayer[2]);
                 await updateInfoPlayer();
 
@@ -470,10 +485,54 @@ async function ready() {
                     infoPlayer[0].mana = infoPlayer[0].maxMana;
                 }
 
-                sound.healingSound.play();
+                sound.healing.play();
+                player.health.classList.add('healed');
+                setTimeout(() => { player.health.classList.remove('healed') }, 300);
                 await uploadPlayerItems(infoPlayer[2]);
                 await updateInfoPlayer();
 
+            }
+
+        }
+
+    }
+
+    async function useSkill(skill) {
+
+        // variáveis de possíveis ações
+        const skillCriticalNumber = Math.floor(Math.random() * 8);
+
+        // variáveis de fórmulas
+        const normalSkillFormula = infoPlayer[0].level + player.totalAttack + (player.totalAttack * skill.damage) - enemy[0].defense;
+        const criticalSkillFormula = normalSkillFormula * 1.5;
+        const magicSkillFormula = infoPlayer[0].level + player.totalMagicAttack + (player.totalMagicAttack * skill.damage) - enemy[0].magicDefense;
+        const critMagicSkillFormula = magicSkillFormula * 1.5;
+        battleTexts.innerHTML = `Você usou a habilidade ${skill.name}!`
+
+        skill.element = playerAttackType;
+
+        if (skill.element == "fisico" && infoPlayer[0].mana >= skill.mpCost) {
+
+            if (skillCriticalNumber === 4) {
+                sound.criticalHit.play();
+                enemy[0].health -= criticalSkillFormula;
+                infoPlayer[0].mana -= skill.mpCost;
+                battleTexts.innerHTML += ` Você desferiu ${criticalSkillFormula} de dano!`
+                monster.health.classList.add('damaged');
+                setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
+                await updateInfoEnemy();
+                await updateInfoPlayer();
+                await uploadPlayerSkills(infoPlayer[3]);
+            } else {
+                sound.swordStab.play();
+                enemy[0].health -= normalSkillFormula;
+                infoPlayer[0].mana -= skill.mpCost;
+                battleTexts.innerHTML += ` Você desferiu ${normalSkillFormula} de dano!`
+                monster.health.classList.add('damaged');
+                setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
+                await updateInfoEnemy();
+                await updateInfoPlayer();
+                await uploadPlayerSkills(infoPlayer[3]);
             }
 
         }

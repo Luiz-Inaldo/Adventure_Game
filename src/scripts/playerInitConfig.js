@@ -70,7 +70,7 @@ const playerInitStatus = [
             type: "ataque",
             element: "fisico",
             description: "ataque base + 30% dano adicional",
-            damage: 5,
+            damage: 0.3,
             mpCost: 5,
             status: "normal",
             icon: "/src/assets/img/icons/skills/skill-sword-1.png"
@@ -80,7 +80,7 @@ const playerInitStatus = [
             type: "ataque",
             element: "fisico",
             description: "ataque base + 30% dano adicional e incapacita o alvo",
-            damage: 5,
+            damage: 0.3,
             mpCost: 15,
             status: "stun",
             icon: "/src/assets/img/icons/skills/skill-stun-1.png"
