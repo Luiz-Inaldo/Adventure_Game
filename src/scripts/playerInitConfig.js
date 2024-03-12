@@ -12,7 +12,7 @@ const playerInitStatus = [
         maxMana: 10,
         level: 1,
         exp: 0,
-        next: 10,
+        next: 50,
         gold: 1000,
         concluded: 0
     },

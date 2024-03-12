@@ -9,6 +9,7 @@
                 "defense": 5,
                 "magicAttack": 0,
                 "magicDefense": 0,
+                "exp": 10,
                 "localization": "forest",
                 "weakTo": "fogo",
                 "strongTo": "terra",
@@ -38,7 +39,7 @@
                     "description": "ataque base + 30% dano adicional",
                     "damage": 0.3,
                     "mpCost": 5,
-                    "stunning": false,
+                    "status": "normal",
                     "icon": ""
                 }
             ]
@@ -47,11 +48,12 @@
         [
             {
                 "name": "goblin guerr.",
-                "health": 80,
-                "attack": 10,
-                "defense": 8,
+                "health": 70,
+                "attack": 12,
+                "defense": 6,
                 "magicAttack": 0,
                 "magicDefense": 0,
+                "exp": 14,
                 "localization": "forest",
                 "weakTo": "fogo",
                 "strongTo": "terra",
@@ -70,7 +72,8 @@
                     "quantity": 1,
                     "icon": "/src/assets/img/icons/potions/hp-potion.png",
                     "avaliable": true,
-                    "equippable": false
+                    "equippable": false,
+                    "chance": [0, 80]
                 },
                 {
                     "id": 9,
@@ -84,7 +87,8 @@
                     "cumulative": false,
                     "icon": "/src/assets/img/icons/weapons/cheap-longsword.png",
                     "avaliable": true,
-                    "equippable": true
+                    "equippable": true,
+                    "chance": [81, 100]
                 }
             ],
             [
@@ -95,7 +99,7 @@
                     "description": "ataque base + 30% dano adicional",
                     "damage": 0.3,
                     "mpCost": 5,
-                    "stunning": false,
+                    "status": "normal",
                     "icon": ""
                 }
             ]
@@ -104,11 +108,12 @@
         [
             {
                 "name": "goblin sold.",
-                "health": 110,
-                "attack": 15,
-                "defense": 12,
+                "health": 80,
+                "attack": 12,
+                "defense": 8,
                 "magicAttack": 0,
                 "magicDefense": 0,
+                "exp": 16,
                 "localization": "forest",
                 "weakTo": "fogo",
                 "strongTo": "terra",
@@ -127,7 +132,8 @@
                     "quantity": 1,
                     "icon": "/src/assets/img/icons/potions/hp-potion.png",
                     "avaliable": true,
-                    "equippable": false
+                    "equippable": false,
+                    "chance": [0, 50]
                 },
                 {
                     "id": 21,
@@ -140,7 +146,8 @@
                     "quantity": 1,
                     "icon": "/src/assets/img/icons/potions/mp-potion.png",
                     "avaliable": true,
-                    "equippable": false
+                    "equippable": false,
+                    "chance": [51, 85]
                 },
                 {
                     "id": 9,
@@ -154,7 +161,8 @@
                     "cumulative": false,
                     "icon": "/src/assets/img/icons/weapons/cheap-longsword.png",
                     "avaliable": true,
-                    "equippable": true
+                    "equippable": true,
+                    "chance": [86, 100]
                 }
             ],
             [
@@ -165,7 +173,7 @@
                     "description": "ataque base + 30% dano adicional",
                     "damage": 0.3,
                     "mpCost": 5,
-                    "stunning": false,
+                    "status": "normal",
                     "icon": ""
                 }
             ]
@@ -174,11 +182,12 @@
         [
             {
                 "name": "goblin rider",
-                "health": 80,
+                "health": 70,
                 "attack": 18,
                 "defense": 8,
                 "magicAttack": 0,
                 "magicDefense": 0,
+                "exp": 14,
                 "localization": "forest",
                 "weakTo": "fogo",
                 "strongTo": "terra",
@@ -197,7 +206,8 @@
                     "quantity": 1,
                     "icon": "/src/assets/img/icons/potions/hp-potion.png",
                     "avaliable": true,
-                    "equippable": false
+                    "equippable": false,
+                    "chance": [0, 50]
                 },
                 {
                     "id": 21,
@@ -210,7 +220,8 @@
                     "quantity": 1,
                     "icon": "/src/assets/img/icons/potions/mp-potion.png",
                     "avaliable": true,
-                    "equippable": false
+                    "equippable": false,
+                    "chance": [51, 86]
                 },
                 {
                     "id": 10,
@@ -224,7 +235,8 @@
                     "cumulative": false,
                     "icon": "/src/assets/img/icons/weapons/iron-longsword.png",
                     "avaliable": true,
-                    "equippable": true
+                    "equippable": true,
+                    "chance": [87, 100]
                 }
             ],
             [
@@ -235,7 +247,7 @@
                     "description": "ataque base + 30% dano adicional",
                     "damage": 0.3,
                     "mpCost": 5,
-                    "stunning": false,
+                    "status": "normal",
                     "icon": ""
                 }
             ]
@@ -247,11 +259,12 @@
         [
             {
                 "name": "Ormruc",
-                "health": 250,
+                "health": 300,
                 "attack": 15,
                 "defense": 13,
                 "magicAttack": 0,
                 "magicDefense": 10,
+                "exp": 60,
                 "localization": "forest",
                 "weakTo": "fogo",
                 "strongTo": "terra",
@@ -322,7 +335,7 @@
                     "description": "ataque base + 30% dano adicional",
                     "damage": 0.3,
                     "mpCost": 5,
-                    "stunning": false,
+                    "status": "normal",
                     "icon": ""
                 },
                 {
@@ -332,7 +345,7 @@
                     "description": "ataque base + 30% dano adicional e incapacita o alvo",
                     "dano": 0.3,
                     "mpCost": 15,
-                    "stunning": true,
+                    "status": "stun",
                     "icon": ""
                 }
             ]

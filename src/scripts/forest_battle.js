@@ -44,10 +44,11 @@ async function ready() {
         swordStab: new Audio('/src/assets/audio/sword_stab.wav'),
         enemyHit: new Audio('/src/assets/audio/enemy_hit.wav'),
         criticalHit: new Audio('/src/assets/audio/critical_hit.mp3'),
-        drawSound: new Audio('/src/assets/audio/swords_draw.wav'),
+        miss: new Audio('/src/assets/audio/miss.wav'),
         healing: new Audio('/src/assets/audio/healing.wav'),
         winSound: new Audio('/src/assets/audio/win.wav'),
-        loseSound: new Audio('/src/assets/audio/lose.wav')
+        loseSound: new Audio('/src/assets/audio/lose.wav'),
+        error: new Audio('/src/assets/audio/error.wav')
     }
 
     // verificando o tipo da batalha
@@ -185,7 +186,7 @@ async function ready() {
         player.attack.textContent = parseInt(infoPlayer[0].attack + infoPlayer[1][0].attribute);
         player.defense.textContent = parseInt(infoPlayer[0].defense + infoPlayer[1][1].attribute);
         player.level.textContent = `Level: ${infoPlayer[0].level}`;
-        player.exp.textContent = `Exp: ${infoPlayer[0].exp}`;
+        player.exp.textContent = `Exp: ${infoPlayer[0].exp}/${infoPlayer[0].next}`;
         player.gold.textContent = `Gold: ${infoPlayer[0].gold}`;
 
     }
@@ -195,7 +196,7 @@ async function ready() {
         monster.name.textContent = enemy[0].name;
         monster.img.innerHTML = `
             <img src="${enemy[0].sprite}">
-        `;
+            `;
         monster.health.textContent = enemy[0].health;
         monster.attack.textContent = enemy[0].attack;
         monster.defense.textContent = enemy[0].defense;
@@ -229,7 +230,7 @@ async function ready() {
 
         for (const skill of skills) {
 
-            if (skill.status == "normal" && infoPlayer[0].mana >= skill.mpCost) {
+            if (skill.status == "normal") {
                 playerSkills.innerHTML += `
                 
                     <div class="skill">
@@ -239,7 +240,7 @@ async function ready() {
                     </div>
                 
                 `
-            } else if (skill.status != "normal" && infoPlayer[0].mana >= skill.mpCost) {
+            } else {
                 playerSkills.innerHTML += `
                 
                     <div class="skill">
@@ -273,6 +274,7 @@ async function ready() {
 
         if (enemyEvadeNumber === 3 && playerCritNumber !== 3 || normalAttackFormula <= 0) {
             battleTexts.innerHTML += ` O inimigo se esquivou do ataque!`;
+            sound.miss.play();
             setTimeout(enemyTurn, 1000);
         } else if (playerCritNumber === 3 && enemyEvadeNumber !== 3) {
 
@@ -292,7 +294,7 @@ async function ready() {
 
             if (enemy[0].health <= 0) {
                 monster.health.textContent = "0";
-                // await winBattle();
+                await winBattle();
                 enemyAlive = false;
             }
 
@@ -318,7 +320,7 @@ async function ready() {
 
             if (enemy[0].health <= 0) {
                 monster.health.textContent = "0";
-                // await winBattle();
+                await winBattle();
                 enemyAlive = false;
             }
 
@@ -354,6 +356,7 @@ async function ready() {
 
             if (playerEvadeNumber === 3 && enemyCritNumber !== 3 || normalAttackFormula <= 0) {
                 battleTexts.innerHTML += ` Você desviou do ataque!`;
+                sound.miss.play();
             } else if (enemyCritNumber === 3 && playerEvadeNumber !== 3) {
 
                 sound.criticalHit.play();
@@ -471,6 +474,7 @@ async function ready() {
                 setTimeout(() => { player.health.classList.remove('healed') }, 300);
                 await uploadPlayerItems(infoPlayer[2]);
                 await updateInfoPlayer();
+                setTimeout(enemyTurn, 1000);
 
             }
 
@@ -490,6 +494,7 @@ async function ready() {
                 setTimeout(() => { player.health.classList.remove('healed') }, 300);
                 await uploadPlayerItems(infoPlayer[2]);
                 await updateInfoPlayer();
+                setTimeout(enemyTurn, 1000);
 
             }
 
@@ -503,39 +508,121 @@ async function ready() {
         const skillCriticalNumber = Math.floor(Math.random() * 8);
 
         // variáveis de fórmulas
-        const normalSkillFormula = infoPlayer[0].level + player.totalAttack + (player.totalAttack * skill.damage) - enemy[0].defense;
-        const criticalSkillFormula = normalSkillFormula * 1.5;
-        const magicSkillFormula = infoPlayer[0].level + player.totalMagicAttack + (player.totalMagicAttack * skill.damage) - enemy[0].magicDefense;
-        const critMagicSkillFormula = magicSkillFormula * 1.5;
-        battleTexts.innerHTML = `Você usou a habilidade ${skill.name}!`
+        const normalSkillFormula = Math.round(infoPlayer[0].level + (player.totalAttack * 1.5) + (player.totalAttack * skill.damage) - enemy[0].defense);
+        const criticalSkillFormula = Math.round(normalSkillFormula * 1.5);
+        const magicSkillFormula = Math.round(infoPlayer[0].level + (player.totalMagicAttack * 1.5) + (player.totalMagicAttack * skill.damage) - enemy[0].magicDefense);
+        const critMagicSkillFormula = Math.round(magicSkillFormula * 1.5);
+        console.log(normalSkillFormula, criticalSkillFormula);
 
-        skill.element = playerAttackType;
+        if (infoPlayer[0].mana >= skill.mpCost) {
 
-        if (skill.element == "fisico" && infoPlayer[0].mana >= skill.mpCost) {
+            battleTexts.innerHTML = `Você usou a habilidade ${skill.name}!`
 
-            if (skillCriticalNumber === 4) {
-                sound.criticalHit.play();
-                enemy[0].health -= criticalSkillFormula;
-                infoPlayer[0].mana -= skill.mpCost;
-                battleTexts.innerHTML += ` Você desferiu ${criticalSkillFormula} de dano!`
-                monster.health.classList.add('damaged');
-                setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
-                await updateInfoEnemy();
-                await updateInfoPlayer();
-                await uploadPlayerSkills(infoPlayer[3]);
+            skill.element = playerAttackType;
+
+            if (skill.element == "fisico") {
+
+                if (skillCriticalNumber === 4) {
+
+                    sound.criticalHit.play();
+                    enemy[0].health -= criticalSkillFormula;
+                    infoPlayer[0].mana -= skill.mpCost;
+                    battleTexts.innerHTML += ` Você desferiu ${criticalSkillFormula} de dano!`
+                    monster.health.classList.add('damaged');
+                    setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
+                    await updateInfoEnemy();
+                    await updateInfoPlayer();
+                    if (enemy[0].health <= 0) {
+                        monster.health.textContent = "0";
+                        await winBattle();
+                        enemyAlive = false;
+                    }
+
+                    if (enemyAlive || skill.status != "stun") {
+                        setTimeout(enemyTurn, 1000);
+                    }
+
+                } else {
+
+                    sound.swordStab.play();
+                    enemy[0].health -= normalSkillFormula;
+                    infoPlayer[0].mana -= skill.mpCost;
+                    battleTexts.innerHTML += ` Você desferiu ${normalSkillFormula} de dano!`
+                    monster.health.classList.add('damaged');
+                    setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
+                    await updateInfoEnemy();
+                    await updateInfoPlayer();
+                    if (enemy[0].health <= 0) {
+                        monster.health.textContent = "0";
+                        await winBattle();
+                        enemyAlive = false;
+                    }
+
+                    if (enemyAlive || skill.status != "stun") {
+                        setTimeout(enemyTurn, 1000);
+                    }
+
+                }
+
             } else {
-                sound.swordStab.play();
-                enemy[0].health -= normalSkillFormula;
-                infoPlayer[0].mana -= skill.mpCost;
-                battleTexts.innerHTML += ` Você desferiu ${normalSkillFormula} de dano!`
-                monster.health.classList.add('damaged');
-                setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
-                await updateInfoEnemy();
-                await updateInfoPlayer();
-                await uploadPlayerSkills(infoPlayer[3]);
+
+                if (skillCriticalNumber === 4) {
+
+                    sound.criticalHit.play();
+                    enemy[0].health -= critMagicSkillFormula;
+                    infoPlayer[0].mana -= skill.mpCost;
+                    battleTexts.innerHTML += ` Você desferiu ${critMagicSkillFormula} de dano! (${skill.element})`
+                    monster.health.classList.add('damaged');
+                    setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
+                    await updateInfoEnemy();
+                    await updateInfoPlayer();
+                    if (enemy[0].health <= 0) {
+                        monster.health.textContent = "0";
+                        await winBattle();
+                        enemyAlive = false;
+                    }
+
+                    if (enemyAlive || skill.status != "stun") {
+                        setTimeout(enemyTurn, 1000);
+                    }
+
+                } else {
+
+                    sound.swordStab.play();
+                    enemy[0].health -= magicSkillFormula;
+                    infoPlayer[0].mana -= skill.mpCost;
+                    battleTexts.innerHTML += ` Você desferiu ${magicSkillFormula} de dano! (${skill.element})`
+                    monster.health.classList.add('damaged');
+                    setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
+                    await updateInfoEnemy();
+                    await updateInfoPlayer();
+                    if (enemy[0].health <= 0) {
+                        monster.health.textContent = "0";
+                        await winBattle();
+                        enemyAlive = false;
+                    }
+
+                    if (enemyAlive || skill.status != "stun") {
+                        setTimeout(enemyTurn, 1000);
+                    }
+
+                }
+
             }
 
+        } else {
+
+            battleTexts.innerHTML = `Você não tem mana suficiente!`
+            sound.error.play();
+
         }
+
+
+    }
+
+    async function winBattle() {
+
+
 
     }
 
