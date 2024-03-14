@@ -37,6 +37,7 @@ async function ready() {
     const playerBackpack = document.querySelector('.survival-itens');
     const playerSkills = document.querySelector('.skills');
     const attackButton = document.getElementById('atk-btn');
+    const endBattleButton = document.getElementById('end-battle');
 
     // variáveis de som
     const sound = {
@@ -119,6 +120,12 @@ async function ready() {
 
     // evento de clique no botão de ataque
     attackButton.addEventListener('click', initiateTurn);
+
+    // evento de clique no botão de voltar ao mapa (final da batalha)
+    endBattleButton.addEventListener('click', () => {
+        localStorage.setItem('jogador', JSON.stringify(infoPlayer));
+        window.location.href = '/roadmap.html';
+    })
 
     // evento de clique no botão de suprimentos
     playerBackpack.addEventListener('click', async (e) => {
@@ -294,8 +301,8 @@ async function ready() {
 
             if (enemy[0].health <= 0) {
                 monster.health.textContent = "0";
-                await winBattle();
                 enemyAlive = false;
+                await winBattle();
             }
 
             if (enemyAlive) {
@@ -320,8 +327,8 @@ async function ready() {
 
             if (enemy[0].health <= 0) {
                 monster.health.textContent = "0";
-                await winBattle();
                 enemyAlive = false;
+                await winBattle();
             }
 
             if (enemyAlive) {
@@ -330,7 +337,9 @@ async function ready() {
 
         }
 
-        setTimeout(() => { attackButton.style.visibility = 'visible' }, 2000)
+        if (enemyAlive) {
+            setTimeout(() => { attackButton.style.visibility = 'visible' }, 2000);
+        }
 
     }
 
@@ -406,7 +415,7 @@ async function ready() {
 
             battleTexts.innerHTML = `O inimigo usou a habilidade ${skillSpelled.name}!`;
 
-            if (enemySkillCriticalChance === 4) {
+            if (enemySkillCriticalChance === 4 && critNormalSkillFormula > 0 && critMagicSkillFormula > 0) {
 
                 sound.criticalHit.play();
                 if (skillSpelled.element == "fisico") {
@@ -425,8 +434,12 @@ async function ready() {
                     // await loseBattle();
                 }
 
+                if (skillSpelled.status == 'stun') {
+                    await enemyTurn();
+                }
 
-            } else {
+
+            } else if (normalSkillFormula > 0 && magicSkillFormula > 0) {
 
                 sound.enemyHit.play();
                 if (skillSpelled.element == "fisico") {
@@ -445,6 +458,13 @@ async function ready() {
                     // await loseBattle();
                 }
 
+                if (skillSpelled.status == 'stun') {
+                    await enemyTurn();
+                }
+
+            } else {
+                sound.miss.play();
+                battleTexts.innerHTML += ` Você desviou da habilidade!`;
             }
 
         }
@@ -490,8 +510,8 @@ async function ready() {
                 }
 
                 sound.healing.play();
-                player.health.classList.add('healed');
-                setTimeout(() => { player.health.classList.remove('healed') }, 300);
+                player.mana.classList.add('healed');
+                setTimeout(() => { player.mana.classList.remove('healed') }, 300);
                 await uploadPlayerItems(infoPlayer[2]);
                 await updateInfoPlayer();
                 setTimeout(enemyTurn, 1000);
@@ -503,6 +523,8 @@ async function ready() {
     }
 
     async function useSkill(skill) {
+
+        attackButton.style.visibility = 'hidden';
 
         // variáveis de possíveis ações
         const skillCriticalNumber = Math.floor(Math.random() * 8);
@@ -610,6 +632,10 @@ async function ready() {
 
             }
 
+            if (enemyAlive) {
+                setTimeout(() => { attackButton.style.visibility = 'visible' }, 2000);
+            }
+
         } else {
 
             battleTexts.innerHTML = `Você não tem mana suficiente!`
@@ -622,7 +648,45 @@ async function ready() {
 
     async function winBattle() {
 
+        attackButton.style.visibility = 'hidden';
+        sound.winSound.play();
+        const goldReceived = Math.round(Math.random() * 30);
+        infoPlayer[0].gold += goldReceived;
+        battleTexts.innerHTML = `Você derrotou o monstro! E recebeu ${goldReceived} de dinheiro.`
 
+        await calculateExp();
+
+        console.log(infoPlayer[0].exp, infoPlayer[0].next);
+
+    }
+
+    async function calculateExp() {
+        const counterExp = enemy[0].exp;
+        battleTexts.innerHTML += `Você ganhou ${counterExp} de experiência!`;
+        infoPlayer[0].exp += counterExp;
+        while (infoPlayer[0].exp > infoPlayer[0].next) {
+
+            infoPlayer[0].level++;
+            await levelUp(infoPlayer[0]);
+            battleTexts.innerHTML += `Você subiu para o nível ${infoPlayer[0].level}!`
+            infoPlayer[0].next += Math.round(infoPlayer[0].next * 1.5);
+
+        }
+        await updateInfoPlayer();
+    }
+
+    async function levelUp(player) {
+
+        player.maxHealth += 10;
+        player.health = player.maxHealth;
+        player.maxMana += 2;
+        player.mana = player.maxMana;
+        player.attack++;
+        player.defense++;
+        player.magicAttack++;
+        player.magicDefense++;
+
+        await updateInfoPlayer();
 
     }
 

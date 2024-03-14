@@ -28,7 +28,8 @@
                     "quantity": 1,
                     "icon": "/src/assets/img/icons/potions/hp-potion.png",
                     "avaliable": true,
-                    "equippable": false
+                    "equippable": false,
+                    "chance": [0, 51]
                 }
             ],
             [
@@ -283,7 +284,8 @@
                     "quantity": 3,
                     "icon": "/src/assets/img/icons/potions/hp-potion.png",
                     "avaliable": true,
-                    "equippable": false
+                    "equippable": false,
+                    "chance": [0, 40]
                 },
                 {
                     "id": 21,
@@ -296,7 +298,8 @@
                     "quantity": 2,
                     "icon": "/src/assets/img/icons/potions/mp-potion.png",
                     "avaliable": true,
-                    "equippable": false
+                    "equippable": false,
+                    "chance": [41, 60]
                 },
                 {
                     "id": 10,
@@ -310,7 +313,8 @@
                     "cumulative": false,
                     "icon": "/src/assets/img/icons/weapons/iron-longsword.png",
                     "avaliable": true,
-                    "equippable": true
+                    "equippable": true,
+                    "chance": [61, 80]
                 },
                 {
                     "id": 11,
@@ -324,7 +328,8 @@
                     "cumulative": false,
                     "icon": "/src/assets/img/icons/weapons/steel-longsword.png",
                     "avaliable": true,
-                    "equippable": true
+                    "equippable": true,
+                    "chance": [81, 100]
                 }
             ],
             [
