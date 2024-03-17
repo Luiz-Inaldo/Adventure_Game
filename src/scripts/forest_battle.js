@@ -42,6 +42,7 @@ async function ready() {
     // variáveis de som
     const sound = {
         battleSound: new Audio('/src/assets/audio/bgm/battle_theme.wav'),
+        bossbattleSound: new Audio('/src/assets/audio/bgm/boss-theme.mp3'),
         swordStab: new Audio('/src/assets/audio/sword_stab.wav'),
         enemyHit: new Audio('/src/assets/audio/enemy_hit.wav'),
         criticalHit: new Audio('/src/assets/audio/critical_hit.mp3'),
@@ -73,9 +74,11 @@ async function ready() {
         document.querySelector('.encounter_text').innerHTML = `
             <p>Depois de muito andar pela floresta (e de matar muitos monstros), você encontrou quem comandava o acampamento na floresta!</p>
         `
+        sound.bossbattleSound.play();
+        sound.bossbattleSound.loop = true;
     }
 
-    console.log(enemy, infoPlayer);
+    console.log(enemy, infoPlayer, currentPhase[0].name);
 
     // carregando informações visuais na tela
     Promise.all([
@@ -666,6 +669,12 @@ async function ready() {
 
     async function winBattle() {
 
+        freezeLock = true;
+        if (battleType == "normal") {
+            sound.battleSound.pause();
+        } else {
+            sound.bossbattleSound.pause();
+        }
         attackButton.style.visibility = 'hidden';
         sound.winSound.play();
         const goldReceived = Math.round(Math.random() * 30);
@@ -673,21 +682,20 @@ async function ready() {
         battleTexts.innerHTML = `Você derrotou o monstro! E recebeu ${goldReceived} de dinheiro.`
         await calculateExp();
         await getLoot(enemy[1]);
-
-        
+        await setConcluded();
 
     }
 
     async function calculateExp() {
-        const counterExp = enemy[0].exp;
-        battleTexts.innerHTML += `Você ganhou ${counterExp} de experiência!`;
-        infoPlayer[0].exp += counterExp;
+        battleTexts.innerHTML += `Você ganhou ${enemy[0].exp} de experiência!`;
+        infoPlayer[0].exp += enemy[0].exp;
         while (infoPlayer[0].exp > infoPlayer[0].next) {
 
             infoPlayer[0].level++;
             await levelUp(infoPlayer[0]);
-            battleTexts.innerHTML += `Você subiu para o nível ${infoPlayer[0].level}!`
-            infoPlayer[0].next += Math.round(infoPlayer[0].next * 1.5);
+            battleTexts.innerHTML += `Você subiu para o nível ${infoPlayer[0].level}!`;
+            infoPlayer[0].next += Math.round(infoPlayer[0].next * 2);
+            // await addPlayerSkill();
 
         }
         await updateInfoPlayer();
@@ -706,33 +714,53 @@ async function ready() {
 
     }
 
-    async function getLoot(loots){
+    async function getLoot(loots) {
 
         const lootNumber = Math.floor(Math.random() * 100);
+        let looted = false;
         let itemLooted;
 
         loots.forEach(item => {
             if (lootNumber >= item.chance[0] && lootNumber <= item.chance[1]) {
                 setTimeout(() => battleTexts.innerHTML += ` Obteve ${item.name}.`, 1000);
                 itemLooted = item;
+                looted = true;
             }
         });
 
         let checkItemMatch = false;
 
-        for (const item of infoPlayer[2]) {
-            if (item.name === itemLooted.name && item.type === 'suporte') {
-                item.quantity++
-                checkItemMatch = true;
-                return
+        if (looted) {
+            for (const item of infoPlayer[2]) {
+                if (item.name === itemLooted.name && item.type === 'suporte') {
+                    item.quantity++
+                    checkItemMatch = true;
+                    return
+                }
+            }
+
+            if (!checkItemMatch) {
+                infoPlayer[2].push(itemLooted);
             }
         }
 
-        if (!checkItemMatch) {
-            infoPlayer[2].push(itemLooted);
-        }
 
-        console.log(infoPlayer[2]);
+    }
+
+    async function setConcluded() {
+
+        const faseName = currentPhase[0].name;
+
+        if (faseName == "fase 1-1" && infoPlayer[0].concluded == 0) {
+            infoPlayer[0].concluded++;
+        } else if (faseName == "fase 1-2" && infoPlayer[0].concluded == 1) {
+            infoPlayer[0].concluded++;
+        } else if (faseName == "fase 1-3" && infoPlayer[0].concluded == 2) {
+            infoPlayer[0].concluded++;
+        } else if (faseName == "fase 1-4" && infoPlayer[0].concluded == 3) {
+            infoPlayer[0].concluded++;
+        }
+        console.log(faseName, infoPlayer[0].concluded);
 
     }
 

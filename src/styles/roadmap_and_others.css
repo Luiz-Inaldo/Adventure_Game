@@ -83,7 +83,7 @@
 #equipment,
 #equipment-icon,
 #equipment p,
-#monster-icon {
+.monster-icon {
     cursor: url('/src/assets/rpg/cursor/point.png'), default;
 }
 
@@ -136,7 +136,7 @@ h1 {
     visibility: hidden;
 }
 
-#monster-icon {
+.monster-icon {
     width: 50px;
 }
 

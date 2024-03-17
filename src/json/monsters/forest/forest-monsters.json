@@ -74,7 +74,7 @@
                     "icon": "/src/assets/img/icons/potions/hp-potion.png",
                     "avaliable": true,
                     "equippable": false,
-                    "chance": [0, 80]
+                    "chance": [40, 80]
                 },
                 {
                     "id": 9,
@@ -134,7 +134,7 @@
                     "icon": "/src/assets/img/icons/potions/hp-potion.png",
                     "avaliable": true,
                     "equippable": false,
-                    "chance": [0, 50]
+                    "chance": [20, 50]
                 },
                 {
                     "id": 21,
@@ -208,7 +208,7 @@
                     "icon": "/src/assets/img/icons/potions/hp-potion.png",
                     "avaliable": true,
                     "equippable": false,
-                    "chance": [0, 50]
+                    "chance": [20, 50]
                 },
                 {
                     "id": 21,
@@ -261,8 +261,8 @@
             {
                 "name": "Ormruc",
                 "health": 300,
-                "attack": 15,
-                "defense": 13,
+                "attack": 30,
+                "defense": 20,
                 "magicAttack": 0,
                 "magicDefense": 10,
                 "exp": 60,
@@ -285,7 +285,7 @@
                     "icon": "/src/assets/img/icons/potions/hp-potion.png",
                     "avaliable": true,
                     "equippable": false,
-                    "chance": [0, 40]
+                    "chance": [20, 40]
                 },
                 {
                     "id": 21,
@@ -348,7 +348,7 @@
                     "type": "ataque",
                     "element": "fisico",
                     "description": "ataque base + 30% dano adicional e incapacita o alvo",
-                    "dano": 0.3,
+                    "damage": 0.3,
                     "mpCost": 15,
                     "status": "stun",
                     "icon": ""

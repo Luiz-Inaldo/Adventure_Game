@@ -14,14 +14,16 @@ document.querySelector('h1').innerHTML = `Mapa da aventura de ${infoPlayer[0].na
 // liberando fases
 let phase = 2;
 
-for (let i = 0; i < concludedStages; i++) {
-    const stageLock = document.getElementById(`p${phase}`).children[0]
-    console.log(stageLock);
-    if (!stageLock.classList.contains("hidden")) {
-        stageLock.classList.add("hidden");
+if (phase <= 5) {
+    for (let i = 0; i < concludedStages; i++) {
+        const stageLock = document.getElementById(`p${phase}`).children[0]
+        console.log(stageLock);
+        if (!stageLock.classList.contains("hidden")) {
+            stageLock.classList.add("hidden");
+        }
+        phase++
+        
     }
-    phase++
-    
 }
 
 // botões de link (market e equipamentos)
@@ -38,14 +40,16 @@ document.getElementById('equipment').addEventListener('click', () => {
 })
 
 // verificando clique nas fases
-document.getElementById('monster-icon').addEventListener('click', (e) => {
-
-    const phaseName = e.target.parentElement.querySelector('p').textContent;
-    localStorage.setItem('fase', JSON.stringify([
-        {
-            name: phaseName
-        }
-    ]))
-    window.location.href = "/src/stages/forest/forest_battle.html";
-
+const stage = Array.from(document.getElementsByClassName('monster-icon'));
+stage.forEach(stage => {
+    stage.addEventListener('click', (e) => {
+        const phaseName = e.target.parentElement.querySelector('p').textContent;
+        const local = e.target.alt;
+        localStorage.setItem('fase', JSON.stringify([
+            {
+                name: phaseName
+            }
+        ]))
+        window.location.href = `/src/stages/forest/${local}_battle.html`;
+    })
 })
