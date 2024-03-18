@@ -289,7 +289,9 @@ async function ready() {
         if (enemyEvadeNumber === 3 && playerCritNumber !== 3 || normalAttackFormula <= 0) {
             battleTexts.innerHTML += ` O inimigo se esquivou do ataque!`;
             sound.miss.play();
-            setTimeout(enemyTurn, 1000);
+            await sleep(1000);
+            await enemyTurn();
+            clearTimeout(sleep);
         } else if (playerCritNumber === 3 && enemyEvadeNumber !== 3) {
 
             sound.criticalHit.play();
@@ -303,8 +305,10 @@ async function ready() {
             }
 
             monster.health.classList.add('damaged');
-            setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
             await updateInfoEnemy();
+            await sleep(300)
+            monster.health.classList.remove('damaged');
+            clearTimeout(sleep);
 
             if (enemy[0].health <= 0) {
                 monster.health.textContent = "0";
@@ -313,7 +317,9 @@ async function ready() {
             }
 
             if (enemyAlive) {
-                setTimeout(enemyTurn, 1000);
+                await sleep(1000)
+                await enemyTurn();
+                clearTimeout(sleep);
             }
 
         } else {
@@ -329,8 +335,10 @@ async function ready() {
             }
 
             monster.health.classList.add('damaged');
-            setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
             await updateInfoEnemy();
+            await sleep(300);
+            monster.health.classList.remove('damaged');
+            clearTimeout(sleep);
 
             if (enemy[0].health <= 0) {
                 monster.health.textContent = "0";
@@ -339,15 +347,20 @@ async function ready() {
             }
 
             if (enemyAlive) {
-                setTimeout(enemyTurn, 1000);
+                await sleep(1000)
+                await enemyTurn();
+                clearTimeout(sleep);
             }
 
         }
 
+        await sleep(1000);
         if (enemyAlive && playerAlive) {
-            setTimeout(() => { attackButton.style.visibility = 'visible'; freezeLock = false; }, 2000);
+            attackButton.style.visibility = 'visible';
+            freezeLock = false;
             console.log("passou");
         }
+        clearTimeout(sleep);
 
     }
 
@@ -380,8 +393,10 @@ async function ready() {
                 infoPlayer[0].health -= criticalAttackFormula;
                 battleTexts.innerHTML += ` Golpe crítico! Você recebeu ${criticalAttackFormula} de dano!`;
                 player.health.classList.add('damaged');
-                setTimeout(() => { player.health.classList.remove('damaged') }, 300);
                 await updateInfoPlayer();
+                await sleep(300)
+                player.health.classList.remove('damaged');
+                clearTimeout(sleep);
 
                 if (infoPlayer[0].health <= 0) {
                     player.health.textContent = "0";
@@ -396,8 +411,10 @@ async function ready() {
                 infoPlayer[0].health -= normalAttackFormula;
                 battleTexts.innerHTML += ` Você recebeu ${normalAttackFormula} de dano!`;
                 player.health.classList.add('damaged');
-                setTimeout(() => { player.health.classList.remove('damaged') }, 300);
                 await updateInfoPlayer();
+                await sleep(300);
+                player.health.classList.remove('damaged');
+                clearTimeout(sleep);
 
                 if (infoPlayer[0].health <= 0) {
                     player.health.textContent = "0";
@@ -438,8 +455,10 @@ async function ready() {
                     battleTexts.innerHTML += ` Dano critico! Você recebeu ${critMagicSkillFormula} de dano!`;
                 }
                 player.health.classList.add('damaged');
-                setTimeout(() => { player.health.classList.remove('damaged') }, 300);
                 await updateInfoPlayer();
+                await sleep(300)
+                player.health.classList.remove('damaged');
+                clearTimeout(sleep);
 
                 if (infoPlayer[0].health <= 0) {
                     player.health.textContent = "0";
@@ -448,8 +467,10 @@ async function ready() {
                     await loseBattle();
                 }
 
-                if (skillSpelled.status == 'stun') {
+                if (skillSpelled.status == 'stun' && playerAlive) {
+                    await sleep(500)
                     await enemyTurn();
+                    clearTimeout(sleep);
                 }
 
 
@@ -464,8 +485,10 @@ async function ready() {
                     battleTexts.innerHTML += ` Você recebeu ${magicSkillFormula} de dano!`;
                 }
                 player.health.classList.add('damaged');
-                setTimeout(() => { player.health.classList.remove('damaged') }, 300);
                 await updateInfoPlayer();
+                await sleep(300);
+                player.health.classList.remove('damaged');
+                clearTimeout(sleep);
 
                 if (infoPlayer[0].health <= 0) {
                     player.health.textContent = "0";
@@ -474,8 +497,10 @@ async function ready() {
                     await loseBattle();
                 }
 
-                if (skillSpelled.status == 'stun') {
+                if (skillSpelled.status == 'stun' && playerAlive) {
+                    await sleep(300);
                     await enemyTurn();
+                    clearTimeout(sleep);
                 }
 
             } else {
@@ -511,10 +536,13 @@ async function ready() {
 
                     sound.healing.play();
                     player.health.classList.add('healed');
-                    setTimeout(() => { player.health.classList.remove('healed') }, 300);
                     await uploadPlayerItems(infoPlayer[2]);
                     await updateInfoPlayer();
-                    setTimeout(enemyTurn, 1000);
+                    await sleep(300);
+                    player.health.classList.remove('healed');
+                    await sleep(1000);
+                    await enemyTurn();
+                    clearTimeout(sleep);
 
                 }
 
@@ -531,18 +559,21 @@ async function ready() {
 
                     sound.healing.play();
                     player.mana.classList.add('healed');
-                    setTimeout(() => { player.mana.classList.remove('healed') }, 300);
                     await uploadPlayerItems(infoPlayer[2]);
                     await updateInfoPlayer();
-                    setTimeout(enemyTurn, 1000);
+                    await sleep(300);
+                    player.mana.classList.remove('healed');
+                    await sleep(1000);
+                    await enemyTurn();
+                    clearTimeout(sleep);
 
                 }
 
             }
-            setTimeout(() => {
-                freezeLock = false;
-                attackButton.style.visibility = 'visible';
-            }, 1000);
+            await sleep(1000);
+            freezeLock = false;
+            attackButton.style.visibility = 'visible';
+            clearTimeout(sleep);
 
         }
 
@@ -580,9 +611,12 @@ async function ready() {
                         infoPlayer[0].mana -= skill.mpCost;
                         battleTexts.innerHTML += ` Você desferiu ${criticalSkillFormula} de dano!`
                         monster.health.classList.add('damaged');
-                        setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
                         await updateInfoEnemy();
                         await updateInfoPlayer();
+                        await sleep(300);
+                        monster.health.classList.remove('damaged');
+                        clearTimeout(sleep);
+
                         if (enemy[0].health <= 0) {
                             monster.health.textContent = "0";
                             await winBattle();
@@ -590,7 +624,9 @@ async function ready() {
                         }
 
                         if (enemyAlive && skill.status != "stun") {
-                            setTimeout(enemyTurn, 1000);
+                            await sleep(1000)
+                            await enemyTurn();
+                            clearTimeout(sleep);
                         }
 
                     } else {
@@ -600,9 +636,12 @@ async function ready() {
                         infoPlayer[0].mana -= skill.mpCost;
                         battleTexts.innerHTML += ` Você desferiu ${normalSkillFormula} de dano!`
                         monster.health.classList.add('damaged');
-                        setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
                         await updateInfoEnemy();
                         await updateInfoPlayer();
+                        await sleep(300);
+                        monster.health.classList.remove('damaged');
+                        clearTimeout(sleep);
+
                         if (enemy[0].health <= 0) {
                             monster.health.textContent = "0";
                             await winBattle();
@@ -610,7 +649,9 @@ async function ready() {
                         }
 
                         if (enemyAlive && skill.status != "stun") {
-                            setTimeout(enemyTurn, 1000);
+                            await sleep(1000);
+                            await enemyTurn();
+                            clearTimeout(sleep);
                         }
 
                     }
@@ -624,9 +665,11 @@ async function ready() {
                         infoPlayer[0].mana -= skill.mpCost;
                         battleTexts.innerHTML += ` Você desferiu ${critMagicSkillFormula} de dano! (${skill.element})`
                         monster.health.classList.add('damaged');
-                        setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
                         await updateInfoEnemy();
                         await updateInfoPlayer();
+                        await sleep(300);
+                        monster.health.classList.remove('damaged');
+
                         if (enemy[0].health <= 0) {
                             monster.health.textContent = "0";
                             await winBattle();
@@ -634,7 +677,9 @@ async function ready() {
                         }
 
                         if (enemyAlive && skill.status != "stun") {
-                            setTimeout(enemyTurn, 1000);
+                            await sleep(1000);
+                            await enemyTurn();
+                            clearTimeout(sleep);
                         }
 
                     } else {
@@ -644,9 +689,12 @@ async function ready() {
                         infoPlayer[0].mana -= skill.mpCost;
                         battleTexts.innerHTML += ` Você desferiu ${magicSkillFormula} de dano! (${skill.element})`
                         monster.health.classList.add('damaged');
-                        setTimeout(() => { monster.health.classList.remove('damaged') }, 300);
                         await updateInfoEnemy();
                         await updateInfoPlayer();
+                        await sleep(300);
+                        monster.health.classList.remove('damaged');
+                        clearTimeout(sleep);
+
                         if (enemy[0].health <= 0) {
                             monster.health.textContent = "0";
                             await winBattle();
@@ -654,7 +702,9 @@ async function ready() {
                         }
 
                         if (enemyAlive && skill.status != "stun") {
-                            setTimeout(enemyTurn, 1000);
+                            await sleep(1000);
+                            await enemyTurn();
+                            clearTimeout(sleep);
                         }
 
                     }
@@ -662,7 +712,9 @@ async function ready() {
                 }
 
                 if (enemyAlive) {
-                    setTimeout(() => { attackButton.style.visibility = 'visible' }, 2000);
+                    await sleep(1000);
+                    attackButton.style.visibility = 'visible';
+                    clearTimeout(sleep);
                 }
 
             } else {
@@ -671,7 +723,10 @@ async function ready() {
                 sound.error.play();
 
             }
-            setTimeout(() => freezeLock = false, 1000);
+
+            await sleep(1000);
+            freezeLock = false;
+            clearTimeout(sleep);
 
         }
 
@@ -811,6 +866,11 @@ async function ready() {
         }
         console.log(faseName, infoPlayer[0].concluded);
 
+    }
+
+    //função responsável por esperar um tempo até uma ação ocorrer
+    async function sleep(miliseconds) {
+        return new Promise(res => setTimeout(res, miliseconds))
     }
 
 }
