@@ -38,6 +38,7 @@ async function ready() {
     const playerSkills = document.querySelector('.skills');
     const attackButton = document.getElementById('atk-btn');
     const endBattleButton = document.getElementById('end-battle');
+    const battleContainer = document.querySelector('.container-battle');
 
     // variáveis de som
     const sound = {
@@ -62,6 +63,7 @@ async function ready() {
     let enemy;
     let freezeLock = false;
     let enemyAlive = true;
+    let playerAlive = true;
     if (battleType == "normal") {
         await loadMonster();
         document.querySelector('.encounter_text').innerHTML = `
@@ -342,8 +344,9 @@ async function ready() {
 
         }
 
-        if (enemyAlive) {
+        if (enemyAlive && playerAlive) {
             setTimeout(() => { attackButton.style.visibility = 'visible'; freezeLock = false; }, 2000);
+            console.log("passou");
         }
 
     }
@@ -382,7 +385,9 @@ async function ready() {
 
                 if (infoPlayer[0].health <= 0) {
                     player.health.textContent = "0";
-                    // await loseBattle();
+                    infoPlayer[0].health = 0;
+                    playerAlive = false;
+                    await loseBattle();
                 }
 
             } else {
@@ -396,7 +401,9 @@ async function ready() {
 
                 if (infoPlayer[0].health <= 0) {
                     player.health.textContent = "0";
-                    // await loseBattle();
+                    infoPlayer[0].health = 0;
+                    playerAlive = false;
+                    await loseBattle();
                 }
 
             }
@@ -436,7 +443,9 @@ async function ready() {
 
                 if (infoPlayer[0].health <= 0) {
                     player.health.textContent = "0";
-                    // await loseBattle();
+                    infoPlayer[0].health = 0;
+                    playerAlive = false;
+                    await loseBattle();
                 }
 
                 if (skillSpelled.status == 'stun') {
@@ -460,7 +469,9 @@ async function ready() {
 
                 if (infoPlayer[0].health <= 0) {
                     player.health.textContent = "0";
-                    // await loseBattle();
+                    infoPlayer[0].health = 0;
+                    playerAlive = false;
+                    await loseBattle();
                 }
 
                 if (skillSpelled.status == 'stun') {
@@ -667,6 +678,43 @@ async function ready() {
 
     }
 
+    async function loseBattle() {
+        
+        freezeLock = true;
+        sound.loseSound.play();
+        if (battleType == 'normal') {
+            sound.battleSound.pause();  
+        } else {
+            sound.bossbattleSound.pause();
+        }
+        setTimeout(() => {
+            battleTexts.innerHTML = `Essa não! Você morreu...`;
+            attackButton.style.visibility = 'hidden';
+        }, 2000);
+
+        setTimeout(() => {
+            battleContainer.innerHTML += `
+            
+                <div class="game-over rpgui-container framed">
+                    <span class="game-over-title">☠️GAME OVER☠️</span>
+                    <div class="game-over-paragraph rpgui-container framed-grey">
+                        <p>A esperança do reino foi perdida!
+                        O jogo será reiniciado em breve...</p>
+                    </div>
+                </div>
+            
+            `
+        }, 6000);
+
+        setTimeout(() => {
+            window.location.href = "/index.html"
+        }, 10000);
+
+        /* apenas para versão beta */
+        localStorage.clear();
+
+    }
+
     async function winBattle() {
 
         freezeLock = true;
@@ -683,6 +731,7 @@ async function ready() {
         await calculateExp();
         await getLoot(enemy[1]);
         await setConcluded();
+        setTimeout(() => endBattleButton.style.visibility = 'visible', 6000)
 
     }
 

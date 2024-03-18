@@ -14,7 +14,7 @@ document.querySelector('h1').innerHTML = `Mapa da aventura de ${infoPlayer[0].na
 // liberando fases
 let phase = 2;
 
-if (phase <= 5) {
+if (phase <= 4) {
     for (let i = 0; i < concludedStages; i++) {
         const stageLock = document.getElementById(`p${phase}`).children[0]
         console.log(stageLock);
