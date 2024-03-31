@@ -15,6 +15,10 @@ async function ready() {
         nextLevel: document.getElementById('next-level-exp'),
         health: document.getElementById('player-health'),
         mana: document.getElementById('player-mana'),
+        for: document.getElementById('player-for'),
+        agi: document.getElementById('player-agi'),
+        int: document.getElementById('player-int'),
+        von: document.getElementById('player-von'),
         atk: document.getElementById('player-attack'),
         def: document.getElementById('player-defense'),
         matk: document.getElementById('player-mattack'),
@@ -121,12 +125,12 @@ async function ready() {
         } else if (button.classList.contains('equip')) {
             const index = infoPlayer[2].findIndex(item => item.id === buttonID);
             const item = infoPlayer[2][index];
-            
-            if (item.type === "ataque") {
-                
+
+            if (item.type === "ataque" && item.weight <= infoPlayer[0].for) {
+
                 infoPlayer[1].unshift(item);
                 infoPlayer[2].splice(index, 1);
-                infoPlayer[2].splice(index, 0 ,infoPlayer[1][1]);
+                infoPlayer[2].splice(index, 0, infoPlayer[1][1]);
                 infoPlayer[1].splice(1, 1);
                 equipSound.play()
                 await loadEquipedItems(infoPlayer[1]);
@@ -134,17 +138,30 @@ async function ready() {
                 await refreshStatusValues();
                 console.log(infoPlayer);
 
-            } else if (item.type === "proteção") {
-                
+            } else if (item.type === "proteção" && item.weight <= infoPlayer[0].for) {
+
                 infoPlayer[1].push(item);
                 infoPlayer[2].splice(index, 1);
-                infoPlayer[2].splice(index, 0 ,infoPlayer[1][1]);
+                infoPlayer[2].splice(index, 0, infoPlayer[1][1]);
                 infoPlayer[1].splice(1, 1);
                 equipSound.play();
                 await loadEquipedItems(infoPlayer[1]);
                 await loadBpItems();
                 await refreshStatusValues();
                 console.log(infoPlayer);
+
+            } else {
+
+                warningBox.style.visibility = "visible";
+                warningBox.innerHTML = `
+                    
+                        <div id="warning-message" class="rpgui-container framed-golden-2">
+                            <p>Força insuficiente para equipar o item</p>
+                        </div>
+                    
+                    `;
+
+                setTimeout(() => { warningBox.style.visibility = "hidden" }, 1500);
 
             }
 
@@ -171,10 +188,14 @@ async function ready() {
         status.nextLevel.innerHTML = `next: ${infoPlayer[0].next - infoPlayer[0].exp}`;
         status.health.innerHTML = `health: ${infoPlayer[0].health}/${infoPlayer[0].maxHealth}`;
         status.mana.innerHTML = `mana: ${infoPlayer[0].mana}/${infoPlayer[0].maxMana}`;
-        status.atk.innerHTML = `attack: ${infoPlayer[0].attack} + ${infoPlayer[1][0].attribute}`;
-        status.def.innerHTML = `defense: ${infoPlayer[0].defense} + ${infoPlayer[1][1].attribute}`;
-        status.matk.innerHTML = `mattack: ${infoPlayer[0].magicAttack} + ${infoPlayer[1][0].elementalAttribute}`;
-        status.mdef.innerHTML = `mdefense: ${infoPlayer[0].magicDefense} + ${infoPlayer[1][1].elementalAttribute}`;
+        status.for.innerHTML = `for: ${infoPlayer[0].for}`;
+        status.agi.innerHTML = `agi: ${infoPlayer[0].agi}`;
+        status.int.innerHTML = `int: ${infoPlayer[0].int}`;
+        status.von.innerHTML = `von: ${infoPlayer[0].von}`;
+        status.atk.innerHTML = `attack: ${infoPlayer[1][0].attribute}`;
+        status.def.innerHTML = `defense: ${infoPlayer[0].for + infoPlayer[0].agi + infoPlayer[1][1].attribute}`;
+        status.matk.innerHTML = `mattack: ${infoPlayer[1][0].elementalAttribute}`;
+        status.mdef.innerHTML = `mdefense: ${infoPlayer[0].for + infoPlayer[0].int + infoPlayer[1][1].elementalAttribute}`;
         status.gold.innerHTML = `gold: ${infoPlayer[0].gold}`
 
     }
@@ -205,8 +226,8 @@ async function ready() {
                         <div class="player-bp-img-wrapper">
                             <img src="${item.icon}" alt="icon" class="bp-item-icon">
                         </div>
-                        <span class="bp-item-description">${item.name}</span>
-                        <span class="bp-item-attribute">+ ${item.attribute} ${item.type}</span>
+                        <span class="bp-item-description">${item.name} (peso: ${item.weight})</span>
+                        <span class="bp-item-attribute">${item.attribute} ${item.type}</span>
                         <button id="${item.id}" class="equip rpgui-button">equipar</button>
                     </li>
                 

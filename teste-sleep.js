@@ -1,11 +1,14 @@
-async function sleep(miliseconds) {
-    return new Promise(res => setTimeout(res, miliseconds))
+const player = {
+    attack: 10
 }
 
-async function main() {
-    console.log("hit (10)");
-    await sleep(2000);
-    console.log("take damage (10)");
+const skill = {
+    name: "teste",
+    description: "ataque base + 30% adicional",
+    formula: (player, enemy) => {
+        let damage = player.attack + (player.attack * 0.3)
+        return damage
+    }
 }
 
-main()
+console.log(skill.formula(player));

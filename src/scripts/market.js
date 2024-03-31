@@ -69,7 +69,7 @@ async function ready() {
                     
                         <li class="mkt-item">
                             <img src="${armadura.icon}" alt="armor-icon" class="mkt-item-icon">
-                            <span class="mkt-item-description">${armadura.name}</span>
+                            <span class="mkt-item-description">${armadura.name} <br> (peso: ${armadura.weight})</span>
                             <span class="mkt-item-attribute">+ ${armadura.attribute} ${armadura.type}</span>
                             <span class="mkt-item-value">${armadura.value}G</span>
                             <button id="${armadura.id}" class="buy-item rpgui-button">comprar</button>
@@ -89,8 +89,8 @@ async function ready() {
                     
                         <li class="mkt-item">
                             <img src="${arma.icon}" alt="armor-icon" class="mkt-item-icon">
-                            <span class="mkt-item-description">${arma.name}</span>
-                            <span class="mkt-item-attribute">+ ${arma.attribute} ${arma.type}</span>
+                            <span class="mkt-item-description">${arma.name} <br> (peso: ${arma.weight})</span>
+                            <span class="mkt-item-attribute">${arma.attribute} ${arma.type}</span>
                             <span class="mkt-item-value">${arma.value}G</span>
                             <button id="${arma.id}" class="buy-item rpgui-button">comprar</button>
                         </li>
@@ -143,7 +143,7 @@ async function ready() {
                             
                     <li class="mkt-item">
                         <img src="${item.icon}" alt="armor-icon" class="mkt-item-icon">
-                        <span class="mkt-item-description">${item.name}</span>
+                        <span class="mkt-item-description">${item.name} <br> (peso: ${item.weight})</span>
                         <span class="mkt-item-attribute">+ ${item.attribute} ${item.type}</span>
                         <span class="mkt-item-value">${item.value / 2}G</span>
                         <button class="sell-item rpgui-button">vender</button>
