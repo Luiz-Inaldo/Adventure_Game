@@ -1,3 +1,6 @@
+import { enemies } from "./monsters/forest-monsters.js";
+import { sound } from "./sounds.js";
+
 window.addEventListener("DOMContentLoaded", ready)
 
 async function ready() {
@@ -21,10 +24,10 @@ async function ready() {
         level: document.querySelector('.player-level'),
         exp: document.querySelector('.player-exp'),
         gold: document.querySelector('.player-gold'),
-        totalAttack: infoPlayer[0].attack + infoPlayer[1][0].attribute,
-        totalMagicAttack: infoPlayer[0].magicAttack + infoPlayer[1][0].elementalAttribute,
-        totalDefense: infoPlayer[0].defense + infoPlayer[1][1].attribute,
-        totalMagicDefense: infoPlayer[0].magicDefense + infoPlayer[1][1].elementalAttribute,
+        totalAttack: infoPlayer[1][0].attribute,
+        totalMagicAttack: infoPlayer[1][0].elementalAttribute,
+        totalDefense: infoPlayer[0].for + infoPlayer[0].agi + infoPlayer[1][1].attribute,
+        totalMagicDefense: infoPlayer[0].int + infoPlayer[0].agi + infoPlayer[1][1].elementalAttribute,
     }
     const monster = {
         name: document.getElementById('monster-name-container'),
@@ -39,20 +42,6 @@ async function ready() {
     const attackButton = document.getElementById('atk-btn');
     const endBattleButton = document.getElementById('end-battle');
     const battleContainer = document.querySelector('.container-battle');
-
-    // variáveis de som
-    const sound = {
-        battleSound: new Audio('/src/assets/audio/bgm/battle_theme.wav'),
-        bossbattleSound: new Audio('/src/assets/audio/bgm/boss-theme.mp3'),
-        swordStab: new Audio('/src/assets/audio/sword_stab.wav'),
-        enemyHit: new Audio('/src/assets/audio/enemy_hit.wav'),
-        criticalHit: new Audio('/src/assets/audio/critical_hit.mp3'),
-        miss: new Audio('/src/assets/audio/miss.wav'),
-        healing: new Audio('/src/assets/audio/healing.wav'),
-        winSound: new Audio('/src/assets/audio/win.wav'),
-        loseSound: new Audio('/src/assets/audio/lose.wav'),
-        error: new Audio('/src/assets/audio/error.wav')
-    }
 
     // verificando o tipo da batalha
     let battleType;
@@ -146,9 +135,7 @@ async function ready() {
     const skill = document.querySelectorAll('.skill');
     skill.forEach(sk => {
         sk.addEventListener('click', async () => {
-            const separator = sk.querySelector('.skill-description').textContent
-                .split("+")[0]
-            const skillName = separator.slice(0, separator.length - 1);
+            const skillName = sk.querySelector('.skill-description').textContent
             const skillToUse = infoPlayer[3].find(skill => skill.name === skillName);
             console.log(skillToUse);
             await useSkill(skillToUse);
@@ -163,28 +150,16 @@ async function ready() {
     // funções
     async function loadMonster() {
 
-        try {
-            const catchInfo = await fetch("/src/json/monsters/forest/forest-monsters.json");
-            const response = await catchInfo.json();
-            const monsters = response.monsters;
-            const index = Math.floor(Math.random() * monsters.length)
-            enemy = monsters[index];
-        } catch (error) {
-            console.error(error);
-        }
+        const monsters = enemies.monsters;
+        const index = Math.floor(Math.random() * monsters.length)
+        enemy = monsters[index];
 
     }
 
     async function loadBoss() {
 
-        try {
-            const catchInfo = await fetch("/src/json/monsters/forest/forest-monsters.json");
-            const response = await catchInfo.json();
-            const boss = response.boss[0];
-            enemy = boss;
-        } catch (error) {
-            console.log(error);
-        }
+        const boss = enemies.boss[0];
+        enemy = boss;
 
     }
 
@@ -196,8 +171,8 @@ async function ready() {
         `;
         player.health.textContent = infoPlayer[0].health;
         player.mana.textContent = infoPlayer[0].mana;
-        player.attack.textContent = parseInt(infoPlayer[0].attack + infoPlayer[1][0].attribute);
-        player.defense.textContent = parseInt(infoPlayer[0].defense + infoPlayer[1][1].attribute);
+        player.attack.textContent = parseInt(infoPlayer[1][0].attribute);
+        player.defense.textContent = parseInt(infoPlayer[0].for + infoPlayer[0].agi + infoPlayer[1][1].attribute);
         player.level.textContent = `Level: ${infoPlayer[0].level}`;
         player.exp.textContent = `Exp: ${infoPlayer[0].exp}/${infoPlayer[0].next}`;
         player.gold.textContent = `Gold: ${infoPlayer[0].gold}`;
@@ -243,27 +218,15 @@ async function ready() {
 
         for (const skill of skills) {
 
-            if (skill.status == "normal") {
-                playerSkills.innerHTML += `
+            playerSkills.innerHTML += `
                 
                     <div class="skill">
                         <img src="${skill.icon}" alt="atk-skill" class="skill-icon">
-                        <span class="skill-description">${skill.name} + ${skill.damage * 100}%</span>
+                        <span class="skill-description">${skill.name}</span>
                         <span class="skill-mana-requer">mp ${skill.mpCost}</span>
                     </div>
                 
                 `
-            } else {
-                playerSkills.innerHTML += `
-                
-                    <div class="skill">
-                        <img src="${skill.icon}" alt="atk-skill" class="skill-icon">
-                        <span class="skill-description">${skill.name} + ${skill.damage * 100}% (${skill.status})</span>
-                        <span class="skill-mana-requer">mp ${skill.mpCost}</span>
-                    </div>
-                
-                `
-            }
 
         }
 
@@ -274,34 +237,23 @@ async function ready() {
         freezeLock = true;
         attackButton.style.visibility = 'hidden';
 
-        // variáveis das provavéis ações
-        const playerCritNumber = Math.floor(Math.random() * 5);
-        const enemyEvadeNumber = Math.floor(Math.random() * 6);
+        // variáveis do "rolamento do dado" e do dano
+        const randomNumber = Math.floor(Math.random() * 12);
+        const damage = player.totalAttack;
+        const elementalDamage = player.totalMagicAttack;
 
         battleTexts.innerHTML = `Você atacou!`;
 
-        // variáveis de fórmulas
-        const normalAttackFormula = Math.round(infoPlayer[0].level + ((player.totalAttack * 1.5) - enemy[0].defense));
-        const magicAttackFormula = Math.round(infoPlayer[0].level + infoPlayer[0].attack + ((player.totalMagicAttack * 1.5) - enemy[0].magicDefense));
-        const criticalAttackFormula = Math.round(normalAttackFormula * 1.5);
-        const criticalMagicFormula = Math.round(magicAttackFormula * 1.5);
-
-        if (enemyEvadeNumber === 3 && playerCritNumber !== 3 || normalAttackFormula <= 0) {
-            battleTexts.innerHTML += ` O inimigo se esquivou do ataque!`;
-            sound.miss.play();
-            await sleep(1000);
-            await enemyTurn();
-            clearTimeout(sleep);
-        } else if (playerCritNumber === 3 && enemyEvadeNumber !== 3) {
+        if (randomNumber == 12) {
 
             sound.criticalHit.play();
 
             if (playerAttackType == "fisico") {
-                enemy[0].health -= criticalAttackFormula;
-                battleTexts.innerHTML += ` O seu dano foi crítico! você desferiu ${criticalAttackFormula} de dano!`;
+                enemy[0].health -= damage * 2
+                battleTexts.innerHTML += ` O seu dano foi crítico! você desferiu ${damage * 2} de dano!`;
             } else {
-                enemy[0].health -= criticalMagicFormula;
-                battleTexts.innerHTML += ` O seu dano foi crítico! você desferiu ${criticalMagicFormula} de dano!`;
+                enemy[0].health -= (damage * 2) + (elementalDamage * 2);
+                battleTexts.innerHTML += ` O seu dano foi crítico! você desferiu ${damage * 2} de dano físico e ${elementalDamage * 2} de dano mágico!`;
             }
 
             monster.health.classList.add('damaged');
@@ -322,16 +274,16 @@ async function ready() {
                 clearTimeout(sleep);
             }
 
-        } else {
+        } else if (randomNumber + infoPlayer[0].for > enemy[0].defense) {
 
-            sound.swordStab.play();
+            sound.hit1.play();
 
             if (playerAttackType == "fisico") {
-                enemy[0].health -= normalAttackFormula;
-                battleTexts.innerHTML += ` Você desferiu ${normalAttackFormula} de dano!`;
+                enemy[0].health -= damage;
+                battleTexts.innerHTML += ` Você desferiu ${damage} de dano!`;
             } else {
-                enemy[0].health -= magicAttackFormulaAttackFormula;
-                battleTexts.innerHTML += ` Você desferiu ${magicAttackFormula} de dano!`;
+                enemy[0].health -= damage + elementalDamage;
+                battleTexts.innerHTML += ` Você desferiu ${damage} de dano físico e ${elementalDamage} de dano mágico!`;
             }
 
             monster.health.classList.add('damaged');
@@ -352,13 +304,18 @@ async function ready() {
                 clearTimeout(sleep);
             }
 
+        } else {
+            battleTexts.innerHTML += ` O inimigo se esquivou do ataque!`;
+            sound.miss.play();
+            await sleep(1000);
+            await enemyTurn();
+            clearTimeout(sleep);
         }
 
         await sleep(1000);
         if (enemyAlive && playerAlive) {
             attackButton.style.visibility = 'visible';
             freezeLock = false;
-            console.log("passou");
         }
         clearTimeout(sleep);
 
@@ -368,30 +325,21 @@ async function ready() {
 
         // variáveis de prováveis chances (ataque ou habilidade)
         let enemyAttackType;
-        const enemyRandomNumber = Math.floor(Math.random() * 10);
-        enemyRandomNumber >= 0 && enemyRandomNumber <= 7
+        const randomNumber = Math.floor(Math.random() * 12)
+        const enemyActionNumber = Math.floor(Math.random() * 10);
+        enemyActionNumber >= 0 && enemyActionNumber <= 7
             ? enemyAttackType = "normal" : enemyAttackType = "skill";
 
         if (enemyAttackType == "normal") {
 
-            // variáveis das provavéis chances
-            const enemyCritNumber = Math.floor(Math.random() * 5);
-            const playerEvadeNumber = Math.floor(Math.random() * 6);
-
+            const damage = enemy[0].attack;
             battleTexts.innerHTML = `O inimigo atacou!`;
 
-            // variáveis de fórmulas
-            const normalAttackFormula = Math.round((enemy[0].attack * 1.5) - player.totalDefense);
-            const criticalAttackFormula = Math.round(normalAttackFormula * 1.5);
-
-            if (playerEvadeNumber === 3 && enemyCritNumber !== 3 || normalAttackFormula <= 0) {
-                battleTexts.innerHTML += ` Você desviou do ataque!`;
-                sound.miss.play();
-            } else if (enemyCritNumber === 3 && playerEvadeNumber !== 3) {
+            if (randomNumber == 12) {
 
                 sound.criticalHit.play();
-                infoPlayer[0].health -= criticalAttackFormula;
-                battleTexts.innerHTML += ` Golpe crítico! Você recebeu ${criticalAttackFormula} de dano!`;
+                infoPlayer[0].health -= damage * 2;
+                battleTexts.innerHTML += ` Golpe crítico! Você recebeu ${damage * 2} de dano!`;
                 player.health.classList.add('damaged');
                 await updateInfoPlayer();
                 await sleep(300)
@@ -405,11 +353,11 @@ async function ready() {
                     await loseBattle();
                 }
 
-            } else {
+            } else if (randomNumber + enemy[0].for > player.totalDefense) {
 
-                sound.enemyHit.play();
-                infoPlayer[0].health -= normalAttackFormula;
-                battleTexts.innerHTML += ` Você recebeu ${normalAttackFormula} de dano!`;
+                sound.hit2.play();
+                infoPlayer[0].health -= damage;
+                battleTexts.innerHTML += ` Você recebeu ${damage} de dano!`;
                 player.health.classList.add('damaged');
                 await updateInfoPlayer();
                 await sleep(300);
@@ -423,37 +371,80 @@ async function ready() {
                     await loseBattle();
                 }
 
+            } else {
+                battleTexts.innerHTML += ` Você desviou do ataque!`;
+                sound.miss.play();
             }
 
         } else {
 
             // variáveis para escolher uma habilidade aleatória
             const randomSkillIndex = Math.floor(Math.random() * enemy[2].length);
-            const skillSpelled = enemy[2][randomSkillIndex];
+            const skill = enemy[2][randomSkillIndex];
 
-            // variáveis de fórmula
-            const normalSkillFormula = Math.round((enemy[0].attack * 1.5) + (enemy[0].attack * skillSpelled.damage) - player.totalDefense);
-            const magicSkillFormula = Math.round((enemy[0].magicAttack * 1.5) + (enemy[0].magicAttack * skillSpelled.damage) - player.totalMagicDefense);
-            const critNormalSkillFormula = Math.round(normalSkillFormula * 1.5);
-            const critMagicSkillFormula = Math.round(magicSkillFormula * 1.5);
-            console.log(`normalskdamage: ${normalSkillFormula}`, `magicskformula: ${magicSkillFormula}`);
+            battleTexts.innerHTML = `O inimigo usou a habilidade ${skill.name}!`;
 
+            if (randomNumber > 2) {
 
-            // variáveis de prováveis chances de crítico
-            const enemySkillCriticalChance = Math.floor(Math.random() * 8);
+                let increase = 1;
 
-            battleTexts.innerHTML = `O inimigo usou a habilidade ${skillSpelled.name}!`;
-
-            if (enemySkillCriticalChance === 4 && critNormalSkillFormula > 0 || enemySkillCriticalChance === 4 && critMagicSkillFormula > 0) {
-
-                sound.criticalHit.play();
-                if (skillSpelled.element == "fisico") {
-                    infoPlayer[0].health -= critNormalSkillFormula;
-                    battleTexts.innerHTML += ` Dano critico! Você recebeu ${critNormalSkillFormula} de dano!`;
-                } else {
-                    infoPlayer[0].health -= critMagicSkillFormula;
-                    battleTexts.innerHTML += ` Dano critico! Você recebeu ${critMagicSkillFormula} de dano!`;
+                if (skill.element == "fisico") {
+                    if (randomNumber == 12 && skill.type != 'suporte') {
+                        increase = 2;
+                        let result = skill.formula(enemy[0], infoPlayer[0], increase);
+                        battleTexts.innerHTML += ` ${result}. Golpe critico!`;
+                        sound.criticalHit.play();
+                    } else if (randomNumber + enemy[0].for > player.totalDefense) {
+                        let result = skill.formula(enemy[0], infoPlayer[0], increase);
+                        battleTexts.innerHTML += ` ${result}`;
+                        if (skill.type == 'suporte') {
+                            await updateInfoEnemy();
+                            return
+                        }
+                    } else {
+                        battleTexts.innerHTML += ` O inimigo errou a habilidade.`
+                        sound.miss.play();
+                        return
+                    }
+                } else if (skill.element == infoPlayer[1][1].strongTo) {
+                    if (randomNumber == 12 && skill.type != suporte) {
+                        let result = skill.formula(enemy[0], infoPlayer[0], increase);
+                        battleTexts.innerHTML += ` ${result}. Golpe critico!`;
+                        sound.criticalHit.play();
+                    } else if (randomNumber + enemy[0].for > player.totalMagicDefense) {
+                        increase = 0.5;
+                        let result = skill.formula(enemy[0], infoPlayer[0], increase);
+                        battleTexts.innerHTML += ` ${result}`;
+                        if (skill.type == 'suporte') {
+                            await updateInfoEnemy();
+                            return
+                        }
+                    } else {
+                        battleTexts.innerHTML += ` O inimigo errou a habilidade.`
+                        sound.miss.play();
+                        return
+                    }
+                } else if (skill.element == infoPlayer[1][1].weakTo) {
+                    if (randomNumber == 12 && skill.type != suporte) {
+                        increase = 4
+                        let result = skill.formula(enemy[0], infoPlayer[0], increase);
+                        battleTexts.innerHTML += ` ${result}. Golpe critico!`;
+                        sound.criticalHit.play();
+                    } else if (randomNumber + enemy[0].for > player.totalMagicDefense) {
+                        increase = 2;
+                        let result = skill.formula(enemy[0], infoPlayer[0], increase);
+                        battleTexts.innerHTML += ` ${result}`;
+                        if (skill.type == 'suporte') {
+                            await updateInfoEnemy();
+                            return
+                        }
+                    } else {
+                        battleTexts.innerHTML += ` O inimigo errou a habilidade.`
+                        sound.miss.play();
+                        return
+                    }
                 }
+
                 player.health.classList.add('damaged');
                 await updateInfoPlayer();
                 await sleep(300)
@@ -467,45 +458,16 @@ async function ready() {
                     await loseBattle();
                 }
 
-                if (skillSpelled.status == 'stun' && playerAlive) {
+                if (skill.status == 'stun' && playerAlive) {
                     await sleep(500)
                     await enemyTurn();
                     clearTimeout(sleep);
                 }
 
 
-            } else if (normalSkillFormula > 0 || magicSkillFormula > 0) {
-
-                sound.enemyHit.play();
-                if (skillSpelled.element == "fisico") {
-                    infoPlayer[0].health -= normalSkillFormula;
-                    battleTexts.innerHTML += ` Você recebeu ${normalSkillFormula} de dano!`;
-                } else {
-                    infoPlayer[0].health -= magicSkillFormula;
-                    battleTexts.innerHTML += ` Você recebeu ${magicSkillFormula} de dano!`;
-                }
-                player.health.classList.add('damaged');
-                await updateInfoPlayer();
-                await sleep(300);
-                player.health.classList.remove('damaged');
-                clearTimeout(sleep);
-
-                if (infoPlayer[0].health <= 0) {
-                    player.health.textContent = "0";
-                    infoPlayer[0].health = 0;
-                    playerAlive = false;
-                    await loseBattle();
-                }
-
-                if (skillSpelled.status == 'stun' && playerAlive) {
-                    await sleep(300);
-                    await enemyTurn();
-                    clearTimeout(sleep);
-                }
-
             } else {
                 sound.miss.play();
-                battleTexts.innerHTML += ` Você desviou da habilidade!`;
+                battleTexts.innerHTML += ` Inimigo errou a habilidade!`;
             }
 
         }
@@ -517,7 +479,6 @@ async function ready() {
         if (!freezeLock) {
 
             freezeLock = true;
-            attackButton.style.visibility = 'hidden';
             const index = infoPlayer[2].findIndex(item => item.id === itemId);
             const healType = infoPlayer[2][index].name.split("de ")[1];
 
@@ -525,6 +486,7 @@ async function ready() {
 
                 if (infoPlayer[0].health < infoPlayer[0].maxHealth) {
 
+                    attackButton.style.visibility = 'hidden';
                     infoPlayer[2][index].quantity--;
                     infoPlayer[0].health += infoPlayer[2][index].attribute;
 
@@ -550,6 +512,7 @@ async function ready() {
 
                 if (infoPlayer[0].mana < infoPlayer[0].maxMana) {
 
+                    attackButton.style.visibility = 'hidden';
                     infoPlayer[2][index].quantity--
                     infoPlayer[0].mana += infoPlayer[2][index].attribute;
 
@@ -586,74 +549,34 @@ async function ready() {
             freezeLock = true;
             attackButton.style.visibility = 'hidden';
 
-            // variáveis de possíveis ações
-            const skillCriticalNumber = Math.floor(Math.random() * 8);
+            // variáveis de "rolamento de dado"
+            const randomNumber = Math.floor(Math.random() * 12);
+            let increase = 1;
 
-            // variáveis de fórmulas
-            const normalSkillFormula = Math.round(infoPlayer[0].level + (player.totalAttack * 1.5) + (player.totalAttack * skill.damage) - enemy[0].defense);
-            const criticalSkillFormula = Math.round(normalSkillFormula * 1.5);
-            const magicSkillFormula = Math.round(infoPlayer[0].level + (player.totalMagicAttack * 1.5) + (player.totalMagicAttack * skill.damage) - enemy[0].magicDefense);
-            const critMagicSkillFormula = Math.round(magicSkillFormula * 1.5);
-            console.log(normalSkillFormula, criticalSkillFormula);
 
             if (infoPlayer[0].mana >= skill.mpCost) {
 
                 battleTexts.innerHTML = `Você usou a habilidade ${skill.name}!`
 
-                skill.element = playerAttackType;
-
                 if (skill.element == "fisico") {
 
-                    if (skillCriticalNumber === 4) {
-
+                    if (randomNumber == 12 && skill.type != 'suporte') {
+                        increase = 2;
+                        let result = skill.formula(infoPlayer[0], enemy[0], increase);
+                        battleTexts.innerHTML += ` ${result}. Dano crítico.`
                         sound.criticalHit.play();
-                        enemy[0].health -= criticalSkillFormula;
                         infoPlayer[0].mana -= skill.mpCost;
-                        battleTexts.innerHTML += ` Você desferiu ${criticalSkillFormula} de dano!`
-                        monster.health.classList.add('damaged');
-                        await updateInfoEnemy();
+                    } else if (randomNumber + infoPlayer[0].for > enemy[0].defense) {
+                        let result = skill.formula(infoPlayer[0], enemy[0], increase);
+                        battleTexts.innerHTML += ` ${result}`
+                        infoPlayer[0].mana -= skill.mpCost;
+                    } else if (skill.type == 'suporte') {
+                        let result = skill.formula(infoPlayer[0], enemy[0], increase);
+                        battleTexts.innerHTML += ` ${result}`
+                        infoPlayer[0].mana -= skill.mpCost;
                         await updateInfoPlayer();
-                        await sleep(300);
-                        monster.health.classList.remove('damaged');
-                        clearTimeout(sleep);
-
-                        if (enemy[0].health <= 0) {
-                            monster.health.textContent = "0";
-                            await winBattle();
-                            enemyAlive = false;
-                        }
-
-                        if (enemyAlive && skill.status != "stun") {
-                            await sleep(1000)
-                            await enemyTurn();
-                            clearTimeout(sleep);
-                        }
-
                     } else {
-
-                        sound.swordStab.play();
-                        enemy[0].health -= normalSkillFormula;
-                        infoPlayer[0].mana -= skill.mpCost;
-                        battleTexts.innerHTML += ` Você desferiu ${normalSkillFormula} de dano!`
-                        monster.health.classList.add('damaged');
-                        await updateInfoEnemy();
-                        await updateInfoPlayer();
-                        await sleep(300);
-                        monster.health.classList.remove('damaged');
-                        clearTimeout(sleep);
-
-                        if (enemy[0].health <= 0) {
-                            monster.health.textContent = "0";
-                            await winBattle();
-                            enemyAlive = false;
-                        }
-
-                        if (enemyAlive && skill.status != "stun") {
-                            await sleep(1000);
-                            await enemyTurn();
-                            clearTimeout(sleep);
-                        }
-
+                        battleTexts.innerHTML = ` Você errou a habilidade.`
                     }
 
                 } else {
@@ -711,6 +634,25 @@ async function ready() {
 
                 }
 
+                monster.health.classList.add('damaged');
+                await updateInfoEnemy();
+                await updateInfoPlayer();
+                await sleep(300);
+                monster.health.classList.remove('damaged');
+                clearTimeout(sleep);
+
+                if (enemy[0].health <= 0) {
+                    monster.health.textContent = "0";
+                    await winBattle();
+                    enemyAlive = false;
+                }
+
+                if (enemyAlive && skill.status != "stun") {
+                    await sleep(1000)
+                    await enemyTurn();
+                    clearTimeout(sleep);
+                }
+
                 if (enemyAlive) {
                     await sleep(1000);
                     attackButton.style.visibility = 'visible';
@@ -734,11 +676,11 @@ async function ready() {
     }
 
     async function loseBattle() {
-        
+
         freezeLock = true;
         sound.loseSound.play();
         if (battleType == 'normal') {
-            sound.battleSound.pause();  
+            sound.battleSound.pause();
         } else {
             sound.bossbattleSound.pause();
         }

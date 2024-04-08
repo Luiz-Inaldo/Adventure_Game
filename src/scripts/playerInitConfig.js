@@ -49,7 +49,9 @@ const playerInitStatus = [
             weight: 1,
             cumulative: false,
             icon: "/src/assets/img/icons/armors/basic-armor.png",
-            equippable: true
+            equippable: true,
+            strongTo: "none",
+            weakTo: "none"
         }
     ],
 
@@ -72,24 +74,38 @@ const playerInitStatus = [
     /* índice [3] habilidades */
     [
         {
-            name: "golpe poderoso",
+            name: "investida mortal",
+            level: 1,
             type: "ataque",
             element: "fisico",
-            description: "ataque base + 30% dano adicional",
-            damage: 0.3,
-            mpCost: 5,
+            description: "ataque base + 10 dano adicional",
+            formula: (a, b, i) => {
+                let damage = (a.attack + 10) * i
+                b.health -= damage
+                let message = `Desferido ${damage} de dano.`;
+                sound.hit1.play();
+                return message;
+            },
+            mpCost: 10,
             status: "normal",
-            icon: "/src/assets/img/icons/skills/skill-sword-1.png"
+            icon: "/src/assets/img/icons/skills/skill-sword-1.png",
         },
         {
-            name: "batida pesada",
+            name: "golpe devastador",
+            level: 1,
             type: "ataque",
             element: "fisico",
-            description: "ataque base + 30% dano adicional e incapacita o alvo",
-            damage: 0.3,
-            mpCost: 15,
+            description: "ataque 2x e incapacita o alvo",
+            formula: (a, b, i) => {
+                let damage = (a.attack * 2) * i
+                b.health -= damage;
+                let message = `Desferido ${damage} de dano. O inimigo ficou incapacitado.`;
+                sound.stomp.play();
+                return message;
+            },
+            mpCost: 30,
             status: "stun",
-            icon: "/src/assets/img/icons/skills/skill-stun-1.png"
+            icon: "/src/assets/img/icons/skills/skill-stun-1.png",
         }
     ]
 

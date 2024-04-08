@@ -14,7 +14,9 @@
             "cumulative": false,
             "icon": "/src/assets/img/icons/armors/basic-armor.png",
             "avaliable": true,
-            "equippable": true
+            "equippable": true,
+            "strongTo": "none",
+            "weakTo": "none"
         },
         {
             "id": 1,
@@ -29,7 +31,9 @@
             "cumulative": false,
             "icon": "/src/assets/img/icons/armors/simple-armor.png",
             "avaliable": true,
-            "equippable": true
+            "equippable": true,
+            "strongTo": "none",
+            "weakTo": "none"
         },
         {
             "id": 2,
@@ -44,7 +48,9 @@
             "cumulative": false,
             "icon": "/src/assets/img/icons/armors/reinforced-armor.png",
             "avaliable": true,
-            "equippable": true
+            "equippable": true,
+            "strongTo": "none",
+            "weakTo": "none"
         },
         {
             "id": 3,
@@ -59,7 +65,9 @@
             "cumulative": false,
             "icon": "/src/assets/img/icons/armors/noble-armor.png",
             "avaliable": true,
-            "equippable": true
+            "equippable": true,
+            "strongTo": "none",
+            "weakTo": "none"
         },
         {
             "id": 4,
@@ -74,7 +82,9 @@
             "cumulative": false,
             "icon": "/src/assets/img/icons/armors/spiked-armor.png",
             "avaliable": true,
-            "equippable": true
+            "equippable": true,
+            "strongTo": "none",
+            "weakTo": "none"
         },
         {
             "id": 5,
@@ -89,7 +99,9 @@
             "cumulative": false,
             "icon": "/src/assets/img/icons/armors/earth-giant-armor.png",
             "avaliable": false,
-            "equippable": true
+            "equippable": true,
+            "strongTo": "terra",
+            "weakTo": "fogo"
         },
         {
             "id": 6,
@@ -104,7 +116,9 @@
             "cumulative": false,
             "icon": "/src/assets/img/icons/armors/frostborn-armor.png",
             "avaliable": false,
-            "equippable": true
+            "equippable": true,
+            "strongTo": "gelo",
+            "weakTo": "raio"
         },
         {
             "id": 7,
@@ -119,7 +133,9 @@
             "cumulative": false,
             "icon": "/src/assets/img/icons/armors/ramsir-armor.png",
             "avaliable": false,
-            "equippable": true
+            "equippable": true,
+            "strongTo": "fogo",
+            "weakTo": "gelo"
         },
         {
             "id": 8,
@@ -134,7 +150,9 @@
             "cumulative": false,
             "icon": "/src/assets/img/icons/armors/thunderlord-armor.png",
             "avaliable": false,
-            "equippable": true
+            "equippable": true,
+            "strongTo": "raio",
+            "weakTo": "terra"
         },
         {
             "id": 9,

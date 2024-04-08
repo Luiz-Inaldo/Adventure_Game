@@ -195,7 +195,7 @@ async function ready() {
         status.atk.innerHTML = `attack: ${infoPlayer[1][0].attribute}`;
         status.def.innerHTML = `defense: ${infoPlayer[0].for + infoPlayer[0].agi + infoPlayer[1][1].attribute}`;
         status.matk.innerHTML = `mattack: ${infoPlayer[1][0].elementalAttribute}`;
-        status.mdef.innerHTML = `mdefense: ${infoPlayer[0].for + infoPlayer[0].int + infoPlayer[1][1].elementalAttribute}`;
+        status.mdef.innerHTML = `mdefense: ${infoPlayer[0].agi + infoPlayer[0].int + infoPlayer[1][1].elementalAttribute}`;
         status.gold.innerHTML = `gold: ${infoPlayer[0].gold}`
 
     }
