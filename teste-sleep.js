@@ -18,10 +18,13 @@ const skills = [
         name: "teste2",
         description: "ataca o inimigo e diminui 1 na rolagem até errar",
         type: "ataque",
-        formula: (a, b, i) => {
+        formula: (a, b, i, e) => {
             let damage = (a.attack + 10) * i
             b.health -= damage
-            let message = `Desferido ${damage} de dano.`;
+            let message = `Desferido ${damage} de dano físico.`;
+            if (e) {
+                message += ` Desferido ${e} de dano elemental`
+            }
             return message;
         },
     }
@@ -37,6 +40,4 @@ const skills = [
 
 // }
 
-const str = "function legal() { return console.log('olá')}"
-
-console.log(JSON.parse(str))
+console.log(skills[0].formula(player, enemy, 1));

@@ -24,18 +24,19 @@ const playerInitStatus = [
     /* índice [1] equipamentos*/
     [
         {
-            id: 9,
-            name: "espada longa simples",
-            description: "espada pesada e frágil",
-            type: "ataque",
-            element: "fisico",
-            attribute: 8,
-            elementalAttribute: 0,
-            value: 50,
-            weight: 2,
-            cumulative: false,
-            icon: "/src/assets/img/icons/weapons/cheap-longsword.png",
-            equippable: true
+            "id": 16,
+            "name": "ira do vulcão",
+            "description": "espada feita dentro de um vulcão",
+            "type": "ataque",
+            "element": "fogo",
+            "attribute": 12,
+            "elementalAttribute": 4,
+            "value": 0,
+            "weight": 7,
+            "cumulative": false,
+            "icon": "/src/assets/img/icons/weapons/volcano-sword.png",
+            "avaliable": false,
+            "equippable": true
         },
         {
             id: 0,

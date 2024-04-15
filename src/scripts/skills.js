@@ -8,7 +8,7 @@ export const skills = [
         type: "passiva",
         element: "none",
         description: "+ 1 de ataque físico para cada ponto de força",
-        formula: (a) => { 
+        formula: (a) => {
             let buff = a.for / 2
             a.attack += Math.floor(buff)
         },
@@ -22,7 +22,7 @@ export const skills = [
         type: "passiva",
         element: "none",
         description: "+ 1 de defesa permanentemente",
-        formula: (a) => { 
+        formula: (a) => {
             a.defense += 1;
         },
         mpCost: 0,
@@ -35,7 +35,7 @@ export const skills = [
         type: "suporte",
         element: "fisico",
         description: "+ 1 de ataque físico por toda a batalha",
-        formula: (a) => { 
+        formula: (a) => {
             a.attack += 1
             let message = `O ataque aumentou em 1`;
             sound.warcry.play();
@@ -51,10 +51,14 @@ export const skills = [
         type: "ataque",
         element: "fisico",
         description: "ataque base + 10 dano adicional",
-        formula: (a, b, i) => {
-            let damage = (a.attack + 10) * i
+        formula: (a, b, inc, elDmg) => {
+            let damage = (a.attack + 10) * inc
             b.health -= damage
             let message = `Desferido ${damage} de dano.`;
+            if (elDmg) {
+                b.health -= elDmg
+                message += ` Desferido ${elDmg} de dano elemental.`
+            }
             sound.hit1.play();
             return message;
         },
@@ -68,10 +72,14 @@ export const skills = [
         type: "ataque",
         element: "fisico",
         description: "ataque 2x e incapacita o alvo",
-        formula: (a, b, i) => {
-            let damage = (a.attack * 2) * i
+        formula: (a, b, inc, elDmg) => {
+            let damage = (a.attack * 2) * inc
             b.health -= damage;
             let message = `Desferido ${damage} de dano. O inimigo ficou incapacitado.`;
+            if (elDmg) {
+                b.health -= elDmg
+                message += ` Desferido ${elDmg} de dano elemental.`
+            }
             sound.stomp.play();
             return message;
         },
@@ -85,10 +93,14 @@ export const skills = [
         type: "ataque",
         element: "fisico",
         description: "ataca o alvo duas vezes",
-        formula: (a, b, i) => { 
-            let damage = (a.attack * 2) * i
+        formula: (a, b, inc, elDmg) => {
+            let damage = (a.attack * 2) * inc
             b.health -= damage
             let message = `Desferido ${damage} de dano.`;
+            if (elDmg) {
+                b.health -= elDmg
+                message += ` Desferido ${elDmg} de dano elemental.`
+            }
             sound.sword2.play();
             return message;
         },
@@ -102,17 +114,23 @@ export const skills = [
         type: "ataque",
         element: "fisico",
         description: "ataca o alvo até errar o primeiro ataque",
-        formula: (a, b, i) => {
+        formula: (a, b, inc, elDmg) => {
             let rollNumber = Math.round(Math.random() * 12)
             if (rollNumber + a.for > b.defense) {
                 let hits = 0;
                 while (rollNumber + a.for > b.defense && b.health > 0) {
-                    b.health -= (a.attack) * i
+                    b.health -= (a.attack) * inc
+                    if (elDmg) {
+                        b.health -= elDmg
+                    }
                     rollNumber--
                     hits++
                 }
                 sound.swordCombo.play();
-                let message = `Foram desferidos ${hits} golpes. Dano total: ${(a.attack * i)*hits}`;
+                let message = `Foram desferidos ${hits} golpes. Dano total: ${(a.attack * i) * hits}`;
+                if (elDmg) {
+                    message += ` e ${elDmg * hits} de dano elemental.`
+                }
                 return message
             }
         },
@@ -126,7 +144,7 @@ export const skills = [
         type: "passiva",
         element: "none",
         description: "+ 1 de defesa para cada ponto de agilidade",
-        formula: (a) => { 
+        formula: (a) => {
             let buff = a.agi / 2
             a.defense += Math.floor(buff)
         },
@@ -140,7 +158,7 @@ export const skills = [
         type: "suporte",
         element: "fisico",
         description: "+ 2 de ataque físico por toda a batalha",
-        formula: (a) => { 
+        formula: (a) => {
             a.attack += 2
             let message = `Ataque aumentou em 2.`;
             sound.warcry.play();
@@ -156,11 +174,15 @@ export const skills = [
         type: "ataque",
         element: "fisico",
         description: "ataque 3x e incapacita o alvo",
-        formula: (a, b, i) => { 
-            let damage = (a.attack * 3) * i
+        formula: (a, b, inc, elDmg) => {
+            let damage = (a.attack * 3) * inc
             b.health -= damage
             let message = `Desferido ${damage} de dano. O inimigo ficou incapacitado.`;
-            sound.hit2.play();
+            if (elDmg) {
+                b.health -= elDmg
+                message += ` Desferido ${elDmg} de dano elemental.`
+            }
+            sound.stomp.play();
             return message;
         },
         mpCost: 60,
@@ -173,7 +195,7 @@ export const skills = [
         type: "passiva",
         element: "none",
         description: "+ 1 de força",
-        formula: (a) => { 
+        formula: (a) => {
             a.for += 1
         },
         mpCost: 0,
@@ -186,7 +208,7 @@ export const skills = [
         type: "passiva",
         element: "none",
         description: "+ 1 de agilidade",
-        formula: (a) => { 
+        formula: (a) => {
             a.agi += 1
         },
         mpCost: 0,
@@ -199,7 +221,7 @@ export const skills = [
         type: "passiva",
         element: "none",
         description: "+ 1 de inteligência",
-        formula: (a) => { 
+        formula: (a) => {
             a.int += 1
         },
         mpCost: 0,
@@ -212,7 +234,7 @@ export const skills = [
         type: "passiva",
         element: "none",
         description: "+ 1 de vontade",
-        formula: (a) => { 
+        formula: (a) => {
             a.von += 1
         },
         mpCost: 0,
@@ -225,7 +247,7 @@ export const skills = [
         type: "passiva",
         element: "none",
         description: "+ 20 de vida",
-        formula: (a) => { 
+        formula: (a) => {
             a.maxHealth += 20
             a.health = a.maxHealth
         },
@@ -239,7 +261,7 @@ export const skills = [
         type: "passiva",
         element: "none",
         description: "+ 20 de mana",
-        formula: (a) => { 
+        formula: (a) => {
             a.maxMana += 20
             a.mana = a.maxMana
         },
@@ -253,11 +275,15 @@ export const skills = [
         type: "ataque",
         element: "fisico",
         description: "um número será lançado e o seu dano multiplicado",
-        formula: (a, b, i) => {
-            const randomNumber = Math.floor(Math.random()*12)
-            const damage = (a.attack * i) * randomNumber;
+        formula: (a, b, inc, elDmg) => {
+            const randomNumber = Math.floor(Math.random() * 12)
+            const damage = (a.attack * inc) * randomNumber;
             b.health -= damage;
             let message = `Desferido ${damage} de dano.`;
+            if (elDmg) {
+                b.health -= elDmg * randomNumber
+                message += ` Desferido ${elDmg * randomNumber} de dano elemental.`
+            }
             sound.hit2.play();
             return message;
         },
@@ -271,7 +297,7 @@ export const skills = [
         type: "ataque",
         element: "fisico",
         description: "o hp do alvo cai em 50%",
-        formula: (a, b, i) => { 
+        formula: (a, b, i) => {
             const damage = b.health / 2
             b.health -= damage
             let message = `Desferido ${damage} de dano.`;

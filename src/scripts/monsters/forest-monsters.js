@@ -47,10 +47,14 @@ export const enemies = {
                     type: "ataque",
                     element: "fisico",
                     description: "ataque base + 10 dano adicional",
-                    formula: (a, b, i) => {
-                        let damage = (a.attack + 10) * i
+                    formula: (a, b, inc, elDmg) => {
+                        let damage = (a.attack + 10) * inc
                         b.health -= damage
                         let message = `Desferido ${damage} de dano.`;
+                        if (elDmg) {
+                            b.health -= elDmg
+                            message += ` Desferido ${elDmg} de dano elemental.`
+                        }
                         sound.hit1.play();
                         return message;
                     },
@@ -119,10 +123,14 @@ export const enemies = {
                     type: "ataque",
                     element: "fisico",
                     description: "ataque base + 10 dano adicional",
-                    formula: (a, b, i) => {
-                        let damage = (a.attack + 10) * i
+                    formula: (a, b, inc, elDmg) => {
+                        let damage = (a.attack + 10) * inc
                         b.health -= damage
                         let message = `Desferido ${damage} de dano.`;
+                        if (elDmg) {
+                            b.health -= elDmg
+                            message += ` Desferido ${elDmg} de dano elemental.`
+                        }
                         sound.hit1.play();
                         return message;
                     },
@@ -200,19 +208,24 @@ export const enemies = {
             ],
             [
                 {
-                    name: "grito de guerra",
+                    name: "investida mortal",
                     level: 1,
-                    type: "suporte",
+                    type: "ataque",
                     element: "fisico",
-                    description: "+ 1 de ataque físico por toda a batalha",
-                    formula: (a) => { 
-                        a.attack += 1
-                        let message = `O ataque aumentou em 1`;
-                        sound.warcry.play();
-                        return message
+                    description: "ataque base + 10 dano adicional",
+                    formula: (a, b, inc, elDmg) => {
+                        let damage = (a.attack + 10) * inc
+                        b.health -= damage
+                        let message = `Desferido ${damage} de dano.`;
+                        if (elDmg) {
+                            b.health -= elDmg
+                            message += ` Desferido ${elDmg} de dano elemental.`
+                        }
+                        sound.hit1.play();
+                        return message;
                     },
-                    mpCost: 20,
-                    status: "none",
+                    mpCost: 10,
+                    status: "normal",
                     icon: "/src/assets/img/icons/skills/skill-sword-1.png",
                 }
             ]
@@ -289,10 +302,14 @@ export const enemies = {
                     type: "ataque",
                     element: "fisico",
                     description: "ataque base + 10 dano adicional",
-                    formula: (a, b, i) => {
-                        let damage = (a.attack + 10) * i
+                    formula: (a, b, inc, elDmg) => {
+                        let damage = (a.attack + 10) * inc
                         b.health -= damage
                         let message = `Desferido ${damage} de dano.`;
+                        if (elDmg) {
+                            b.health -= elDmg
+                            message += ` Desferido ${elDmg} de dano elemental.`
+                        }
                         sound.hit1.play();
                         return message;
                     },
@@ -394,10 +411,14 @@ export const enemies = {
                     type: "ataque",
                     element: "fisico",
                     description: "ataque base + 10 dano adicional",
-                    formula: (a, b, i) => {
-                        let damage = (a.attack + 10) * i
+                    formula: (a, b, inc, elDmg) => {
+                        let damage = (a.attack + 10) * inc
                         b.health -= damage
                         let message = `Desferido ${damage} de dano.`;
+                        if (elDmg) {
+                            b.health -= elDmg
+                            message += ` Desferido ${elDmg} de dano elemental.`
+                        }
                         sound.hit1.play();
                         return message;
                     },
@@ -411,16 +432,36 @@ export const enemies = {
                     type: "ataque",
                     element: "fisico",
                     description: "ataque 2x e incapacita o alvo",
-                    formula: (a, b, i) => {
-                        let damage = (a.attack * 2) * i
+                    formula: (a, b, inc, elDmg) => {
+                        let damage = (a.attack * 2) * inc
                         b.health -= damage;
                         let message = `Desferido ${damage} de dano. O inimigo ficou incapacitado.`;
+                        if (elDmg) {
+                            b.health -= elDmg
+                            message += ` Desferido ${elDmg} de dano elemental.`
+                        }
                         sound.stomp.play();
                         return message;
                     },
                     mpCost: 30,
                     status: "stun",
                     icon: "/src/assets/img/icons/skills/skill-stun-1.png",
+                },
+                {
+                    name: "grito de guerra",
+                    level: 1,
+                    type: "suporte",
+                    element: "fisico",
+                    description: "+ 1 de ataque físico por toda a batalha",
+                    formula: (a) => {
+                        a.attack += 1
+                        let message = `O ataque aumentou em 1`;
+                        sound.warcry.play();
+                        return message
+                    },
+                    mpCost: 20,
+                    status: "none",
+                    icon: "/src/assets/img/icons/skills/skill-sword-1.png",
                 }
             ]
         ]
